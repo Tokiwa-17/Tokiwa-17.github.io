@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-07T12:55:02.969Z</updated>
+    <updated>2020-11-07T13:21:28.277Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -20,8 +20,8 @@
 <hr>
 <h2 id="变量">变量</h2>
 <ol>
-<li>$ ch[N][2]😒  左右儿子.</li>
-<li>$var[N]: $   x存储的值</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>h</mi><mo>[</mo><mi>N</mi><mo>]</mo><mo>[</mo><mn>2</mn><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">ch[N][2]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">h</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>  左右儿子.</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mo>[</mo><mi>N</mi><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">var[N]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>   x存储的值</li>
 <li>cnt<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>N</mi><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">[N]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span> 重复节点的个数。</li>
 <li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>a</mi><mi>r</mi><mo>[</mo><mi>N</mi><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">par[N]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span> x的父节点</li>
 <li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>z</mi><mo>[</mo><mi>N</mi><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">sz[N]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span> x子树下存储的节点个数</li>
@@ -62,8 +62,76 @@
 <pre><code class="language-c++">void find(int x){
 	if(!root) return;
 	int cur = root;
-	while(ch[cur][x &gt; cur] &amp;&amp; val[cur] != x) cur = ch[cur][x &gt; cur];
+	while(ch[cur][x &gt; val[cur]] &amp;&amp; val[cur] != x) cur = ch[cur][x &gt; val[cur]];
 	splay(cur);
+}
+</code></pre>
+<h2 id="insert">insert</h2>
+<p>记录父节点同时从根节点向下搜索。如果节点存在 cnt++, 否则新建节点并与父节点连边。</p>
+<pre><code class="language-c++">void insert(int x){
+	int cur = root, p = 0;
+	while(cur &amp;&amp; val[cur] != x){
+		p = cur;
+		cur = ch[cur][x &gt; val[cur]];
+	}
+	if(cur) cnt++;
+	else{
+		cur = size++;
+		val[cur] = x, par[cur] = p, ch[p][x &gt; val[p]] = cur;
+		cnt[cur] = sz[cur] = 1;
+	}
+	splay(cur);
+}
+</code></pre>
+<h2 id="kth">kth</h2>
+<p>查询第k大的值</p>
+<pre><code class="language-c++">int kth(int k){
+	int cur = root;
+	while(cur){
+		if(ch[cur][0] &amp;&amp; k &lt;= sz[ch[cur][0]]) cur = ch[cur][0];
+		else if(k &gt; sz[ch[cur][0]] + cnt[cur]) cur = ch[cur][1];
+		else return cur;
+	}
+}
+</code></pre>
+<h2 id="rank">rank</h2>
+<p>将节点find到根后返回左子树的大小即可</p>
+<pre><code class="language-c++">int rank(int x){
+	find(x);
+	return sz[ch[root][0]];
+}
+</code></pre>
+<h2 id="pre">pre</h2>
+<p>将节点find到根后返回左子树最右边的节点即可</p>
+<pre><code class="language-c++">int pre(int x){
+	find(x);
+	if(val[root] &lt; x) return root;
+	int cur = ch[root][0];
+	while(ch[cur][1]) cur = ch[cur][1];
+	splay(cur);
+	return cur;
+}
+</code></pre>
+<h2 id="suc">suc</h2>
+<p>同pre</p>
+<pre><code class="language-c++">int suc(int x){
+	find(x);
+	if(val[root] &gt; x) return root;
+	int cur = ch[root][1];
+	while(ch[cur][1]) cur = ch[cur][1];
+	splay(cur);
+	return cur;
+}
+</code></pre>
+<h2 id="remove">remove</h2>
+<p>把前驱伸展到根，后继伸展到根的右儿子，根的右儿子的左儿子就是要删除的节点</p>
+<pre><code class="language-c++">void remove(int x){
+	int last = pre(x), nxt = suc(x);
+	splay(last);	splay(nxt, last);
+	int del = ch[nxt][0];
+	if(cnt[del] &gt; 1) cnt[del]--, splay(del);
+	else ch[nxt][0] = 0;
+	pushup(nxt), pushup(x);
 }
 </code></pre>
 ]]></content>
