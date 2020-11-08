@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1604757690121">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1604804120562">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -22,15 +22,11 @@
 
 变量
 
-ch[N][2]:  左右儿子.
-var[N]:   x存储的值
-cnt[N]: 重复节点的个数。
-par[N]: x的父节点
-sz[N]: x子树下存储的节点个数
-
-chk
-查询节点和父节点之间的关系
-int chk..." />
+$ ch[N][2]😒  左右儿子.
+$var[N]: $   x存储的值
+cnt[N]:[N]:[N]: 重复节点的个数。
+par[N]:par[N]:par[N]: x的父节点
+sz[N]:sz[N]:sz[N]..." />
     <meta name="keywords" content="Data Structure" />
   </head>
   <body>
@@ -40,7 +36,7 @@ int chk..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1604757690121" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1604804120562" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -110,11 +106,11 @@ int chk..." />
 <hr>
 <h2 id="变量">变量</h2>
 <ol>
-<li>ch[N][2]:  左右儿子.</li>
-<li>var[N]:   x存储的值</li>
-<li>cnt[N]: 重复节点的个数。</li>
-<li>par[N]: x的父节点</li>
-<li>sz[N]: x子树下存储的节点个数</li>
+<li>$ ch[N][2]😒  左右儿子.</li>
+<li>$var[N]: $   x存储的值</li>
+<li>cnt<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>N</mi><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">[N]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span> 重复节点的个数。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>a</mi><mi>r</mi><mo>[</mo><mi>N</mi><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">par[N]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span> x的父节点</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>z</mi><mo>[</mo><mi>N</mi><mo>]</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">sz[N]:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span> x子树下存储的节点个数</li>
 </ol>
 <h2 id="chk">chk</h2>
 <p>查询节点和父节点之间的关系</p>
@@ -173,6 +169,7 @@ int chk..." />
 	splay(cur);
 }
 </code></pre>
+<h3 id="remark-如果加入了哨兵节点请修改kth-和-rank">Remark : 如果加入了哨兵节点请修改Kth 和 rank</h3>
 <h2 id="kth">kth</h2>
 <p>查询第k大的值</p>
 <pre><code class="language-c++">int kth(int k){
@@ -185,9 +182,12 @@ int chk..." />
 }
 </code></pre>
 <h2 id="rank">rank</h2>
-<p>将节点find到根后返回左子树的大小即可</p>
+<p>将节点find到根后返回左子树的大小即可(如果加入了哨兵节点请修改)</p>
 <pre><code class="language-c++">int rank(int x){
 	find(x);
+    //判断此时根节点是否为x
+    if(val[root] == x) return sz[ch[root][0]] + 1;
+    else return sz[ch[root][0]] + cnt[root] + 1;
 	return sz[ch[root][0]];
 }
 </code></pre>
