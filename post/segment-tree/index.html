@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Segment Tree | Tokiwa-17</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1604845438070">
+<link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Segment Tree
+每一个子节点表示整个序列中的一段子区间，每个叶子节点表示序列中单个元素的信息。子节点不断向父亲节点传递信息，而父亲节点存储每个叶子节点信息的整合。
+注意pushup 和 pushdown 的时机，pushup是由子..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tokiwa-17.github.io">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1604845438070" class="site-logo">
+        <h1 class="site-title">Tokiwa-17</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      転ばぬ先の杖
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tokiwa-17.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Segment Tree</h2>
+            <div class="post-date">2020-11-08</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="segment-tree">Segment Tree</h1>
+<p>每一个子节点表示整个序列中的一段子区间，每个叶子节点表示序列中单个元素的信息。子节点不断向父亲节点传递信息，而父亲节点存储每个叶子节点信息的整合。</p>
+<p>注意pushup 和 pushdown 的时机，pushup是由子节点向父节点传递信息，所以在回溯时，pushdown是由父节点向子节点传递信息，所以应该在递归开始前。</p>
+<h2 id="左右节点的表示">左右节点的表示</h2>
+<pre><code class="language-c++">#define ls x &lt;&lt; 1
+#define rs x &lt;&lt; 1 | 1
+int t[MAXN &lt;&lt; 2];
+</code></pre>
+<h2 id="pushup">pushup</h2>
+<p>可以根据节点之间的逻辑关系选择</p>
+<pre><code class="language-c++">il void pushup(int x){t[x] = t[ls] + t[rs];}
+il void pushup(int x){t[x] = max(t[ls], t[rs]);}
+il void pushup(int x){t[x] = min(t[ls], t[rs]);}
+</code></pre>
+<h2 id="build">build</h2>
+<pre><code class="language-c++">void build(int x, int l, int r){
+	int mid = (l + r) &gt;&gt; 1;
+	build(ls, l, mid), build(rs, mid + 1, r);
+	pushup(x);
+}
+</code></pre>
+<h2 id="lazytag">lazytag</h2>
+<pre><code class="language-c++">il void f(int x, int l, int r, int k){
+	tag[x] = tag[x] + k;
+	t[x] = t[x] + (r - l + 1) * k;
+}
+il void pushdown(int x, int l, int r){
+	int mid = (l + r) &gt;&gt; 1;
+	f(ls, l, mid), f(rs, mid + 1, r);
+	tag[x] = 0;
+}
+</code></pre>
+<h2 id="update">update</h2>
+<pre><code class="language-c++">il void update(int x, int ql, int qr, int l, int r, int k){
+	if(ql &lt;= l &amp;&amp; qr &gt;= r){
+		t[x] += k * (r - l + 1);
+        tag[x] += k;
+        return;
+    }
+    pushdown(x, l, r);
+    int mid = (l + r) &gt;&gt; 1;
+    if(ql &lt;= mid) update(ls, ql, qr, l, mid, k);
+    if(qr &gt; mid) update(rs, ql, qr, mid + 1, r, k);
+    pushup(x);
+}
+</code></pre>
+<h2 id="query">query</h2>
+<pre><code class="language-c++">int query(int x, int ql, int qr, int l, int r){
+	int res = 0;
+	if(ql &lt;= l &amp;&amp; qr &gt;= r) return t[x];
+	int mid = (l + r) &gt;&gt; 1;
+	pushdown(x, l, r);
+	if(ql &lt;= mid) res += query(ls, ql, qr, l, mid);
+	if(qr &gt; mid) res += query(rs, ql, qr, mid + 1, r);
+	return res;
+}
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tokiwa-17.github.io/post/splay/">
+                  <h3 class="post-title">
+                    splay
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
