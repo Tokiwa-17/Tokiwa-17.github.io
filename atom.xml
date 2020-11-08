@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-08T14:24:02.711Z</updated>
+    <updated>2020-11-08T14:49:23.527Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -44,7 +44,7 @@ il void pushup(int x){t[x] = min(t[ls], t[rs]);}
 }
 il void pushdown(int x, int l, int r){
 	int mid = (l + r) &gt;&gt; 1;
-	f(ls, l, mid), f(rs, mid + 1, r);
+	f(ls, l, mid, tag[x]), f(rs, mid + 1, r, tag[x]);
 	tag[x] = 0;
 }
 </code></pre>
