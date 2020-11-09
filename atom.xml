@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-08T14:52:46.154Z</updated>
+    <updated>2020-11-09T03:16:06.792Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -73,7 +73,95 @@ il void pushdown(int x, int l, int r){
 	return res;
 }
 </code></pre>
-<p><a href="https://www.luogu.com.cn/problem/P3372">模板题</a></p>
+<p><a href="https://www.luogu.com.cn/problem/P3372">模板题</a><br>
+<a href="https://www.luogu.com.cn/problem/P3373">线段树2</a></p>
+<p>维护 mul, add两个标记，先乘再加。</p>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+#define ls x &lt;&lt; 1
+#define rs x &lt;&lt; 1 | 1
+#define mid ((l + r) &gt;&gt; 1)
+#define il inline
+#define int long long
+using namespace std;
+const int N = 1e5 + 10;
+
+int a[N], t[N &lt;&lt; 2], mul[N &lt;&lt; 2], add[N &lt;&lt; 2];
+int n, m, p;
+
+il void pushup(int x){t[x] = (t[ls] + t[rs]) % p;}
+il void build(int x, int l, int r){
+    mul[x] = 1, add[x] = 0;
+    if(l == r){t[x] = a[l]; return;}
+    build(ls, l, mid), build(rs, mid + 1, r);
+    pushup(x);
+}
+il void pushdown(int x, int l, int r){
+    mul[ls] = (mul[ls] * mul[x]) % p;
+    mul[rs] = (mul[rs] * mul[x]) % p;
+    add[ls] = (add[ls] * mul[x] + add[x]) % p;
+    add[rs] = (add[rs] * mul[x] + add[x]) % p;
+    t[ls] = (t[ls] * mul[x] + add[x] * (mid - l + 1)) % p;
+    t[rs] = (t[rs] * mul[x] + add[x] * (r - mid)) % p;
+    mul[x] = 1, add[x] = 0;
+}
+void addition(int x, int ql, int qr, int l, int r, int k){
+    if(ql &lt;= l &amp;&amp; qr &gt;= r){
+        add[x] = (add[x] + k) % p;
+        t[x] = (t[x] + k * (r - l + 1)) % p;
+        return;
+    }
+    pushdown(x, l, r);
+    if(ql &lt;= mid) addition(ls, ql, qr, l, mid, k);
+    if(qr &gt; mid) addition(rs, ql, qr, mid + 1, r, k);
+    pushup(x);
+}
+void multiplication(int x, int ql, int qr, int l, int r, int k){
+    if(ql &lt;= l &amp;&amp; qr &gt;= r){
+        mul[x] = (mul[x] * k) % p;
+        add[x] = (add[x] * k) % p;
+        t[x] = (t[x] * k) % p;
+        return;
+    }
+    pushdown(x, l, r);
+    if(ql &lt;= mid) multiplication(ls, ql, qr, l, mid, k);
+    if(qr &gt; mid) multiplication(rs, ql, qr, mid + 1, r, k);
+    pushup(x);
+}
+int query(int x, int ql, int qr, int l, int r){
+    int res = 0;
+    if(ql &lt;= l &amp;&amp; qr &gt;= r) return t[x];
+    pushdown(x, l, r);
+    if(ql &lt;= mid) res = (res + query(ls, ql, qr, l, mid)) % p;
+    if(qr &gt; mid) res = (res + query(rs, ql, qr, mid + 1, r)) % p;
+    return res % p;
+}
+
+il int read(){
+    int x = 0,f = 1;char ch = getchar();
+    while(ch &lt; '0' || ch &gt; '9'){if(ch == '-')f = -1;ch = getchar();}
+    while(ch &gt;= '0' &amp;&amp; ch &lt;= '9'){x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + (ch ^ 48);ch = getchar();}
+    return x * f;
+}
+
+signed main(){
+    n = read(), m = read(), p = read();
+    for(int i = 1;i &lt;= n;i++) a[i] = read();
+    build(1, 1, n);
+    int opt, x, y, k;
+    while(m--){
+        opt = read(), x = read(), y = read();
+        if(opt == 1){
+            k = read();
+            multiplication(1, x, y, 1, n, k);
+        }else if(opt == 2){
+            k = read();
+            addition(1, x, y, 1, n, k);
+        }
+        else cout &lt;&lt; query(1, x, y, 1, n) &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
