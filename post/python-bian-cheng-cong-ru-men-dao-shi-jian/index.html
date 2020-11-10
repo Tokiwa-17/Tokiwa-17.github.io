@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Tokiwa-17</title>
+<title>Python编程：从入门到实践 | Tokiwa-17</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,8 +18,14 @@
 
 
 
-    <meta name="description" content="転ばぬ先の杖">
-    
+    <meta name="description" content="Python 编程从入门到实践
+第二章 变量和简单数据类型
+字符串
+1.修改大小写
+用引号扩起的都是字符串，其中的引号可以是单引号，也可以是双引号
+&quot;this is a string.&quot;
+'this is a strin..." />
+    <meta name="keywords" content="python" />
   </head>
   <body>
     <div id="app" class="main">
@@ -89,57 +95,68 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://tokiwa-17.github.io/post/python-bian-cheng-cong-ru-men-dao-shi-jian/">
-                  <h2 class="post-title">Python编程：从入门到实践</h2>
-                </a>
-                <div class="post-date">
-                  2020-11-10
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://tokiwa-17.github.io/post/segment-tree/">
-                  <h2 class="post-title">Segment Tree</h2>
-                </a>
-                <div class="post-date">
-                  2020-11-08
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://tokiwa-17.github.io/post/splay/">
-                  <h2 class="post-title">splay</h2>
-                </a>
-                <div class="post-date">
-                  2020-11-07
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
+          <div class="post-detail">
+            <h2 class="post-title">Python编程：从入门到实践</h2>
+            <div class="post-date">2020-11-10</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="python-编程从入门到实践">Python 编程从入门到实践</h2>
+<h1 id="第二章-变量和简单数据类型">第二章 变量和简单数据类型</h1>
+<h3 id="字符串">字符串</h3>
+<p>1.修改大小写</p>
+<p>用引号扩起的都是字符串，其中的引号可以是单引号，也可以是双引号</p>
+<pre><code class="language-python">&quot;this is a string.&quot;
+'this is a string.'
+'I told my friend, &quot;python is my favorite language!&quot;'
 
-          <div class="pagination-container">
-  
-  
-</div>
+</code></pre>
+<p>title() 以首字母大写的方式显示每个单词（其余字母小写）</p>
+<p>upper() 全部大写 lower() 全部小写.</p>
+<p>2.在字符串中使用变量(f字符串)</p>
+<p>python把花括号中的变量替换为其值来设置字符串的格式。</p>
+<pre><code class="language-python">first_name = &quot;ada&quot;
+last_name = &quot;lovelace&quot;
+full_name = f&quot;{first_name} {last_name}&quot; # full_name = &quot;ada lovelace&quot;
+</code></pre>
+<p>3.制表符或换行符</p>
+<pre><code class="language-python">print(&quot;\tPython&quot;)
+print(&quot;Languages:\nPython\nC\nJavaScript&quot;)
+</code></pre>
+<p>4.删除空白</p>
+<p>暂时删除空白</p>
+<pre><code class="language-python">favorite_language = 'python '
+favorite_language.rstrip() # 'python'
+favorite_language # 'python '
+</code></pre>
+<p>永久删除空白</p>
+<pre><code class="language-python">favorite_language = favorite_language.rstrip() # 'python'
+</code></pre>
+<p>剔除字符串开头的空白或者两边的空白可以分别使用 lstrip() 和 strip().</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://tokiwa-17.github.io/tag/3o4CsRk8K/" class="tag">
+                    python
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tokiwa-17.github.io/post/segment-tree/">
+                  <h3 class="post-title">
+                    Segment Tree
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
 
         </div>
       </div>
