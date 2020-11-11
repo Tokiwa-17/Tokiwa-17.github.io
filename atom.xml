@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-10T10:03:40.908Z</updated>
+    <updated>2020-11-11T07:00:38.742Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -18,8 +18,10 @@
         <updated>2020-11-10T10:02:44.000Z</updated>
         <content type="html"><![CDATA[<h2 id="python-编程从入门到实践">Python 编程从入门到实践</h2>
 <h1 id="第二章-变量和简单数据类型">第二章 变量和简单数据类型</h1>
-<h3 id="字符串">字符串</h3>
-<p>1.修改大小写</p>
+<h2 id="字符串">字符串</h2>
+<ol>
+<li>修改大小写</li>
+</ol>
 <p>用引号扩起的都是字符串，其中的引号可以是单引号，也可以是双引号</p>
 <pre><code class="language-python">&quot;this is a string.&quot;
 'this is a string.'
@@ -28,17 +30,23 @@
 </code></pre>
 <p>title() 以首字母大写的方式显示每个单词（其余字母小写）</p>
 <p>upper() 全部大写 lower() 全部小写.</p>
-<p>2.在字符串中使用变量(f字符串)</p>
+<ol start="2">
+<li>在字符串中使用变量(f字符串)</li>
+</ol>
 <p>python把花括号中的变量替换为其值来设置字符串的格式。</p>
 <pre><code class="language-python">first_name = &quot;ada&quot;
 last_name = &quot;lovelace&quot;
 full_name = f&quot;{first_name} {last_name}&quot; # full_name = &quot;ada lovelace&quot;
 </code></pre>
-<p>3.制表符或换行符</p>
+<ol start="3">
+<li>制表符或换行符</li>
+</ol>
 <pre><code class="language-python">print(&quot;\tPython&quot;)
 print(&quot;Languages:\nPython\nC\nJavaScript&quot;)
 </code></pre>
-<p>4.删除空白</p>
+<ol start="4">
+<li>删除空白</li>
+</ol>
 <p>暂时删除空白</p>
 <pre><code class="language-python">favorite_language = 'python '
 favorite_language.rstrip() # 'python'
@@ -48,6 +56,53 @@ favorite_language # 'python '
 <pre><code class="language-python">favorite_language = favorite_language.rstrip() # 'python'
 </code></pre>
 <p>剔除字符串开头的空白或者两边的空白可以分别使用 lstrip() 和 strip().</p>
+<h2 id="数">数</h2>
+<ol>
+<li>python 使用两个乘号表示乘方运算：</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; 3 ** 2
+9
+</code></pre>
+<ol start="2">
+<li>
+<p>将任意两个数相除时，结果总是浮点数，即便这两个数都是整数且能整除。</p>
+</li>
+<li>
+<p>书写很大的数时，可使用下划线将其中的数字分组使其更易读：</p>
+</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; universe_age = 14_000_000_000
+&gt;&gt;&gt; print(universe_age)
+14000000000
+</code></pre>
+<ol start="4">
+<li>
+<p>同时给多个变量赋值</p>
+<pre><code class="language-python">&gt;&gt;&gt; x, y, z = 0, 0, 0
+</code></pre>
+<p>只要变量和值的个数相同，Python就能正确地把它们关联起来</p>
+</li>
+<li>
+<p>常量</p>
+</li>
+</ol>
+<p>Python 中没有内置的常量类型，通常使用全大写来指出某个变量为常量。</p>
+<pre><code class="language-python">MAX_CONNECTIONS = 5000
+</code></pre>
+<h1 id="第三章列表简介">第三章：列表简介</h1>
+<h2 id="列表是什么">列表是什么</h2>
+<p>一系列按特定顺序排列的元素组成列表  <strong>有序列表</strong></p>
+<pre><code class="language-python">bicycles = ['trek', 'cannondale', 'redline', 'specialized']
+</code></pre>
+<ol>
+<li>访问列表元素</li>
+</ol>
+<pre><code class="language-python">print(bicycles[0]) 
+# trek
+print(bicycles[-1])
+# specialized
+</code></pre>
+<p>Python可以在不知道列表长度的情况下访问最后的元素</p>
 ]]></content>
     </entry>
     <entry>
