@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-12T08:21:34.387Z</updated>
+    <updated>2020-11-12T11:39:25.685Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
     <entry>
-        <title type="html"><![CDATA[Python编程：从入门到实践]]></title>
+        <title type="html"><![CDATA[# python编程01: 变量、列表]]></title>
         <id>https://tokiwa-17.github.io/post/python-bian-cheng-cong-ru-men-dao-shi-jian/</id>
         <link href="https://tokiwa-17.github.io/post/python-bian-cheng-cong-ru-men-dao-shi-jian/">
         </link>
@@ -30,6 +30,7 @@
 </code></pre>
 <p>title() 以首字母大写的方式显示每个单词（其余字母小写）</p>
 <p>upper() 全部大写 lower() 全部小写.</p>
+<hr>
 <ol start="2">
 <li>在字符串中使用变量(f字符串)</li>
 </ol>
@@ -38,12 +39,14 @@
 last_name = &quot;lovelace&quot;
 full_name = f&quot;{first_name} {last_name}&quot; # full_name = &quot;ada lovelace&quot;
 </code></pre>
+<hr>
 <ol start="3">
 <li>制表符或换行符</li>
 </ol>
 <pre><code class="language-python">print(&quot;\tPython&quot;)
 print(&quot;Languages:\nPython\nC\nJavaScript&quot;)
 </code></pre>
+<hr>
 <ol start="4">
 <li>删除空白</li>
 </ol>
@@ -56,6 +59,7 @@ favorite_language # 'python '
 <pre><code class="language-python">favorite_language = favorite_language.rstrip() # 'python'
 </code></pre>
 <p>剔除字符串开头的空白或者两边的空白可以分别使用 lstrip() 和 strip().</p>
+<hr>
 <h2 id="数">数</h2>
 <ol>
 <li>python 使用两个乘号表示乘方运算：</li>
@@ -103,6 +107,64 @@ print(bicycles[-1])
 # specialized
 </code></pre>
 <p>Python可以在不知道列表长度的情况下访问最后的元素</p>
+<hr>
+<ol start="2">
+<li>修改列表元素</li>
+</ol>
+<pre><code class="language-python">motorcycles = ['honda', 'yamaha', 'suzuki']
+motorcycles.append('ducati')
+print(motorcycles)
+# ['honda', 'yamaha', 'suzuki', 'ducati']
+</code></pre>
+<p>实际中经常创建一个空列表，然后程序运行后动态加入列表元素。</p>
+<hr>
+<p>使用方法insert()可以在任何位置添加新元素</p>
+<pre><code class="language-python">motorcycles = ['honda', 'yamaha', 'suzuki']
+motorcycles.insert(0, 'ducati')
+# ['ducati', 'honda', 'yamaha', 'suzuki']
+</code></pre>
+<hr>
+<p>如果知道要删除的元素在列表中的位置，可使用del语句。</p>
+<pre><code class="language-python">del motorcycles[0]
+</code></pre>
+<p>使用方法pop()删除元素：删除列表末尾的元素，并能够继续使用它</p>
+<pre><code class="language-python">motorcycles = ['honda', 'yamaha', 'suzuki']
+popped_motorcycles = motorcycles.pop()
+print(motoecycles) # ['honda', 'yamaha']
+print(popped_motorcycles) # suzuki
+</code></pre>
+<p>实际上，可以用pop()来删除列表中任意位置的元素, 只需在圆括号中指定要删除元素的索引。</p>
+<hr>
+<p>根据值删除元素</p>
+<pre><code class="language-python">motorcycles = ['honda', 'yamaha', 'suzuki', 'ducati']
+motorcycles.remove('ducati')
+</code></pre>
+<ul>
+<li>Remark: 方法Remove()只删除第一个指定的值，如果要删除的值可能在列表中出现多次，就需要使用循环来确保每个值都删除。</li>
+</ul>
+<hr>
+<ol start="3">
+<li>组织列表</li>
+</ol>
+<ul>
+<li>方法sort()永久性地修改列表元素的顺序</li>
+</ul>
+<pre><code class="language-python">cars = ['bmw', 'audi', 'toyota' , 'subaru']
+cars.sort() # ['audi', 'bmw', 'subaru', 'toyota']
+</code></pre>
+<p>还可以按反字母序的顺序排列列表元素</p>
+<pre><code class="language-python">cars.sort(reverse = True)
+# ['toyota', 'subaru', 'bmw', 'audi']
+</code></pre>
+<hr>
+<pre><code>* 使用函数sorted()对列表临时排序
+</code></pre>
+<pre><code class="language-python">print(sorted(cars)) # ['audi', 'bmw', 'subaru', 'toyota']
+print(cars) # ['bmw', 'audi', 'toyota', 'subaru']
+</code></pre>
+<hr>
+<p>方法reverse()：倒序排列</p>
+<p>方法len(): 获取列表的长度</p>
 ]]></content>
     </entry>
     <entry>
