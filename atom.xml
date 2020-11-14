@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-14T11:13:18.793Z</updated>
+    <updated>2020-11-14T14:28:03.745Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -10,6 +10,73 @@
     <logo>https://tokiwa-17.github.io/images/avatar.png</logo>
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
+    <entry>
+        <title type="html"><![CDATA[Disjoint - set]]></title>
+        <id>https://tokiwa-17.github.io/post/disjoint-set/</id>
+        <link href="https://tokiwa-17.github.io/post/disjoint-set/">
+        </link>
+        <updated>2020-11-14T14:18:00.000Z</updated>
+        <content type="html"><![CDATA[<p>Disjoint - Set</p>
+<h2 id="基本操作">基本操作</h2>
+<ol>
+<li>Get : 查询一个元素属于哪一个集合。</li>
+<li>Merge:把两个集合合并成一个大集合。</li>
+</ol>
+<p>在并查集中，采用“代表元”法，即为每个集合选择一个固定的元素，作为整个集合的“代表”。</p>
+<p>使用一个树形结构存储每个集合，树上的每个节点都是一个元素，树根是集合的代表元素。</p>
+<p>这样一来，在合并两个集合时，只需要连接两个树根。</p>
+<pre><code class="language-c++">fa[root1] = root2;
+</code></pre>
+<hr>
+<p><img src="https://tokiwa-17.github.io/post-images/1605363737394.jpg" alt="" loading="lazy">#</p>
+<h2 id="路径压缩和按秩合并">路径压缩和按秩合并</h2>
+<p><em>在查询时需要不断递归访问父节点，直至到达树根，为了提高查询效率，引入了路径压缩和按秩合并两种思想。</em></p>
+<p><strong>路径压缩 ：可以在每次执行 Get 操作的同时，把访问过每个节点都直接指向树根。即把上图中左边那棵树变成右边那棵。</strong></p>
+<p><strong>按秩合并：合并时把秩较小的树根作为秩较大的树根的子节点。</strong></p>
+<p><em>Remark:启发式合并是数据结构相关问题中一种重要的思想，把小的结构合并到大的结构中。只增加了小的结构的查询代价。这样一来，把所有结构都合并起来，总的代价也不会超过NlogN.均摊复杂度为logN.</em></p>
+<hr>
+<h2 id="code">Code</h2>
+<h3 id="ini">ini</h3>
+<pre><code class="language-c++">for(int i = 1;i &lt;= n;i++) fa[i] = i;
+</code></pre>
+<h3 id="get">get</h3>
+<pre><code class="language-c++">int get(int x){
+    if(x == fa[x]) return x;
+    return fa[x] = get(fa[x]);//路径压缩
+}
+</code></pre>
+<h3 id="merge">merge</h3>
+<pre><code class="language-c++">void merge(int x, int y){
+    fa[get(x)] = get(y);
+}
+</code></pre>
+<hr>
+<h2 id="例题">例题</h2>
+<ul>
+<li>
+<p><a href="https://www.luogu.com.cn/problem/P1955">程序自动分析</a></p>
+<p>数据规模较大，可以使用离散化</p>
+</li>
+</ul>
+<blockquote>
+<p>离散化就是把无穷大集合中的若干个元素映射为有限集合以便于统计的方法。在很多情况下，问题的范围虽然定义在整数集合 $$\mathbb{Z}$$ ,但是只设计其中m个有限数值，并且只与数值的相对顺序有关时，我们就可以把这m个整数与1 ~ m建立映射关系。</p>
+</blockquote>
+<p>​	a数组排序去掉重复数值，得到有序数组b[1] ~ b[m],  若要查询整数i代题的数值，只需直接返回b[i].</p>
+<p>若要查询整数a[j]被1 ~ m之间的哪个整数代替，只需要在数组b中二分查找a[j]的位置即可。</p>
+<pre><code class="language-c++">
+void discrete(){
+    sort(a + 1, a + n + 1);
+    for(int i = 1;i &lt;= n;i++){
+        if(i == 1 || a[i] != a[i - 1])
+            b[++m] = a[i];
+    }
+}
+int query(int x){
+    return lower_bound(b + 1, b + m, x) - b;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python 编程03：字典]]></title>
         <id>https://tokiwa-17.github.io/post/python-bian-cheng-03zi-dian/</id>
