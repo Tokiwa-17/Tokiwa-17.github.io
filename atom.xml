@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-12T15:17:43.619Z</updated>
+    <updated>2020-11-14T08:21:40.610Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -74,6 +74,73 @@ print(players[0 : 3])
 <pre><code class="language-python">dimensions = (200, 50)
 # do something
 dimensions = (400, 100)
+</code></pre>
+<hr>
+<h1 id="第五章if语句">第五章：if语句</h1>
+<h2 id="51-一个简单示例">5.1 一个简单示例</h2>
+<pre><code class="language-python">cars = ['audi', 'bmw', 'subaru', 'toyota']
+for car in cars:
+    if car == 'bmw':
+        print(car.upper())
+    else:
+        print(car.title())
+</code></pre>
+<h2 id="52-条件测试">5.2 条件测试</h2>
+<ol>
+<li>使用and检查多个条件</li>
+</ol>
+<pre><code class="language-python">age_0 &gt;= 21 and age_1 &gt;= 21
+(age_0 &gt;= 21) and (age_1 &gt;= 21)
+</code></pre>
+<ol start="2">
+<li>使用or 检查多个条件</li>
+</ol>
+<pre><code class="language-python">age_0 &gt;= 21 or age_1 &gt;= 21
+</code></pre>
+<ol start="3">
+<li>检查特定值是否包含在列表中</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; requested_toppings = ['mushrooms', 'onions', 'pineapple']
+&gt;&gt;&gt; 'mushrooms' in requested_toppings
+True
+</code></pre>
+<ol start="4">
+<li>检查特定值是否不包含在列表中</li>
+</ol>
+<pre><code class="language-python">banned_users = ['andrew', 'carolina', 'david']
+user = 'marie'
+
+if user not in banned_users:
+    print(f&quot;{user.title()}, you can post a response if you wish.&quot;)
+</code></pre>
+<h2 id="53-if语句">5.3 if语句</h2>
+<ol>
+<li></li>
+</ol>
+<pre><code class="language-python">age = 12
+
+if age &lt; 4:
+    print(&quot;Your admission cost is $0.&quot;)
+elif age &lt; 18:
+    print(&quot;Your admission cost is $25.&quot;)
+else:
+    print(&quot;Your admission cost is $40.&quot;)
+</code></pre>
+<p>可以添加任意数量的elif代码块，Python并不要求if - elif 结构后面必须有else代码块。</p>
+<hr>
+<ol start="2">
+<li>if - elif - else 仅仅适合用于只有一个条件满足的情况 ：遇到通过了的测试后，Python就跳过余下的测试。然而有时候必须检查你关心的所有事件。在这种情况下，应该使用一些列不包含elif 和 else 的代码块的简单if语句。</li>
+</ol>
+<hr>
+<ol start="3">
+<li>确定列表不是空的</li>
+</ol>
+<pre><code class="language-python">requested_toppings = []
+
+if requested_toppings :
+    # do something
+else:
+    print(&quot;Are you sure you want a plain pizza?&quot;)
 </code></pre>
 ]]></content>
     </entry>
