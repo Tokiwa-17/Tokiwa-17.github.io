@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-14T14:28:03.745Z</updated>
+    <updated>2020-11-14T16:07:54.874Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -78,12 +78,12 @@ int query(int x){
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Python 编程03：字典]]></title>
+        <title type="html"><![CDATA[Python 编程03：字典、输入]]></title>
         <id>https://tokiwa-17.github.io/post/python-bian-cheng-03zi-dian/</id>
         <link href="https://tokiwa-17.github.io/post/python-bian-cheng-03zi-dian/">
         </link>
         <updated>2020-11-14T11:12:39.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="python编程03字典">Python编程03：字典、</h1>
+        <content type="html"><![CDATA[<h1 id="python编程03字典-输入">Python编程03：字典、输入</h1>
 <h1 id="第六章字典">第六章：字典</h1>
 <h2 id="61-一个简单的字典">6.1 一个简单的字典</h2>
 <pre><code class="language-python">alien_0 = {'color' : 'green', 'points' : 5}
@@ -231,6 +231,62 @@ for topping in pizza['toppings']:
         'location' : 'paris',
     },
 }
+</code></pre>
+<hr>
+<h1 id="第七章-用户输入和while循环">第七章 用户输入和while循环</h1>
+<h2 id="71-函数input的工作原理">7.1 函数input()的工作原理</h2>
+<ul>
+<li>input()示例</li>
+</ul>
+<pre><code class="language-python">msg = input(&quot;Tell me something, and I'll repeat it back to you:&quot;)
+print(msg)
+</code></pre>
+<pre><code class="language-python">prompt = &quot;If you tell us who you are, we can personalize the messages you see.&quot;
+prompt += &quot;\nWhat is your first name?&quot;
+
+name = input(prompt)
+</code></pre>
+<ul>
+<li>使用input()获取数值输入</li>
+</ul>
+<pre><code class="language-python">age = input(&quot;How old are you? &quot;)
+age = int(age)
+</code></pre>
+<hr>
+<h2 id="72-while-循环简介">7.2 while 循环简介</h2>
+<pre><code class="language-python">cur_num = 1
+while cur_num &lt;= 5:
+    print(cur_num)
+    cur_num += 1
+</code></pre>
+<p><em>在任何Python循环中都可以使用break语句。</em></p>
+<hr>
+<h2 id="73使用while循环处理列表和字典">7.3使用while循环处理列表和字典</h2>
+<blockquote>
+<p>for循环是一种遍历列表的有效方式，但不应在for循环中修改列表。</p>
+</blockquote>
+<ul>
+<li>在列表之间移动元素</li>
+</ul>
+<blockquote>
+<p>未验证的用户验证后移动到另一个已验证用户列表中</p>
+</blockquote>
+<pre><code class="language-python">unconfirmed_users = ['alice', 'brian', 'candace']
+confirmed_users = []
+
+while unconfirmed_users:
+    current_user = unconfirmed_users.pop()
+    # do something
+    confirmed_users.append(current_user)
+</code></pre>
+<hr>
+<ul>
+<li>删除为特定值的所有列表元素</li>
+</ul>
+<pre><code class="language-python">pets = ['dog', 'cat', 'dog', 'goldfish', 'cat', 'rabbit', 'cat']
+
+while 'cat' in pets:
+    pets.remove('cat')
 </code></pre>
 ]]></content>
     </entry>
