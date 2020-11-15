@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-15T01:51:13.141Z</updated>
+    <updated>2020-11-15T09:08:52.569Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -33,7 +33,7 @@ greet_user('jesse')
 <li>
 <p>关键字实参</p>
 <blockquote>
-<p>关键字实参是传递给函数的名称值对，直接在是惨重将名称和值关联起来。无需考虑函数调用中的实参顺序。</p>
+<p>关键字实参是传递给函数的名称值对，直接在实参中将名称和值关联起来。无需考虑函数调用中的实参顺序。</p>
 </blockquote>
 <pre><code class="language-python">def describe_pet(animal_type, pet_name)
 	# do something
@@ -76,7 +76,7 @@ describe_pet(animal_type = 'hamster', pet_name = 'harry')
 <pre><code class="language-python">def print_models(unprinted_designs[:], completed_models):
     # ...
 </code></pre>
-<p><em>Remark:除非有充分的理由，否则还是应该将原始列表传递给函数。用线程的列表可以避免花时间和内存创建副本。</em></p>
+<p><em>Remark:除非有充分的理由，否则还是应该将原始列表传递给函数。用现成的列表可以避免花时间和内存创建副本。</em></p>
 ]]></content>
     </entry>
     <entry>
@@ -328,7 +328,7 @@ while cur_num &lt;= 5:
     print(cur_num)
     cur_num += 1
 </code></pre>
-<p><em>在任何Python循环中都可以使用break语句。</em></p>
+<p><em>在任何Python循环中都可以使用break和continue语句。</em></p>
 <hr>
 <h2 id="73使用while循环处理列表和字典">7.3使用while循环处理列表和字典</h2>
 <blockquote>
