@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Python编程04：函数 | Tokiwa-17</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605405031505">
+<link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Python 编程04：函数、
+8.1 定义函数
+def greet_user(username):
+    &quot;&quot;&quot;显示简单的问候语&quot;&quot;&quot;
+    print(f&quot;Hel..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tokiwa-17.github.io">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605405031505" class="site-logo">
+        <h1 class="site-title">Tokiwa-17</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      転ばぬ先の杖
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tokiwa-17.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Python编程04：函数</h2>
+            <div class="post-date">2020-11-15</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="python-编程04函数">Python 编程04：函数、</h1>
+<h2 id="81-定义函数">8.1 定义函数</h2>
+<pre><code class="language-python">def greet_user(username):
+    &quot;&quot;&quot;显示简单的问候语&quot;&quot;&quot;
+    print(f&quot;Hello, {username.title()}!&quot;)
+   
+greet_user('jesse')
+</code></pre>
+<hr>
+<h2 id="82-传递实参">8.2 传递实参</h2>
+<ul>
+<li>
+<p>位置实参</p>
+</li>
+<li>
+<p>关键字实参</p>
+<blockquote>
+<p>关键字实参是传递给函数的名称值对，直接在是惨重将名称和值关联起来。无需考虑函数调用中的实参顺序。</p>
+</blockquote>
+<pre><code class="language-python">def describe_pet(animal_type, pet_name)
+	# do something
+describe_pet(animal_type = 'hamster', pet_name = 'harry')
+</code></pre>
+</li>
+<li>
+<p>可以给每一个形参指定<strong>默认值</strong></p>
+<p><em>Remark:先列出没有默认值的形参，再列出有默认值的形参。</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="83-返回值">8.3 返回值</h2>
+<pre><code class="language-python">def get_formatted_name(first_name, last_name):
+    full_name = f&quot;{first_name} {last_name}&quot;
+    return full_name
+</code></pre>
+<ul>
+<li>返回字典</li>
+</ul>
+<pre><code class="language-python">def build_person(first_name, last_name, age = None):
+    person = {'first' : first_name, 'last' : last_name}
+    if age:
+        person['age'] = age
+        return person
+</code></pre>
+<hr>
+<h2 id="84-传递列表">8.4 传递列表</h2>
+<pre><code class="language-python">def greet_users(names):
+    for name in names:
+        msg = f&quot;Hello, {name.title()}!&quot;
+</code></pre>
+<ul>
+<li>禁止函数修改列表</li>
+</ul>
+<blockquote>
+<p>有一家3D打印的公司，未打印的模型打印完毕后移到打印好的模型列表中。要求保留原来未打印的设计列表以供备案。</p>
+</blockquote>
+<p>使用切片表示法创建列表的副本：</p>
+<pre><code class="language-python">def print_models(unprinted_designs[:], completed_models):
+    # ...
+</code></pre>
+<p><em>Remark:除非有充分的理由，否则还是应该将原始列表传递给函数。用线程的列表可以避免花时间和内存创建副本。</em></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tokiwa-17.github.io/post/disjoint-set/">
+                  <h3 class="post-title">
+                    Disjoint - set
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

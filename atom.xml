@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-14T16:07:54.874Z</updated>
+    <updated>2020-11-15T01:50:35.030Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -10,6 +10,75 @@
     <logo>https://tokiwa-17.github.io/images/avatar.png</logo>
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
+    <entry>
+        <title type="html"><![CDATA[Python编程04：函数]]></title>
+        <id>https://tokiwa-17.github.io/post/python-bian-cheng-04han-shu/</id>
+        <link href="https://tokiwa-17.github.io/post/python-bian-cheng-04han-shu/">
+        </link>
+        <updated>2020-11-15T01:49:59.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="python-编程04函数">Python 编程04：函数、</h1>
+<h2 id="81-定义函数">8.1 定义函数</h2>
+<pre><code class="language-python">def greet_user(username):
+    &quot;&quot;&quot;显示简单的问候语&quot;&quot;&quot;
+    print(f&quot;Hello, {username.title()}!&quot;)
+   
+greet_user('jesse')
+</code></pre>
+<hr>
+<h2 id="82-传递实参">8.2 传递实参</h2>
+<ul>
+<li>
+<p>位置实参</p>
+</li>
+<li>
+<p>关键字实参</p>
+<blockquote>
+<p>关键字实参是传递给函数的名称值对，直接在是惨重将名称和值关联起来。无需考虑函数调用中的实参顺序。</p>
+</blockquote>
+<pre><code class="language-python">def describe_pet(animal_type, pet_name)
+	# do something
+describe_pet(animal_type = 'hamster', pet_name = 'harry')
+</code></pre>
+</li>
+<li>
+<p>可以给每一个形参指定<strong>默认值</strong></p>
+<p><em>Remark:先列出没有默认值的形参，再列出有默认值的形参。</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="83-返回值">8.3 返回值</h2>
+<pre><code class="language-python">def get_formatted_name(first_name, last_name):
+    full_name = f&quot;{first_name} {last_name}&quot;
+    return full_name
+</code></pre>
+<ul>
+<li>返回字典</li>
+</ul>
+<pre><code class="language-python">def build_person(first_name, last_name, age = None):
+    person = {'first' : first_name, 'last' : last_name}
+    if age:
+        person['age'] = age
+        return person
+</code></pre>
+<hr>
+<h2 id="84-传递列表">8.4 传递列表</h2>
+<pre><code class="language-python">def greet_users(names):
+    for name in names:
+        msg = f&quot;Hello, {name.title()}!&quot;
+</code></pre>
+<ul>
+<li>禁止函数修改列表</li>
+</ul>
+<blockquote>
+<p>有一家3D打印的公司，未打印的模型打印完毕后移到打印好的模型列表中。要求保留原来未打印的设计列表以供备案。</p>
+</blockquote>
+<p>使用切片表示法创建列表的副本：</p>
+<pre><code class="language-python">def print_models(unprinted_designs[:], completed_models):
+    # ...
+</code></pre>
+<p><em>Remark:除非有充分的理由，否则还是应该将原始列表传递给函数。用线程的列表可以避免花时间和内存创建副本。</em></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Disjoint - set]]></title>
         <id>https://tokiwa-17.github.io/post/disjoint-set/</id>
