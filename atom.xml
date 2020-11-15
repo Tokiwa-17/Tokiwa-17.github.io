@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-15T09:08:52.569Z</updated>
+    <updated>2020-11-15T09:42:51.525Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -128,7 +128,7 @@ describe_pet(animal_type = 'hamster', pet_name = 'harry')
 </li>
 </ul>
 <blockquote>
-<p>离散化就是把无穷大集合中的若干个元素映射为有限集合以便于统计的方法。在很多情况下，问题的范围虽然定义在整数集合 $$\mathbb{Z}$$ ,但是只设计其中m个有限数值，并且只与数值的相对顺序有关时，我们就可以把这m个整数与1 ~ m建立映射关系。</p>
+<p>离散化就是把无穷大集合中的若干个元素映射为有限集合以便于统计的方法。在很多情况下，问题的范围虽然定义在整数集合 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span> ,但是只设计其中m个有限数值，并且只与数值的相对顺序有关时，我们就可以把这m个整数与1 ~ m建立映射关系。</p>
 </blockquote>
 <p>​	a数组排序去掉重复数值，得到有序数组b[1] ~ b[m],  若要查询整数i代题的数值，只需直接返回b[i].</p>
 <p>若要查询整数a[j]被1 ~ m之间的哪个整数代替，只需要在数组b中二分查找a[j]的位置即可。</p>
