@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605435021714">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605451880086">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -36,7 +36,7 @@ def greet_user(username):
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605435021714" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605451880086" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -119,7 +119,7 @@ greet_user('jesse')
 <li>
 <p>关键字实参</p>
 <blockquote>
-<p>关键字实参是传递给函数的名称值对，直接在实参中将名称和值关联起来。无需考虑函数调用中的实参顺序。</p>
+<p>关键字实参是传递给函数的名称值对，直接在是惨重将名称和值关联起来。无需考虑函数调用中的实参顺序。</p>
 </blockquote>
 <pre><code class="language-python">def describe_pet(animal_type, pet_name)
 	# do something
@@ -162,7 +162,81 @@ describe_pet(animal_type = 'hamster', pet_name = 'harry')
 <pre><code class="language-python">def print_models(unprinted_designs[:], completed_models):
     # ...
 </code></pre>
-<p><em>Remark:除非有充分的理由，否则还是应该将原始列表传递给函数。用现成的列表可以避免花时间和内存创建副本。</em></p>
+<p><em>Remark:除非有充分的理由，否则还是应该将原始列表传递给函数。用线程的列表可以避免花时间和内存创建副本。</em></p>
+<hr>
+<h2 id="85-传递任意数量的实参">8.5 传递任意数量的实参</h2>
+<pre><code class="language-python">def make_pizza(*toppings) :
+    # ...
+</code></pre>
+<p>形参名 *toppings中的星号让 Python 创建一个名为 toppings 的空元组，并将收到的所有值都封装到这个元组中。</p>
+<ul>
+<li>
+<p>位置实参和任意数量实参结合使用</p>
+<p>必须将函数定义中接纳任意数量实参的形参放在最后。</p>
+<pre><code class="language-python">def make_pizza(size, *toppings)
+	# ...
+</code></pre>
+</li>
+<li>
+<p>使用任意数量的关键字实参</p>
+</li>
+</ul>
+<pre><code class="language-python">def build_profile(first, last, **user_info):
+    user_info['first_name'] = first
+    user_info['last_name'] = last
+    return user_info
+
+user_profile = build_profile('albert', 'einstein', location = 'princeton', field = 'physics')
+</code></pre>
+<p>形参**user_info 中的两个星号让 python 创建一个名为 user_info 的空字典，并将收到的所有名称对都放到这个字典中。</p>
+<hr>
+<h2 id="86将函数存储在模块中">8.6将函数存储在模块中</h2>
+<blockquote>
+<p>通过将函数存储在称为模块的独立文件中可以隐藏程序代码的细节，将重点放在程序的高层逻辑。</p>
+</blockquote>
+<pre><code class="language-python"># pizza.py
+def make_pizza(size, *toppings):
+    # ...
+</code></pre>
+<pre><code class="language-python"># making_pizzas.py
+import pizza
+pizza.make_pizza(16, 'pepperoni')
+</code></pre>
+<p>代码行 import pizza 让 Python 打开文件 pizza.py,并将其中的所有函数都复制到这个程序中。</p>
+<p>要调用被导入模块中的函数，可以使用下面的语法：</p>
+<pre><code class="language-python">module_name.function_name()
+</code></pre>
+<hr>
+<ul>
+<li>还可以导入模块中的特定函数</li>
+</ul>
+<pre><code class="language-python">from module_name import function_0, function_1, function_2
+</code></pre>
+<p>导入模块中的特定函数后，调用函数时无须使用句点。</p>
+<hr>
+<ul>
+<li>使用 as 给函数指定别名</li>
+</ul>
+<blockquote>
+<p>如果要导入函数的名称可能与程序中现有的名称冲突，或者函数的名称太长，可以指定一个别名。</p>
+</blockquote>
+<pre><code class="language-python">from module_name import function_name as fn
+</code></pre>
+<hr>
+<ul>
+<li>使用as给模块指定别名</li>
+</ul>
+<pre><code class="language-python">import pizza as p
+p.make_pizza(16, 'pepperoni')
+</code></pre>
+<hr>
+<ul>
+<li>导入模块中的所有函数</li>
+</ul>
+<p>使用星号(*)运算符可以让Python导入模块中的所有函数：</p>
+<pre><code class="language-python">from pizza import *
+</code></pre>
+<p>此时可以通过名称来调用每个函数，而无须使用句点表示法。</p>
 
             </div>
             
