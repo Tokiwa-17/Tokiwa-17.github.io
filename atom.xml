@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-16T10:07:37.413Z</updated>
+    <updated>2020-11-16T11:19:51.296Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -10,6 +10,94 @@
     <logo>https://tokiwa-17.github.io/images/avatar.png</logo>
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
+    <entry>
+        <title type="html"><![CDATA[Python编程06：Numpy、Pandas]]></title>
+        <id>https://tokiwa-17.github.io/post/python-bian-cheng-06numpypandas/</id>
+        <link href="https://tokiwa-17.github.io/post/python-bian-cheng-06numpypandas/">
+        </link>
+        <updated>2020-11-16T11:19:08.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="python-编程06-numpy-pandas">Python 编程06： Numpy、Pandas</h1>
+<blockquote>
+<p>Numpy、Pandas用底层语言（C）实现，比Python自带类型要快很多。</p>
+</blockquote>
+<h2 id="11-numpy属性">1.1 numpy属性</h2>
+<pre><code class="language-python">import numpy as np
+</code></pre>
+<p>列表转换成矩阵:</p>
+<pre><code class="language-python">array = np.array([[1, 2, 3],
+                  [2, 3, 4]])
+# [[1 2 3]
+#	[2 3 4]] 没有逗号分隔
+</code></pre>
+<pre><code class="language-python">print(array.shape) # (2, 3)
+print(array.size)  # 6
+</code></pre>
+<hr>
+<h2 id="12-numpy的创建array">1.2 numpy的创建array</h2>
+<ul>
+<li>可以在创建的时候使用 <strong>dtype</strong>来指定元素类型：</li>
+</ul>
+<pre><code class="language-python">a = np.array([2, 23, 4], dtype = np.float)
+print(a.dtype) # float64
+</code></pre>
+<ul>
+<li>生成零矩阵(提供元组形参)</li>
+</ul>
+<pre><code class="language-python">a = np.zeros((3, 4))
+</code></pre>
+<ul>
+<li>生成有序数列</li>
+</ul>
+<pre><code class="language-python">a = np.arange(10, 20, 2) # (start, end, step)
+</code></pre>
+<ul>
+<li>重新指定有序数列的格式</li>
+</ul>
+<pre><code class="language-python">a = np.arrat(12).reshape((3, 4))
+</code></pre>
+<ul>
+<li>生成线段</li>
+</ul>
+<pre><code class="language-python">a = np.linspace(1, 10, 5)
+# 在 1 ~ 10之间生成五段的线段
+</code></pre>
+<hr>
+<h2 id="13-numpy的基础运算">1.3 numpy的基础运算</h2>
+<pre><code class="language-python">a = np.array([10, 20, 30, 40])
+b = np.arange(4)
+
+c = a + b
+c = a - b
+c = b ** 2 # [0, 1, 4, 9]
+c = 10 * np.sin(a)
+print(b &lt; 3) #[True True True False]
+</code></pre>
+<ul>
+<li>矩阵运算</li>
+</ul>
+<pre><code class="language-python">a = np.array([[1, 1],
+              [0, 1]])
+b = np.arange(4).reshape((2, 2))
+# 逐个相乘
+c = a * b
+# 矩阵乘法
+c_dot = np.dot(a, b)
+c_dot = a.dot(b)
+</code></pre>
+<hr>
+<pre><code class="language-python">a = np.random.random((2, 4)) #shape
+print(np.sum(a))
+# axis = 1 每一行
+# axis = 0 每一列
+print(np.min(a, axis = 1))
+# [0.29046038 0.27287636]
+print(np.max(a, axis = 0))
+# [0.97312175 0.29046038 0.65062655 0.95807683]
+
+</code></pre>
+<hr>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python编程05：文件、异常]]></title>
         <id>https://tokiwa-17.github.io/post/python-bian-cheng-05wen-jian-yi-chang/</id>
