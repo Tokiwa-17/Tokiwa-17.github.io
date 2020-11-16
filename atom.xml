@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-16T02:24:03.457Z</updated>
+    <updated>2020-11-16T05:10:48.447Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -10,6 +10,98 @@
     <logo>https://tokiwa-17.github.io/images/avatar.png</logo>
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
+    <entry>
+        <title type="html"><![CDATA[Python编程05：文件、异常]]></title>
+        <id>https://tokiwa-17.github.io/post/python-bian-cheng-05wen-jian-yi-chang/</id>
+        <link href="https://tokiwa-17.github.io/post/python-bian-cheng-05wen-jian-yi-chang/">
+        </link>
+        <updated>2020-11-16T05:10:16.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="第十章-文件和异常">第十章 文件和异常</h2>
+<h2 id="101-从文件中读取数据">10.1 从文件中读取数据</h2>
+<blockquote>
+<p>创建一个txt，包含小数点后三十位的圆周率值</p>
+</blockquote>
+<pre><code class="language-python">with open('pi_digits.txt') as file_object:
+    contents = file_object.read()
+print(contents)
+</code></pre>
+<p>函数open()接受打开文件的名称，返回一个表示文件的对象。</p>
+<p>关键字with在不再需要访问文件后将其关闭。也可以调用 open() 和 close()来打开和关闭文件。</p>
+<p>方法 read()读取这个文件中的全部内容，并将其作为一个长长的字符串赋给变量contents.</p>
+<p><strong>read()到达文件末尾时返回一个空字符串，而将这个空字符串显示出来就是一个空行。要删除多出来的空行，可以调用rstrip()</strong></p>
+<hr>
+<ul>
+<li>
+<p>文件路径</p>
+<ul>
+<li>
+<p>只将文件名传递给函数时，Python将在当前执行的文件所在的目录中查找。</p>
+</li>
+<li>
+<p>相对路径（如文件夹text_files位于文件夹python_work中)</p>
+<pre><code class="language-python">with open('text_files/filname.txt') as file_object:
+</code></pre>
+<p><strong>Windows使用 <code>\</code> 而非 <code>/</code>,但在代码中依然可以使用斜杠。</strong></p>
+</li>
+<li>
+<p>绝对路径</p>
+<pre><code class="language-python">file_path = 'home/ehmatthes/other_files/text_files/filename.txt'
+with open(file_path) as file_object
+</code></pre>
+</li>
+</ul>
+<p><em>如果在文件路径中直接使用反斜杠，将引发错误，其中的字符将被解释为转移字符。如果一定要使用反斜杠，可对路径中每一个反斜杠都进行转义， 如<code>&quot;C:\\path\\to\\file.txt&quot;</code>.</em></p>
+<hr>
+<ul>
+<li>逐行读取</li>
+</ul>
+<pre><code class="language-python">filename = 'pi_digits.txt'
+
+with open(filename) as file_object:
+    for line in file_object:
+        print(line.rstrip())
+        # 文件中每行末尾都有一个换行符，print()也会加一个换行符，所以会出现多余的空行。
+</code></pre>
+<hr>
+<ul>
+<li>创建一个包含文件各行内容的列表</li>
+</ul>
+<blockquote>
+<p>使用关键字with时，open()返回的文件对象只能在with代码块中使用，如果要在with代码块外访问文件的内容，可以将文件各行储存在列表中。</p>
+</blockquote>
+<pre><code class="language-python">with open(filename) as file_object:
+    lines = file_object.readlines()
+    
+for line in lines:
+    print(line.rstrip())
+</code></pre>
+<p><strong>方法<code>readlines()</code>从文件中读取每一行并将其存储在一个列表中</strong></p>
+<hr>
+<h2 id="102-写入文件">10.2 写入文件</h2>
+<ul>
+<li>写入空文件</li>
+</ul>
+<pre><code class="language-python">filename = 'programming.txt'
+
+with open(filename, 'w') as file_object:
+    file_object.write(&quot;I love programming.&quot;)
+</code></pre>
+<p>调用open()时提供了两个实参。第二个实参指定Python以什么模式打开文件：</p>
+<p>读取模式（‘r') 、写入模式（’w') 、附加模式（‘a')、读写模式（’r+').如果省略了模式实参，Python将以默认的只读模式打开文件。</p>
+<p><em>Remark:Python只能将字符串写入文本文件。要将数值数据存储到文本文件中，必须先使用函数str()将其转换成字符串格式。</em></p>
+<ul>
+<li>写入多行</li>
+</ul>
+<p><code>write</code>不会自动加换行符，需要手动添加 <code>\n</code>.</p>
+<hr>
+<ul>
+<li>附加到文件</li>
+</ul>
+<p>如果要给文件添加内容，而不是覆盖原有内容，可以以附加模式<code>a</code>打开文件.</p>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Stack]]></title>
         <id>https://tokiwa-17.github.io/post/stack/</id>
