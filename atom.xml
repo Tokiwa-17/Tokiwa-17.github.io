@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-16T02:06:06.354Z</updated>
+    <updated>2020-11-16T02:24:03.457Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -103,12 +103,12 @@
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Python编程04：函数]]></title>
+        <title type="html"><![CDATA[Python编程04：函数、类与对象]]></title>
         <id>https://tokiwa-17.github.io/post/python-bian-cheng-04han-shu/</id>
         <link href="https://tokiwa-17.github.io/post/python-bian-cheng-04han-shu/">
         </link>
         <updated>2020-11-15T01:49:59.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="python-编程04函数-对象">Python 编程04：函数、对象</h1>
+        <content type="html"><![CDATA[<h1 id="python-编程04函数-类与对象">Python 编程04：函数、类与对象</h1>
 <h2 id="81-定义函数">8.1 定义函数</h2>
 <pre><code class="language-python">def greet_user(username):
     &quot;&quot;&quot;显示简单的问候语&quot;&quot;&quot;
@@ -307,6 +307,47 @@ class ElectricCar(Car):
     def __init__ (self, make, model, year):
         # ...
         self.battery = Battery()
+</code></pre>
+<hr>
+<h2 id="94-导入类">9.4 导入类</h2>
+<pre><code class="language-python">from car import ElectricCar, Car
+
+my_tesla = ElectricCar('tesla', 'model s', 2019)
+</code></pre>
+<ul>
+<li>还可以导入整个模块，再使用句点表示法访问需要的类。</li>
+</ul>
+<pre><code class="language-python">import car
+my_beetle = car.Car('volkswagen', 'beetle', 2019)
+my_tesla = car.ElectricCar('tesla', 'roadster', 2019)
+</code></pre>
+<ul>
+<li>导入模块中所有的类</li>
+</ul>
+<pre><code class="language-python">from module_name import *
+</code></pre>
+<hr>
+<ul>
+<li>在一个模块中导入另一个模块</li>
+</ul>
+<p>有时候可能一个模块中的类依赖于另一个模块中的类。在这种情况下，需要在模块中导入必要的类。</p>
+<pre><code>* 使用别名
+</code></pre>
+<pre><code class="language-python">from electric_car import Electric_Car as EC
+my_tesla = EC('tesla', 'roadster', 2019)
+</code></pre>
+<hr>
+<h2 id="python-标准库">Python 标准库</h2>
+<pre><code class="language-python">&gt;&gt;&gt; from random import randint
+&gt;&gt;&gt; randint(1, 6) # 以两个整数作为参数，返回两个整数之间的一个随机数
+3
+</code></pre>
+<pre><code class="language-python">&gt;&gt;&gt; from random import choice
+&gt;&gt;&gt; players = ['charles', 'martina', 'michael', 'florence', 'eli']
+&gt;&gt;&gt; first_up = choice(players)
+# 以一个列表或元组作为参数，随机返回其中一个元素
+&gt;&gt;&gt; first_up
+'florence'
 </code></pre>
 ]]></content>
     </entry>
