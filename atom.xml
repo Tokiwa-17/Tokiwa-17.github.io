@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-16T11:19:51.296Z</updated>
+    <updated>2020-11-16T14:28:04.933Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -10,6 +10,146 @@
     <logo>https://tokiwa-17.github.io/images/avatar.png</logo>
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
+    <entry>
+        <title type="html"><![CDATA[20-fall Data Structure]]></title>
+        <id>https://tokiwa-17.github.io/post/20-fall-data-structure/</id>
+        <link href="https://tokiwa-17.github.io/post/20-fall-data-structure/">
+        </link>
+        <updated>2020-11-16T14:26:37.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="20-fall-data-structure">20-fall data structure</h1>
+<h2 id="lecture-9-graph">Lecture 9 :Graph</h2>
+<h3 id="1基本术语">1.基本术语</h3>
+<ul>
+<li>简单路径：路径上各顶点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>V</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>V</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">V_1, V_2, ..., V_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>均不相互重复。</li>
+<li>连通图与强连通分量(无向图)
+<ul>
+<li>连通图：任一对顶点都是联通的</li>
+<li>连通分量：非连通图的极大联通子图</li>
+</ul>
+</li>
+<li>强联通图与强联通分量(有向图)
+<ul>
+<li>强连通图：每一对顶点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>V</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>V</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">V_i, V_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>,都可相互到达</li>
+<li>强连通分量：非强连通图的极大强连通子图。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2图的存储表示">2.图的存储表示</h3>
+<figure data-type="image" tabindex="1"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
+<p><strong>图模板类</strong></p>
+<pre><code class="language-c++">template&lt;typename Tv, typename Te&gt;
+class GraphMatrix : public Graph&lt;Tv, Te&gt;{
+    private:
+    	Vector&lt;Vertex&lt;Tv&gt; &gt;V; //顶点集
+    	Vector&lt;Vector&lt;Edge&lt;Te&gt;*&gt; &gt; E //边集（邻接矩阵)
+    public:
+    	GraphMatrix() {n = e = 0;}
+    	~GraphMatrix(){
+			for(int j = 0;j &lt; n;j++)
+                for(int k = 0;k &lt; n;k++)
+                    delete E[j][k];
+        }
+}
+</code></pre>
+<ol>
+<li>邻接矩阵：A<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>N</mi><mo>]</mo><mo>[</mo><mi>N</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[N][N]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span></span></span></span>,不存在的边，统一取值为无穷或0</li>
+<li>邻接表</li>
+</ol>
+<hr>
+<h3 id="图的基本操作">图的基本操作</h3>
+<ol>
+<li>顶点的基本操作 (0 &lt;= i &lt; n)</li>
+</ol>
+<pre><code class="language-c++">virtual int firstNbr(int i){return nextNbr(i, n);} //首个邻接顶点
+virtual int nextNbr(int i, int j){//相对于顶点 i 的下一邻接点
+    while((j &gt; -1) &amp;&amp; !exist(i, --j)) ;//逆向线性试探
+    return j;
+}
+</code></pre>
+<ol start="2">
+<li>边的基本操作</li>
+</ol>
+<pre><code class="language-c++">virtual bool exist(int i, int j){
+return (i &gt; -1) &amp;&amp; (i &lt; n) &amp;&amp; (j &gt; -1) &amp;&amp; (j &lt; n) &amp;&amp; E[i][j] != NULL;
+}
+</code></pre>
+<ol start="3">
+<li>图的基本接口实现</li>
+</ol>
+<hr>
+<h3 id="图的遍历">图的遍历</h3>
+<ul>
+<li>遍历中组成树的一类边叫树边，与相应顶点构成遍历树。</li>
+<li>强调对特定状态顶点的查找，故称图搜索。</li>
+<li>BFS、DFS, 均可在O(n + e)时间内完成。</li>
+</ul>
+<hr>
+<h3 id="最小支撑树">最小支撑树</h3>
+<p><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"><img src="C:%5CUsers%5Cylf%5CDesktop%5C3.png" alt="3" loading="lazy"></p>
+<pre><code class="language-c++">//邻接表版本prim
+struct Node{
+    int v, dis;
+};
+
+vector&lt;Node&gt; Adj[MAXV];//Adj[u]存放u为始点连接的所有终点
+
+int prim(){
+    fill(d + 1, d + MAXV + 1, INF);
+    d[1] = 0;
+    int res = 0;
+    for(int i = 0;i &lt; n;i++){
+		int u = -1, MIN = INF;
+        for(int j = 1;j &lt;= n;j++){
+			if(!vis[j] &amp;&amp; d[j] &lt; MIN){
+                u = j;
+                MIN = d[j];
+            }
+        }
+        if(u == -1) return -1;
+        vis[u] = true;
+        res += d[u];
+        for(int j = 0;j &lt; Adj[u].size();j++){
+            int v = Adj[u][j].v;
+            if(!vis[v] &amp;&amp; Adj[u][v].dis &lt; d[v])
+                d[v] = Adj[u][v].dis;
+        }
+        return res;
+    }
+}
+</code></pre>
+<pre><code class="language-c++">//prim 课件版本
+void minSpanTreePrim(MGraph g){
+    int min, i, j, k;
+    int pred[MAXVEX];//前驱
+    int cutcost[MAXVEX];//到集合U的最小跨边大小
+    //cutcost != 0意味着不在集合U中
+    cutcost[0] = 0, pred[0] = 0;
+    for(i = 1;i &lt; g.numVertexes;i++){
+        cutcost[i] = g.arc[0][i];
+        pred[i] = 0;
+    }
+    for(i = 1;i &lt; g.numVertexer;j++){//找离集合U最近的点
+        min = INFINITY;
+        for(j = 1;j &lt; g.numVertexes; j++){
+            if(cutcost[j] &amp;&amp; cutcost[j] &lt; min){
+                min = cutcost[j];
+                k = j;
+            }
+        }
+        cout &lt;&lt; pred[k] &lt;&lt; ' ' &lt;&lt; k;
+        cutcost[k] = 0;
+        for(j = 1; j &lt; g.numVertexes;j++){//松弛操作
+            if(cutcost[j] &amp;&amp; g.arc[k][j] &lt; cutcost[j]){
+                cutcost[j] = g.arc[k][j];
+                pred[j] = k;
+            }
+        }
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python编程06：Numpy、Pandas]]></title>
         <id>https://tokiwa-17.github.io/post/python-bian-cheng-06numpypandas/</id>
@@ -1378,137 +1518,6 @@ signed main(){
 <li><a href="https://www.luogu.com.cn/problem/SP2916">SP2916 GSS5 - Can you answer these queries V</a></li>
 <li><a href="https://www.luogu.com.cn/problem/SP6779">SP6779 GSS7 - Can you answer these queries VII</a></li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[splay]]></title>
-        <id>https://tokiwa-17.github.io/post/splay/</id>
-        <link href="https://tokiwa-17.github.io/post/splay/">
-        </link>
-        <updated>2020-11-07T12:54:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="splay">Splay</h1>
-<hr>
-<h2 id="变量">变量</h2>
-<ol>
-<li>ch[N][2]:  左右儿子.</li>
-<li>var[N]:   x存储的值</li>
-<li>cnt[N]: 重复节点的个数。</li>
-<li>par[N]: x的父节点</li>
-<li>sz[N]: x子树下存储的节点个数</li>
-</ol>
-<h2 id="chk">chk</h2>
-<p>查询节点和父节点之间的关系</p>
-<pre><code class="language-c++">int chk(int x){return ch[par[x]][1] == x;}//左关系返回0，右关系返回1.
-</code></pre>
-<h2 id="pushup">pushup</h2>
-<p>更新sz数组</p>
-<pre><code class="language-c++">il void pushup(int x){sz[x] = sz[ch[x][0]] + sz[ch[x][1]] + cnt[x];}
-</code></pre>
-<h2 id="rotate">rotate</h2>
-<pre><code class="language-c++">il void rotate(int x){
-    int y = par[x], z = par[y], d = chk(x), k = ch[x][d ^ 1];
-    ch[y][d] = k, par[k] = y;
-    ch[z][chk(y)] = x, par[x] = z;
-    ch[x][d ^ 1] = y, par[y] = x;
-    pushup(y), pushup(x);
-}
-</code></pre>
-<h2 id="splay-2">splay</h2>
-<p>将一个节点旋转到指定节点的儿子，可以模拟下自下而上6个链状节点将3号节点旋转至根的情形。</p>
-<pre><code class="language-c++">void splay(int x, int goal = 0){
-    while(par[x] != goal){
-        int y = par[x], z = par[y];
-        if(z != goal){
-            if(chk(x) == chk(y)) rotate(y);
-            else rotate(x);
-        }
-        rotate(x);
-    }
-    if(!goal) root = x;
-}
-</code></pre>
-<h2 id="find">find</h2>
-<p>将最大的小于等于x的节点伸展到根</p>
-<pre><code class="language-c++">void find(int x){
-    int cur = root;
-    while(ch[cur][x &gt; val[cur]] &amp;&amp; x != val[cur]) cur = ch[cur][x &gt; val[cur]];
-    splay(cur);
-}
-</code></pre>
-<h2 id="insert">insert</h2>
-<p>记录父节点同时从根节点向下搜索。如果节点存在 cnt++, 否则新建节点并与父节点连边。</p>
-<pre><code class="language-c++">void insert(int x){
-    int cur = root, p = 0;
-    while(val[cur] != x &amp;&amp; cur){
-        p = cur;
-        cur = ch[cur][x &gt; val[cur]];
-    }
-    if(cur) cnt[cur]++;
-    else {
-        cur = ++ncnt;
-        if(p) ch[p][x &gt; val[p]] = cur;
-        ch[cur][0] = ch[cur][1] = 0;
-        par[cur] = p;val[cur] = x;
-        sz[cur] = cnt[cur] = 1;
-    }
-    splay(cur);
-}
-</code></pre>
-<h3 id="remark-如果加入了哨兵节点请修改kth-和-rank">Remark : 如果加入了哨兵节点请修改Kth 和 rank</h3>
-<h2 id="kth">kth</h2>
-<p>查询第k大的值</p>
-<pre><code class="language-c++">int kth(int k){
-    int cur = root;
-    while(1){
-        if(k &lt;= sz[ch[cur][0]] &amp;&amp; ch[cur][0]) cur = ch[cur][0];
-        else if(k &gt; sz[ch[cur][0]] + cnt[cur]){
-            k -= sz[ch[cur][0]] + cnt[cur];//注意顺序
-            cur = ch[cur][1];
-        }else{
-            splay(cur);
-            return cur;
-        }
-    }
-}
-</code></pre>
-<h2 id="rank">rank</h2>
-<p>将节点find到根后返回左子树的大小即可（再加入哨兵节点的前提下）。</p>
-<h2 id="pre">pre</h2>
-<p>将节点find到根后返回左子树最右边的节点即可</p>
-<pre><code class="language-c++">int pre(int x){
-    find(x);
-    if(val[root] &lt; x) return root;
-    int cur = ch[root][0];
-    while(ch[cur][1]) cur = ch[cur][1];
-    splay(cur);
-    return cur;
-}
-</code></pre>
-<h2 id="suc">suc</h2>
-<p>同pre</p>
-<pre><code class="language-c++">int suc(int x){
-    find(x);
-    if(val[root] &gt; x) return root; 
-    int cur = ch[root][1];
-    while(ch[cur][0]) cur = ch[cur][0];
-    splay(cur);
-    return cur;
-}
-</code></pre>
-<h2 id="remove">remove</h2>
-<p>把前驱伸展到根，后继伸展到根的右儿子，根的右儿子的左儿子就是要删除的节点</p>
-<pre><code class="language-c++">void remove(int x){
-    int last = pre(x), nxt = suc(x);
-    splay(last);splay(nxt, last);
-    int del = ch[nxt][0];
-    if(cnt[del] &gt; 1){
-        cnt[del]--;
-        splay(del);
-    }else ch[nxt][0] = 0;
-    pushup(nxt), pushup(root);
-}
-</code></pre>
-<p><a href="https://www.luogu.com.cn/problem/P3369">模板题</a></p>
 ]]></content>
     </entry>
 </feed>
