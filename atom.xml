@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-16T05:10:48.447Z</updated>
+    <updated>2020-11-16T09:01:59.008Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -98,6 +98,92 @@ with open(filename, 'w') as file_object:
 <li>附加到文件</li>
 </ul>
 <p>如果要给文件添加内容，而不是覆盖原有内容，可以以附加模式<code>a</code>打开文件.</p>
+<hr>
+<h2 id="103异常">10.3异常</h2>
+<p>Python使用称为异常的特殊对象来管理程序执行期间发生的错误。</p>
+<p>异常是使用<code>try-except</code>代码块处理的。<code>try-except</code>将告诉发生异常时怎么办， 即便出现异常，程序也将继续运行。</p>
+<ul>
+<li>处理<code>ZeroDivisionError</code></li>
+</ul>
+<pre><code class="language-python">try:
+    print(5 / 0)
+except ZeroDivisionError:
+    print(&quot;You can't divide by zero!&quot;)
+</code></pre>
+<hr>
+<ul>
+<li>try - except - else语句</li>
+</ul>
+<p>妥善地处理用户输入</p>
+<pre><code class="language-python">print(&quot;Give me two numbers, and I'll divide them.&quot;)
+print(&quot;Enter 'q' to quit&quot;)
+
+while True:
+    first_number = input(&quot;\nFirst number: &quot;)
+    if(first_number == 'q'):
+        break
+    
+    second_number = input(&quot;\nSecond number: &quot;)
+    if(second_number == 'q'):
+    	break
+    
+    try :
+        answer = int(first_number) / int(second_number)
+    except ZeroDivisionError:
+        print(&quot;You can't divide by zero!&quot;)
+        
+    else :
+        print(answer)
+
+</code></pre>
+<hr>
+<p>方法<code>split()</code>以空格为分隔符将字符串分拆成多个部分，并将这些部分都存储到一个列表中。结果是一个包含字符串中所有单词的列表。</p>
+<pre><code class="language-python">&gt;&gt;&gt; title = 'Alice in Wonderland'
+&gt;&gt;&gt; title.split()
+['Alice', 'in', 'Wonderland']
+</code></pre>
+<hr>
+<ul>
+<li>静默失败</li>
+</ul>
+<blockquote>
+<p>如果希望程序在发生异常时保持静默，像什么也没有发生一样继续运行,即静默失败</p>
+</blockquote>
+<pre><code class="language-python">def count_words(filename):
+    try:
+        --snip--
+    except FileNotFoundError:
+        pass
+    else:
+        --snip--
+</code></pre>
+<hr>
+<h2 id="104存储数据">10.4存储数据</h2>
+<blockquote>
+<p>程序把用户提供的信息存储在列表和字典等数据结构中。用户关闭程序时，几乎总是要保存他们提供的信息。一种简单的方式是使用模块<code>json</code>来存储数据。</p>
+</blockquote>
+<p><code>json</code>可以：</p>
+<ol>
+<li>将简单的Python数据结构(数据存储格式与Python一样)转储到文件中，并在文件再次运行时加载该文件中的数据。</li>
+<li>可以使用<code>json</code>在Python程序之间分享数据。</li>
+</ol>
+<hr>
+<ul>
+<li>使用<code>json.dump()</code>和<code>json.load()</code></li>
+</ul>
+<pre><code class="language-python">import json
+numbers = [2, 3, 5, 7, 11, 13]
+
+filename = 'numbers.json'
+with open(filename, 'w') as f:
+    json.dump(numbers, f)
+</code></pre>
+<pre><code class="language-python">import json
+filename = 'numbers.json'
+with open(filename) as f:
+    numbers = json.load(f)
+   
+</code></pre>
 </li>
 </ul>
 ]]></content>
