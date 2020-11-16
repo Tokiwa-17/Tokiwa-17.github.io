@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-15T14:51:22.973Z</updated>
+    <updated>2020-11-16T02:06:06.354Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -108,7 +108,7 @@
         <link href="https://tokiwa-17.github.io/post/python-bian-cheng-04han-shu/">
         </link>
         <updated>2020-11-15T01:49:59.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="python-编程04函数">Python 编程04：函数、</h1>
+        <content type="html"><![CDATA[<h1 id="python-编程04函数-对象">Python 编程04：函数、对象</h1>
 <h2 id="81-定义函数">8.1 定义函数</h2>
 <pre><code class="language-python">def greet_user(username):
     &quot;&quot;&quot;显示简单的问候语&quot;&quot;&quot;
@@ -243,6 +243,71 @@ p.make_pizza(16, 'pepperoni')
 <pre><code class="language-python">from pizza import *
 </code></pre>
 <p>此时可以通过名称来调用每个函数，而无须使用句点表示法。</p>
+<hr>
+<h2 id="第九章-类">第九章 类</h2>
+<h2 id="91-创建和使用类">9.1 创建和使用类</h2>
+<pre><code class="language-python">class Dog:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+   
+	def sit(self) :
+        # ...
+   
+my_dog = Dog('Willie', 6)
+age = my_dog.name
+my_dog.sit()
+</code></pre>
+<p>__ init__ 是一个特殊方法，创建Dog新实例时会自动运行。self必不可少，且必须位于其他形参的前面，Python调用这个方法创建Dog实例时，将自动传入实参self.</p>
+<hr>
+<h2 id="92-使用类和实例">9.2 使用类和实例</h2>
+<p>创建实例时，有些属性无须通过形参来定义，可在方法 __ init __ ()中为其指定默认值。</p>
+<pre><code class="language-python">class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+</code></pre>
+<ul>
+<li>可以直接修改属性的值或者通过方法修改属性的值</li>
+</ul>
+<hr>
+<h2 id="93-继承">9.3 继承</h2>
+<p>创建子类时，父类必须包含在当前文件中，且位于子类前面。</p>
+<p>定义子类时，必须在圆括号中指定父类的名称。</p>
+<pre><code class="language-python">class ElectricCar(Car):
+    
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+        self.battery_size = 75
+</code></pre>
+<p>super()是一个特殊函数，可以调用父类的方法。</p>
+<hr>
+<ul>
+<li>重写父类的方法</li>
+</ul>
+<blockquote>
+<p>Car类有一个名为 fill_gas_tank()的方法，对电动汽车来说毫无意义。</p>
+</blockquote>
+<pre><code class="language-python">clss ElectricCar(Car):
+    --snip--
+    def fill_gas_tank(self):
+        print(&quot;This car doesn't need a gas tank!&quot;)
+</code></pre>
+<ul>
+<li>将实例用作属性</li>
+</ul>
+<pre><code class="language-python">class Battery:
+    def __init__ (self, battery_size = 75):
+        self.battery_size = battery_size
+        # ...
+    
+class ElectricCar(Car):
+    def __init__ (self, make, model, year):
+        # ...
+        self.battery = Battery()
+</code></pre>
 ]]></content>
     </entry>
     <entry>
