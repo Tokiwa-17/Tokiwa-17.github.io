@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-17T05:10:11.102Z</updated>
+    <updated>2020-11-17T07:25:52.932Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -10,6 +10,79 @@
     <logo>https://tokiwa-17.github.io/images/avatar.png</logo>
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
+    <entry>
+        <title type="html"><![CDATA[# 20-fall Digital electronics]]></title>
+        <id>https://tokiwa-17.github.io/post/20-fall-digital-electronics/</id>
+        <link href="https://tokiwa-17.github.io/post/20-fall-digital-electronics/">
+        </link>
+        <updated>2020-11-17T07:08:15.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="20-fall-digital-electronics">20-fall Digital electronics</h1>
+<hr>
+<h2 id="第四章组合逻辑电路">第四章：组合逻辑电路</h2>
+<hr>
+<h3 id="43-若干常用组合逻辑电路">4.3 若干常用组合逻辑电路</h3>
+<h4 id="431编码器">4.3.1编码器</h4>
+<h4 id="432译码器">4.3.2译码器</h4>
+<p>译码：将每个输入的二进制代码译成对应的输出高、低电平信号或是另外一个代码。</p>
+<p>将每个输入代码译成对应的一根输出线。</p>
+<p>一、二进制译码器（3线 - 8线译码器）</p>
+<figure data-type="image" tabindex="1"><img src="https://tokiwa-17.github.io/post-images/1605596966499.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://tokiwa-17.github.io/post-images/1605596974032.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://tokiwa-17.github.io/post-images/1605597926012.jpg" alt="" loading="lazy"></figure>
+<p>用二极管<strong>与门</strong>阵列组成的3线-8线译码器缺点：</p>
+<ol>
+<li>电路的输入电阻较低而输出电阻较高</li>
+<li>输出的高、低电平信号发生偏移</li>
+</ol>
+<hr>
+<p>集成译码器实例： 74HC138</p>
+<ul>
+<li><strong>低电平输出</strong></li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://tokiwa-17.github.io/post-images/1605596981432.png" alt="" loading="lazy"></figure>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>Y</mi><mn>0</mn><mo mathvariant="normal">′</mo></msubsup><mo>=</mo><mo>(</mo><msubsup><mi>A</mi><mn>0</mn><mo mathvariant="normal">′</mo></msubsup><msubsup><mi>A</mi><mn>1</mn><mo mathvariant="normal">′</mo></msubsup><msubsup><mi>A</mi><mn>2</mn><mo mathvariant="normal">′</mo></msubsup><mi>S</mi><mo>)</mo><mo>=</mo><mo>(</mo><msubsup><mi>m</mi><mn>0</mn><mo mathvariant="normal">′</mo></msubsup><mi>S</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">Y&#x27;_0 = (A&#x27;_0A&#x27;_1A&#x27;_2S) = (m&#x27;_0S)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mclose">)</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>Y</mi><mn>0</mn><mo mathvariant="normal">′</mo></msubsup><mtext> </mtext><msubsup><mi>Y</mi><mn>7</mn><mo mathvariant="normal">′</mo></msubsup></mrow><annotation encoding="application/x-tex">Y&#x27;_0 ~ Y&#x27;_7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace nobreak"> </span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span></span></span></span>同时又是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>A</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>A</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">A_0,A_1,A_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>这三个变量的全部最小项的译码输出，所以也成为最小项译码器。</p>
+<figure data-type="image" tabindex="5"><img src="https://tokiwa-17.github.io/post-images/1605596987461.png" alt="" loading="lazy"></figure>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>=</mo><msub><mi>S</mi><mn>1</mn></msub><msub><mi>S</mi><mn>2</mn></msub><msub><mi>S</mi><mn>3</mn></msub><mi mathvariant="normal">，</mi><msub><mi>S</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn><mo separator="true">,</mo><msubsup><mi>S</mi><mn>2</mn><mo mathvariant="normal">′</mo></msubsup><mo>+</mo><msubsup><mi>S</mi><mn>3</mn><mo mathvariant="normal">′</mo></msubsup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">S = S_1S_2S_3， S_1 = 1, S&#x27;_2 + S&#x27;_3 = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.24810799999999997em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4518920000000004em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>时，译码器处于工作状态。</p>
+<hr>
+<p>二、二——十进制译码器</p>
+<hr>
+<p>三、显示译码器</p>
+<ol>
+<li>
+<p>七段字符显示器</p>
+<ul>
+<li>
+<p>半导体数码管如BS201A：<strong>亮度高，耗电大</strong></p>
+</li>
+<li>
+<p>液晶显示器：<strong>亮度暗，耗电小</strong></p>
+<p>​		不通电时，液晶分子整齐排列，透明，反射光线，显示器呈白色。</p>
+<p>​		通电时，液晶分子排列不规则，仅有少量光线反射，显示器成灰暗色。</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure data-type="image" tabindex="6"><img src="https://tokiwa-17.github.io/post-images/1605596996534.png" alt="" loading="lazy"></figure>
+<hr>
+<h2 id="bcd-七段显示译码器7748">BCD-七段显示译码器7748<br>
+<img src="https://tokiwa-17.github.io/post-images/1605597167031.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597179060.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597201652.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597591854.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597172904.png" alt="" loading="lazy"></h2>
+<h4 id="433-数据选择器">4.3.3 数据选择器</h4>
+<h2 id=""><img src="https://tokiwa-17.github.io/post-images/1605597195336.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597772252.png" alt="" loading="lazy"></h2>
+<h4 id="434-加法器">4.3.4 加法器</h4>
+<p><img src="https://tokiwa-17.github.io/post-images/1605597209451.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597188788.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597206291.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597233565.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1605597228485.png" alt="" loading="lazy"></p>
+<hr>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[20-fall Data Structure]]></title>
         <id>https://tokiwa-17.github.io/post/20-fall-data-structure/</id>
@@ -1481,198 +1554,6 @@ print(cars) # ['bmw', 'audi', 'toyota', 'subaru']
 <hr>
 <p>方法reverse()：倒序排列</p>
 <p>方法len(): 获取列表的长度</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Segment Tree]]></title>
-        <id>https://tokiwa-17.github.io/post/segment-tree/</id>
-        <link href="https://tokiwa-17.github.io/post/segment-tree/">
-        </link>
-        <updated>2020-11-08T14:00:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="segment-tree">Segment Tree</h1>
-<p>每一个子节点表示整个序列中的一段子区间，每个叶子节点表示序列中单个元素的信息。子节点不断向父亲节点传递信息，而父亲节点存储每个叶子节点信息的整合。</p>
-<p>注意pushup 和 pushdown 的时机，pushup是由子节点向父节点传递信息，所以在回溯时，pushdown是由父节点向子节点传递信息，所以应该在递归开始前。</p>
-<h2 id="左右节点的表示">左右节点的表示</h2>
-<pre><code class="language-c++">#define ls x &lt;&lt; 1
-#define rs x &lt;&lt; 1 | 1
-int t[MAXN &lt;&lt; 2];
-</code></pre>
-<h2 id="pushup">pushup</h2>
-<p>可以根据节点之间的逻辑关系选择</p>
-<pre><code class="language-c++">il void pushup(int x){t[x] = t[ls] + t[rs];}
-il void pushup(int x){t[x] = max(t[ls], t[rs]);}
-il void pushup(int x){t[x] = min(t[ls], t[rs]);}
-</code></pre>
-<h2 id="build">build</h2>
-<pre><code class="language-c++">void build(int x, int l, int r){
-	int mid = (l + r) &gt;&gt; 1;
-	build(ls, l, mid), build(rs, mid + 1, r);
-	pushup(x);
-}
-</code></pre>
-<h2 id="lazytag">lazytag</h2>
-<pre><code class="language-c++">il void f(int x, int l, int r, int k){
-	tag[x] = tag[x] + k;
-	t[x] = t[x] + (r - l + 1) * k;
-}
-il void pushdown(int x, int l, int r){
-	int mid = (l + r) &gt;&gt; 1;
-	f(ls, l, mid, tag[x]), f(rs, mid + 1, r, tag[x]);
-	tag[x] = 0;
-}
-</code></pre>
-<h2 id="update">update</h2>
-<pre><code class="language-c++">il void update(int x, int ql, int qr, int l, int r, int k){
-	if(ql &lt;= l &amp;&amp; qr &gt;= r){
-		t[x] += k * (r - l + 1);
-        tag[x] += k;
-        return;
-    }
-    pushdown(x, l, r);
-    int mid = (l + r) &gt;&gt; 1;
-    if(ql &lt;= mid) update(ls, ql, qr, l, mid, k);
-    if(qr &gt; mid) update(rs, ql, qr, mid + 1, r, k);
-    pushup(x);
-}
-</code></pre>
-<h2 id="query">query</h2>
-<pre><code class="language-c++">int query(int x, int ql, int qr, int l, int r){
-	int res = 0;
-	if(ql &lt;= l &amp;&amp; qr &gt;= r) return t[x];
-	int mid = (l + r) &gt;&gt; 1;
-	pushdown(x, l, r);
-	if(ql &lt;= mid) res += query(ls, ql, qr, l, mid);
-	if(qr &gt; mid) res += query(rs, ql, qr, mid + 1, r);
-	return res;
-}
-</code></pre>
-<p><a href="https://www.luogu.com.cn/problem/P3372">模板题</a><br>
-<a href="https://www.luogu.com.cn/problem/P3373">线段树2</a></p>
-<p>维护 mul, add两个标记，先乘再加：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>+</mo><mi>a</mi><mi>d</mi><mi>d</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>)</mo><mo>×</mo><mi>m</mi><mi>u</mi><mi>l</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>=</mo><mi>t</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>×</mo><mi>m</mi><mi>u</mi><mi>l</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>+</mo><mi>a</mi><mi>d</mi><mi>d</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>×</mo><mi>m</mi><mi>u</mi><mi>l</mi><mo>[</mo><mi>x</mi><mo>]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">(t[x] + add[x]) \times mul[x] = t[x] \times mul[x] + add[x] \times mul[x].
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">d</span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">d</span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mord">.</span></span></span></span></span></p>
-<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
-#define ls x &lt;&lt; 1
-#define rs x &lt;&lt; 1 | 1
-#define mid ((l + r) &gt;&gt; 1)
-#define il inline
-#define int long long
-using namespace std;
-const int N = 1e5 + 10;
-
-int a[N], t[N &lt;&lt; 2], mul[N &lt;&lt; 2], add[N &lt;&lt; 2];
-int n, m, p;
-
-il void pushup(int x){t[x] = (t[ls] + t[rs]) % p;}
-il void build(int x, int l, int r){
-    mul[x] = 1, add[x] = 0;
-    if(l == r){t[x] = a[l]; return;}
-    build(ls, l, mid), build(rs, mid + 1, r);
-    pushup(x);
-}
-il void pushdown(int x, int l, int r){
-    mul[ls] = (mul[ls] * mul[x]) % p;
-    mul[rs] = (mul[rs] * mul[x]) % p;
-    add[ls] = (add[ls] * mul[x] + add[x]) % p;
-    add[rs] = (add[rs] * mul[x] + add[x]) % p;
-    t[ls] = (t[ls] * mul[x] + add[x] * (mid - l + 1)) % p;
-    t[rs] = (t[rs] * mul[x] + add[x] * (r - mid)) % p;
-    mul[x] = 1, add[x] = 0;
-}
-void addition(int x, int ql, int qr, int l, int r, int k){
-    if(ql &lt;= l &amp;&amp; qr &gt;= r){
-        add[x] = (add[x] + k) % p;
-        t[x] = (t[x] + k * (r - l + 1)) % p;
-        return;
-    }
-    pushdown(x, l, r);
-    if(ql &lt;= mid) addition(ls, ql, qr, l, mid, k);
-    if(qr &gt; mid) addition(rs, ql, qr, mid + 1, r, k);
-    pushup(x);
-}
-void multiplication(int x, int ql, int qr, int l, int r, int k){
-    if(ql &lt;= l &amp;&amp; qr &gt;= r){
-        mul[x] = (mul[x] * k) % p;
-        add[x] = (add[x] * k) % p;
-        t[x] = (t[x] * k) % p;
-        return;
-    }
-    pushdown(x, l, r);
-    if(ql &lt;= mid) multiplication(ls, ql, qr, l, mid, k);
-    if(qr &gt; mid) multiplication(rs, ql, qr, mid + 1, r, k);
-    pushup(x);
-}
-int query(int x, int ql, int qr, int l, int r){
-    int res = 0;
-    if(ql &lt;= l &amp;&amp; qr &gt;= r) return t[x];
-    pushdown(x, l, r);
-    if(ql &lt;= mid) res = (res + query(ls, ql, qr, l, mid)) % p;
-    if(qr &gt; mid) res = (res + query(rs, ql, qr, mid + 1, r)) % p;
-    return res % p;
-}
-
-il int read(){
-    int x = 0,f = 1;char ch = getchar();
-    while(ch &lt; '0' || ch &gt; '9'){if(ch == '-')f = -1;ch = getchar();}
-    while(ch &gt;= '0' &amp;&amp; ch &lt;= '9'){x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + (ch ^ 48);ch = getchar();}
-    return x * f;
-}
-
-signed main(){
-    n = read(), m = read(), p = read();
-    for(int i = 1;i &lt;= n;i++) a[i] = read();
-    build(1, 1, n);
-    int opt, x, y, k;
-    while(m--){
-        opt = read(), x = read(), y = read();
-        if(opt == 1){
-            k = read();
-            multiplication(1, x, y, 1, n, k);
-        }else if(opt == 2){
-            k = read();
-            addition(1, x, y, 1, n, k);
-        }
-        else cout &lt;&lt; query(1, x, y, 1, n) &lt;&lt; endl;
-    }
-    return 0;
-}
-</code></pre>
-<h2 id="题单">题单</h2>
-<p><strong>本题单里的题目，由简单到难，逐渐递进，适合新学线段树 or 还只会打线段树板子选手。</strong><br>
-<em><strong>P.S.</strong></em> <em>其中一些题目线段树并不是最好的办法，但线段树一定是可以过的</em></p>
-<p>这部分都是线段树模板，切掉这些题，开始练习线段树吧：</p>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/P3372">P3372 【模板】线段树 1</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P2068">P2068 统计和</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P1531">P1531 I Hate It</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P3373">P3373 【模板】线段树 2</a></li>
-</ul>
-<p>这部分开始就不是简单的模板了，需要选手根据题目在线段树中维护一些东西：</p>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/P2880">P2880 [USACO07JAN]Balanced Lineup G</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P5057">P5057 [CQOI2006]简单题</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P3870">P3870 [TJOI2009]开关</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P1816">P1816 忠诚</a></li>
-</ul>
-<p>这部分就需要好好思考题目了，不像上个部分，需要维护的东西和做法并不是显而易见的，有时还需要结合一些数学知识：</p>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/P1438">P1438 无聊的数列</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P1471">P1471 方差</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P4145">P4145 上帝造题的七分钟2 / 花神游历各国</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P2184">P2184 贪婪大陆</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P5568">P5568 [SDOI2008]校门外的区间</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P4314">P4314 CPU监控</a></li>
-<li><a href="https://www.luogu.com.cn/problem/P2572">P2572 [SCOI2010]序列操作</a></li>
-</ul>
-<p>非常经典的GSS系列，如果切掉这部分，那绝对就是线段树大神了：</p>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/SP1043">SP1043 GSS1 - Can you answer these queries I</a></li>
-<li><a href="https://www.luogu.com.cn/problem/SP1557">SP1557 GSS2 - Can you answer these queries II</a></li>
-<li><a href="https://www.luogu.com.cn/problem/SP1716">SP1716 GSS3 - Can you answer these queries III</a></li>
-<li><a href="https://www.luogu.com.cn/problem/SP2713">SP2713 GSS4 - Can you answer these queries IV</a></li>
-<li><a href="https://www.luogu.com.cn/problem/SP2916">SP2916 GSS5 - Can you answer these queries V</a></li>
-<li><a href="https://www.luogu.com.cn/problem/SP6779">SP6779 GSS7 - Can you answer these queries VII</a></li>
-</ul>
 ]]></content>
     </entry>
 </feed>
