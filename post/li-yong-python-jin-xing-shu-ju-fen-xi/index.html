@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>利用Python 进行数据分析 | Tokiwa-17</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605669682846">
+<link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="利用Python 进行数据分析
+第二章:Python 语言基础
+a = [1, 2, 3]
+b = a
+
+在Python中，a和b实际上指向了相同的对象。
+将对象作为参数传递给一个函数时，指向原始对象的新的本地变量就会被创建而无需复制。
+
+..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tokiwa-17.github.io">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605669682846" class="site-logo">
+        <h1 class="site-title">Tokiwa-17</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      転ばぬ先の杖
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tokiwa-17.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">利用Python 进行数据分析</h2>
+            <div class="post-date">2020-11-18</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="利用python-进行数据分析">利用Python 进行数据分析</h1>
+<h2 id="第二章python-语言基础">第二章:Python 语言基础</h2>
+<pre><code class="language-python">a = [1, 2, 3]
+b = a
+</code></pre>
+<p>在Python中，a和b实际上指向了相同的对象。</p>
+<p>将对象作为参数传递给一个函数时，指向原始对象的新的本地变量就会被创建而无需复制。</p>
+<ul>
+<li>了解对象的类型</li>
+</ul>
+<blockquote>
+<p>isinstance接受一个包含类型的元组，你可以检查对象的类型是否是元组中存在的类型之一。</p>
+</blockquote>
+<pre><code class="language-python">a = 5; b = 4.5
+isinstance(a, (int, float))
+# True
+isinstance(b, (int,	float))
+# True
+</code></pre>
+<ul>
+<li>检查一个对象是否可以迭代</li>
+</ul>
+<blockquote>
+<p>可以使用 <code>iter</code>函数检查一个对象是否实现了迭代器协议</p>
+</blockquote>
+<pre><code class="language-python">def isiterable(obj):
+    try:
+        iter(obj)
+        return True
+    except TypeError: # 不可遍历
+    	return False
+
+isiterable('a string') # True
+isiterable([1, 2, 3]) # True
+isiterable(5) # False
+</code></pre>
+<pre><code class="language-python">if not instance(x, list) and isiterable(x):
+    x = list(x)
+</code></pre>
+<p><em>Remark: 优先级 <code>not &gt; and &gt; or</code></em></p>
+<hr>
+<ul>
+<li>运算</li>
+</ul>
+<blockquote>
+<p>检查两个引用是否指向同一个对象，可以使用<code>is</code>关键字。</p>
+</blockquote>
+<pre><code class="language-python">a = [1, 2, 3]
+b = a
+c = list(a) # list 函数总是创建一个新的列表
+
+a is b # True
+a is not c # True
+</code></pre>
+<p><code>is</code>和<code>is not</code>的常用之处是检查一个变量是否为<code>None</code></p>
+<pre><code class="language-python">a = None
+
+a is None # True
+</code></pre>
+<hr>
+<p><strong>标量类型</strong></p>
+<ul>
+<li>
+<p>数值类型：</p>
+<ol>
+<li><code>int</code>可以储存任意大小的数字</li>
+<li>浮点数可以用科学计数法表示</li>
+</ol>
+</li>
+<li>
+<p>字符串</p>
+<ol>
+<li>
+<p>对于含有换行的字符串，可以使用三个单引号<code>'''</code> 或者三个双引号<code>&quot;&quot;&quot;</code>.</p>
+<pre><code class="language-python">c = &quot;&quot;&quot;
+This is a long string that
+spans multiple lines
+&quot;&quot;&quot;
+</code></pre>
+</li>
+<li>
+<p>字符串是不可变的，无法修改一个字符串</p>
+</li>
+</ol>
+</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tokiwa-17.github.io/post/20-fall-statistics-inference/">
+                  <h3 class="post-title">
+                    20-fall statistics inference
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

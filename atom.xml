@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-17T16:30:52.849Z</updated>
+    <updated>2020-11-18T03:21:25.443Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -10,6 +10,100 @@
     <logo>https://tokiwa-17.github.io/images/avatar.png</logo>
     <icon>https://tokiwa-17.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Tokiwa-17</rights>
+    <entry>
+        <title type="html"><![CDATA[利用Python 进行数据分析]]></title>
+        <id>https://tokiwa-17.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi/</id>
+        <link href="https://tokiwa-17.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi/">
+        </link>
+        <updated>2020-11-18T03:21:14.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="利用python-进行数据分析">利用Python 进行数据分析</h1>
+<h2 id="第二章python-语言基础">第二章:Python 语言基础</h2>
+<pre><code class="language-python">a = [1, 2, 3]
+b = a
+</code></pre>
+<p>在Python中，a和b实际上指向了相同的对象。</p>
+<p>将对象作为参数传递给一个函数时，指向原始对象的新的本地变量就会被创建而无需复制。</p>
+<ul>
+<li>了解对象的类型</li>
+</ul>
+<blockquote>
+<p>isinstance接受一个包含类型的元组，你可以检查对象的类型是否是元组中存在的类型之一。</p>
+</blockquote>
+<pre><code class="language-python">a = 5; b = 4.5
+isinstance(a, (int, float))
+# True
+isinstance(b, (int,	float))
+# True
+</code></pre>
+<ul>
+<li>检查一个对象是否可以迭代</li>
+</ul>
+<blockquote>
+<p>可以使用 <code>iter</code>函数检查一个对象是否实现了迭代器协议</p>
+</blockquote>
+<pre><code class="language-python">def isiterable(obj):
+    try:
+        iter(obj)
+        return True
+    except TypeError: # 不可遍历
+    	return False
+
+isiterable('a string') # True
+isiterable([1, 2, 3]) # True
+isiterable(5) # False
+</code></pre>
+<pre><code class="language-python">if not instance(x, list) and isiterable(x):
+    x = list(x)
+</code></pre>
+<p><em>Remark: 优先级 <code>not &gt; and &gt; or</code></em></p>
+<hr>
+<ul>
+<li>运算</li>
+</ul>
+<blockquote>
+<p>检查两个引用是否指向同一个对象，可以使用<code>is</code>关键字。</p>
+</blockquote>
+<pre><code class="language-python">a = [1, 2, 3]
+b = a
+c = list(a) # list 函数总是创建一个新的列表
+
+a is b # True
+a is not c # True
+</code></pre>
+<p><code>is</code>和<code>is not</code>的常用之处是检查一个变量是否为<code>None</code></p>
+<pre><code class="language-python">a = None
+
+a is None # True
+</code></pre>
+<hr>
+<p><strong>标量类型</strong></p>
+<ul>
+<li>
+<p>数值类型：</p>
+<ol>
+<li><code>int</code>可以储存任意大小的数字</li>
+<li>浮点数可以用科学计数法表示</li>
+</ol>
+</li>
+<li>
+<p>字符串</p>
+<ol>
+<li>
+<p>对于含有换行的字符串，可以使用三个单引号<code>'''</code> 或者三个双引号<code>&quot;&quot;&quot;</code>.</p>
+<pre><code class="language-python">c = &quot;&quot;&quot;
+This is a long string that
+spans multiple lines
+&quot;&quot;&quot;
+</code></pre>
+</li>
+<li>
+<p>字符串是不可变的，无法修改一个字符串</p>
+</li>
+</ol>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[20-fall statistics inference]]></title>
         <id>https://tokiwa-17.github.io/post/20-fall-statistics-inference/</id>
@@ -1346,140 +1440,6 @@ while unconfirmed_users:
 
 while 'cat' in pets:
     pets.remove('cat')
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Python编程02：操作列表、if语句]]></title>
-        <id>https://tokiwa-17.github.io/post/python-bian-cheng-02/</id>
-        <link href="https://tokiwa-17.github.io/post/python-bian-cheng-02/">
-        </link>
-        <updated>2020-11-12T15:16:40.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="python-编程02">Python 编程02</h1>
-<h1 id="第四章-操作列表">第四章 ：操作列表</h1>
-<h2 id="41-遍历整个列表">4.1 遍历整个列表</h2>
-<pre><code class="language-python">magicians = ['alice', 'david', 'carolina']
-for magician in magicians:
-# 冒号告诉Python，下一行时循环的第一行。
-    print(magician)
-</code></pre>
-<p>每行缩进可以在for循环中包含更多操作。</p>
-<hr>
-<h2 id="43创建数值列表">4.3创建数值列表</h2>
-<p>使用函数range()可以轻松地生成一系列数</p>
-<pre><code class="language-python">for val in range(1, 5):
-    print(val)
-</code></pre>
-<p><em>Remark: 在这个示例中，range()只打印 1 ~ 4.</em> （<strong>在5处停止</strong>）</p>
-<hr>
-<p>使用list()将range()的结果转换成列表：</p>
-<pre><code class="language-python">numbers = list(range(1, 6))
-print numbers # [1, 2, 3, 4, 5, 6]
-</code></pre>
-<p>给range指定第三个参数可以指定步长：</p>
-<pre><code class="language-python">even_numbers = list(range(2, 11, 2))
-</code></pre>
-<hr>
-<p>列表解析：首先指定一个描述性的列表名，然后再方括号中定义一个表达式，生成要存储到列表中的值。</p>
-<pre><code class="language-python">squares = [value ** 2 for value in range(1, 11)]
-</code></pre>
-<hr>
-<h2 id="44-列表切片">4.4 列表切片</h2>
-<ul>
-<li>处理列表的部分元素，Python称之为切片</li>
-<li>通过指定第一个元素和最后一个元素的索引实现</li>
-</ul>
-<pre><code class="language-python">players = ['charles', 'martina', 'michael', 'florence', 'eli']
-print(players[0 : 3])
-# ['charles', 'martina', 'michael']
-</code></pre>
-<p>第一个索引缺省从头开始: <strong>print(players[ : 3])</strong></p>
-<p>第二个索引缺省到末尾结束： <strong>print(players[2 : ])</strong></p>
-<hr>
-<p>复制列表</p>
-<pre><code class="language-python">friends_foods = my_foods[:]
-# Wrong: friends_foods = my_foods
-# 这两个变量会指向一个列表
-</code></pre>
-<hr>
-<h2 id="45元组">4.5元组</h2>
-<ul>
-<li>不可变的列表称为元组</li>
-<li>元组用圆括号标识</li>
-</ul>
-<pre><code class="language-python">dimensions = (200, 50)
-</code></pre>
-<p>不能修改元组的元素，但是可以给存储元组的变量赋值</p>
-<pre><code class="language-python">dimensions = (200, 50)
-# do something
-dimensions = (400, 100)
-</code></pre>
-<hr>
-<h1 id="第五章if语句">第五章：if语句</h1>
-<h2 id="51-一个简单示例">5.1 一个简单示例</h2>
-<pre><code class="language-python">cars = ['audi', 'bmw', 'subaru', 'toyota']
-for car in cars:
-    if car == 'bmw':
-        print(car.upper())
-    else:
-        print(car.title())
-</code></pre>
-<h2 id="52-条件测试">5.2 条件测试</h2>
-<ol>
-<li>使用and检查多个条件</li>
-</ol>
-<pre><code class="language-python">age_0 &gt;= 21 and age_1 &gt;= 21
-(age_0 &gt;= 21) and (age_1 &gt;= 21)
-</code></pre>
-<ol start="2">
-<li>使用or 检查多个条件</li>
-</ol>
-<pre><code class="language-python">age_0 &gt;= 21 or age_1 &gt;= 21
-</code></pre>
-<ol start="3">
-<li>检查特定值是否包含在列表中</li>
-</ol>
-<pre><code class="language-python">&gt;&gt;&gt; requested_toppings = ['mushrooms', 'onions', 'pineapple']
-&gt;&gt;&gt; 'mushrooms' in requested_toppings
-True
-</code></pre>
-<ol start="4">
-<li>检查特定值是否不包含在列表中</li>
-</ol>
-<pre><code class="language-python">banned_users = ['andrew', 'carolina', 'david']
-user = 'marie'
-
-if user not in banned_users:
-    print(f&quot;{user.title()}, you can post a response if you wish.&quot;)
-</code></pre>
-<h2 id="53-if语句">5.3 if语句</h2>
-<ol>
-<li></li>
-</ol>
-<pre><code class="language-python">age = 12
-
-if age &lt; 4:
-    print(&quot;Your admission cost is $0.&quot;)
-elif age &lt; 18:
-    print(&quot;Your admission cost is $25.&quot;)
-else:
-    print(&quot;Your admission cost is $40.&quot;)
-</code></pre>
-<p>可以添加任意数量的elif代码块，Python并不要求if - elif 结构后面必须有else代码块。</p>
-<hr>
-<ol start="2">
-<li>if - elif - else 仅仅适合用于只有一个条件满足的情况 ：遇到通过了的测试后，Python就跳过余下的测试。然而有时候必须检查你关心的所有事件。在这种情况下，应该使用一些列不包含elif 和 else 的代码块的简单if语句。</li>
-</ol>
-<hr>
-<ol start="3">
-<li>确定列表不是空的</li>
-</ol>
-<pre><code class="language-python">requested_toppings = []
-
-if requested_toppings :
-    # do something
-else:
-    print(&quot;Are you sure you want a plain pizza?&quot;)
 </code></pre>
 ]]></content>
     </entry>
