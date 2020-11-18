@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-18T05:22:01.806Z</updated>
+    <updated>2020-11-18T17:02:01.550Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -99,9 +99,189 @@ spans multiple lines
 <li>
 <p>字符串是不可变的，无法修改一个字符串</p>
 </li>
+<li>
+<p>含有大量反斜杠的字符串可以加一个前缀<code>r</code>，表示这些字符是原生字符(无需转义)</p>
+<pre><code class="language-python">s = r'this \has\no\sppecial\characters'
+</code></pre>
+</li>
+<li>
+<p>两个字符串合成一个字符串</p>
+<pre><code class="language-python">a = 'this is the first half'
+b = 'and this is the second half'
+a + b
+</code></pre>
+</li>
+<li>
+<p>字符串的<code>format</code>方法</p>
+<pre><code class="language-python">template = '{0:.2f} {1:s} are worth US${2:d}'
+template.format(4.5560, 'Argentine Pesos', 1)
+</code></pre>
+<ul>
+<li><code>{0:.2f}</code>表示将第一个参数格式化为2位小数的浮点数</li>
+<li>{1:s}表示将第二个参数格式化为字符串</li>
+<li>{2:d}表示将第三个参数格式化为整数。</li>
+</ul>
+</li>
 </ol>
 </li>
+<li>
+<p>字节与<code>Unicode</code></p>
+<ol>
+<li>
+<p>encode 与 decode</p>
+<pre><code class="language-python">test = 'もうこんな時間'
+test_utf8 = test.encode('utf-8')
+print('test_utf8')
+&quot;&quot;&quot;b'\xe3\x82\x82\xe3\x81\x86\xe3\x81\x93\xe3\x82\x93\xe3\x81\xaa\xe6\x99\x82\xe9\x96\x93'&quot;&quot;&quot;
+print(test_utf8.decode('utf-8'))
+# もうこんな時間
+</code></pre>
+</li>
+<li>
+<p>可以在字符串加前缀<code>b</code>来定义字符文本</p>
+<pre><code class="language-python">bytes_val = b'this is bytes'
+print(bytes_val.decode('utf-8'))
+</code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p><code>None</code> ：<strong>NoneType</strong>类型的唯一实例。如果一个函数没有显示地返回值，则它会隐式地返回None.</p>
+</li>
+<li>
+<p>三元表达式：</p>
+<pre><code class="language-python">value = true-expr if condition else false-expr
+
+'Non-negative' if x &gt;= 0 else 'Negative'
+</code></pre>
+</li>
 </ul>
+<hr>
+<hr>
+<h2 id="数据结构-函数和文件">数据结构、函数和文件</h2>
+<h2 id="31数据结构和序列">3.1数据结构和序列</h2>
+<ol>
+<li>
+<p>元组</p>
+<pre><code class="language-python"># 元组的元组
+nested_tup = ((4, 5, 6), (7, 8))
+# 使用tuple函数将任意序列或迭代器转换成元组:
+tuple([4, 0, 2]) # (4, 0, 2)
+tuple('string') # ('s', 't', 'r', 'i', 'n', 'g')
+
+# 如果元组中的一个对象是可变的，可以在它内部进行修改
+tup = tuple(['foo', [1, 2], True])
+tup[1].append(3)
+
+# 可以使用 + 号连接元组生成更长的元组
+(4, None, 'foo') + (6, 0) + ('bar',)
+# (4, None, 'foo', 6, 0, 'bar')
+
+# 将元组乘以整数，则会和列表一样，生成含有多份拷贝的元组
+('foo', 'bar') * 4
+# ('foo', 'bar', 'foo', 'bar', 'foo', 'bar', 'foo', 'bar')
+
+# 元组拆包
+tup = (4, 5, 6)
+a, b, c = tup
+# a = 4, b = 5, c = 6
+
+# 使用元组拆包，可以轻易地交换变量
+a, b = 1, 2
+b, a = a, b
+
+# 拆包的另一个常用场景就是遍历元组或列表组成的序列
+seq = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+for a, b, c in seq:
+    print('a = {0}, b = {1}, c = {2}'.format(a, b, c))
+&quot;&quot;&quot;
+a = 1, b = 2, c = 3
+a = 4, b = 5, c = 6
+a = 7, b = 8, c = 9
+&quot;&quot;&quot;
+
+# 使用 * 获取任意长度的参数列表
+values = 1, 2, 3, 4, 5
+a, b, *rest = values
+# rest = [3, 4, 5]
+
+#元组的方法 count(列表中也可用), 用于计量某个数值在元组中出现的次数
+a = (1, 2, 2, 2, 3, 4, 2)
+a.count(2)
+# 4
+</code></pre>
+<hr>
+<ol start="2">
+<li>
+<p>列表</p>
+<ul>
+<li>
+<p>使用<code>in</code>关键字可以检查一个值是否在列表中</p>
+</li>
+<li>
+<p>两个列表可以用 <code>+</code>号连接</p>
+</li>
+<li>
+<p>使用<code>extend</code>方法像列表添加多个元素</p>
+<pre><code class="language-python">x = [4, None, 'foo']
+x.extend([7, 8, (2, 3)])
+</code></pre>
+<blockquote>
+<p>通过 <code>+</code>号连接列表需要创建新列表、复制对象，使用<code>extend</code>添加元素是更好的方式。</p>
+</blockquote>
+</li>
+<li>
+<p>内建的<code>bisect</code>模块实现了二分搜索和已排序列表的插值</p>
+<ul>
+<li><code>bisect.bisect</code>会找到元素应当被插入的位置</li>
+<li><code>bisect.insort</code>将元素插入到相应位置。</li>
+</ul>
+<pre><code class="language-python">import bisect
+c = [1, 2, 2, 2, 3, 4, 7]
+bisect.bisect(c, 2) # 4
+bisect.insort(c, 6) # [1, 2, 2, 2, 3, 4, 6, 7]
+</code></pre>
+<p><em>Remark: bisect并不会检查列表是否已经排序</em></p>
+</li>
+<li>
+<p>切片</p>
+<pre><code class="language-python">seq = [7, 2, 3, 7, 5, 6, 0, 1]
+# 切片可以将序列赋值给变量
+seq[3 : 4] = [6, 3]
+# [7, 2, 3, 6, 3, 5, 6, 0, 1]
+
+# 步进值 step
+seq[::2]
+# [7, 3, 3, 6, 1]
+# 列表翻转
+seq[::-1]
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li>
+<p>Python 内建函数</p>
+<ul>
+<li>
+<p><code>enumerate</code>: 返回<code>(i, val)</code>,其中<code>val</code>是元素的值，<code>i</code>是元素的索引.</p>
+<pre><code class="language-python">for i, value in enumerate(collection):
+    #...
+# 常用来对数据建立索引
+some_list = ['foo', 'bar', 'baz']
+mapping = {}
+for i, v in enumerate(some_list):
+    mapping{v} = i
+# mapping = {'bar':1, 'baz':2, 'foo':0}
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
 ]]></content>
     </entry>
     <entry>
