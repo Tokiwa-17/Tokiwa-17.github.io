@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-18T17:02:01.550Z</updated>
+    <updated>2020-11-19T17:09:46.188Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -279,7 +279,116 @@ for i, v in enumerate(some_list):
 # mapping = {'bar':1, 'baz':2, 'foo':0}
 </code></pre>
 </li>
+<li>
+<p><code>zip</code> :将列表、元组或其他序列的元素配对，新建一个元组构成的列表</p>
+<pre><code class="language-python">seq1 = ['foo', 'bar', 'baz']
+seq2 = ['one', 'two', 'three']
+zipped = zip(seq1, seq2)
+list(zipped)
+# [('foo', 'one'), ('bar', 'two'), ('baz', 'three')]
+
+# 可以处理任意长度的序列，生成列表长度由最短的序列决定
+seq3 = [False, True]
+list(zip(seq1, seq2, seq3))
+# [('foo', 'one', False), ('bar', 'two', True)]
+</code></pre>
+<ul>
+<li>
+<p><code>zip</code>的常用场景</p>
+<pre><code class="language-python"># 同时遍历多个序列
+for i, (a, b) in enumerate(zip(seq1, seq2)):
+    print('{0}: {1}, {2}'.format(i, a, b))
+# 0: foo, one
+# ...
+</code></pre>
+<pre><code class="language-python">#拆分已配对序列
+pitchers = [('Nolan', 'Ryan'), ('Roger', 'Clemens'), ('Schilling', 'Curt')]
+first_names, last_names = zip(*pitchers)
+# first_names = ('Nolan', 'Roger', 'Schilling')
+</code></pre>
+</li>
 </ul>
+</li>
+<li>
+<p><code>reversed</code>将序列的元素倒序排列</p>
+<pre><code class="language-python">list(reversed(range(10)))
+# reversed是一个生成器，如果没有实例化，不会生成一个倒序的列表
+</code></pre>
+</li>
+</ul>
+<hr>
+<ol start="4">
+<li>
+<p>字典</p>
+<ul>
+<li>
+<p>插入字典中的元素</p>
+<pre><code class="language-python">d1[7] = 'an integer'
+</code></pre>
+</li>
+<li>
+<p>可以用<code>del</code>或<code>pop</code>删除值，<code>pop</code>会在删除的同时返回被删的值，并删除键</p>
+<pre><code class="language-python">d1 = {'a' : 'some value',
+      'b' : [1, 2, 3, 4],
+       7  : 'an integer', 
+      'dummy' : 'another value'}
+
+ret = d1.pop('dummy')
+</code></pre>
+</li>
+<li>
+<p><code>keys</code>方法和<code>values</code>方法会分别为你提供字典键、值的迭代器。输出时键、值按照相同的顺序。</p>
+</li>
+<li>
+<p>可以使用<code>update</code>方法将两个字典合并</p>
+<pre><code class="language-python">d1.update('b':'foo', 'c' : 12)
+</code></pre>
+<p><em>Remark:如果传给update()的字典含有相同的键，则原来的值会被覆盖</em></p>
+</li>
+<li>
+<p>两个序列在字典中按元素配对</p>
+<pre><code class="language-python"># 接受一个2-元组的列表作为参数：
+mapping = dict(zip(range(5), reversed(range(5))))
+</code></pre>
+</li>
+<li>
+<p>默认值</p>
+<pre><code class="language-python">if key in some_dict:
+    value = some_dict[key]
+else:
+    value = default_value
+# 可以用get()方法返回一个默认值
+# 等价代码
+value = some_dict.get(key, default_value)
+</code></pre>
+<p><code>setdefault()</code>和<code>get()</code>函数类似，键不存在于字典中，将会添加键并设置为默认值</p>
+<pre><code class="language-python">dict.setdefault(key, default = None)
+</code></pre>
+<p><code>defaultdict</code>接受一个工厂函数作为参数，当<code>key</code>不存在时，返回工厂的默认值：如<code>list</code>对应<code>[]</code>, <code>str</code>对应空字符串</p>
+<pre><code class="language-python">from collections import defaultdict
+by_letter = defaultdict(list)
+for word in words:
+    by_letter[word[0]].append(word)
+
+# 等价代码
+for word in words:
+    letter = word[0]
+    by_letter.setdefault(letter, []).append(word)
+</code></pre>
+</li>
+<li>
+<p>有效的字典键类型：键必须是不可变的对象，如标量类型（int,string)或元组.使用<code>hash</code>函数可以检查一个对象是否可以哈希化（即是否可以用作字典的键）</p>
+<pre><code class="language-python">hash('string')
+hash((1, 2, [2, 3])) # 列表是可变的所以会失败
+</code></pre>
+<p>将列表作为键的一种方式就是将其转换为元组</p>
+<pre><code class="language-python">d = {}
+d[tuple([1, 2, 3])] = 5
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
 </li>
 </ol>
 ]]></content>
