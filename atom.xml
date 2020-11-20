@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-20T15:22:27.686Z</updated>
+    <updated>2020-11-20T16:25:05.542Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -792,7 +792,89 @@ void minSpanTreePrim(MGraph g){
     }
 }
 </code></pre>
-<p><strong>时间复杂度<code>o(N)</code>,可以通过优先级队列降低。</strong></p>
+<h2 id="时间复杂度on可以通过优先级队列降低"><strong>时间复杂度<code>o(N)</code>,可以通过优先级队列降低。</strong></h2>
+<h2 id="lecture-10-graph2">Lecture 10: Graph(2)</h2>
+<ul>
+<li>
+<p>边权值非负的单源最短路径问题</p>
+<p><strong>最短路径树：</strong></p>
+<ul>
+<li>单调性：最短路径的任意前缀也是最短路径。</li>
+<li>无环性</li>
+</ul>
+<p><strong>Dijkstra:</strong> 首先求出长度最短的一条最短路径<code>(s, u)</code>, 更新SPT的顶点集及到其他各点的最短距离。依次类推，指导所有顶点进入SPT集合。</p>
+<figure data-type="image" tabindex="7"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+<p><strong>堆优化的dijkstra:整体时间复杂度O(elogn).</strong></p>
+<pre><code class="language-c++">struct Node{
+    int pos, dis;
+    bool operator &lt;(Node &amp;a)const {return a.dis &lt; dis;}
+};
+il void addedge(int u, int v, int w){
+    E[++cnt].v = v, E[cnt].w = w;
+    E[cnt].next = head[u];
+    head[u] = cnt;
+}
+priority_queue&lt;Node&gt; q;
+void dijkstra(int s){
+    d[s] = 0;
+    q.push(Node{s, 0});
+    while(!q.empty){
+        Node now = q.top();
+        q.pop();
+        int u = now.pos, dis = now.dis;
+        if(vis[u]) continue;
+        for(int i = head[u];i;i = E[i].next){
+            int v = E[i].v;
+            if(d[v] &gt; d[u] + E[i].w){
+                d[v] = d[u] + E[i].w;
+                if(!vis[v]) q.push((Node){v, d[v]});
+            }
+        }
+    }
+}
+</code></pre>
+<hr>
+<p><strong>Bellman-Ford算法：解决负权边的问题。</strong></p>
+<p><u>限制条件：图中不能出现负权回路</u></p>
+<figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
+<p><strong>TODO:SPFA(shortest path faster algorithm)</strong></p>
+<hr>
+<p><strong>多源最短路径问题（Floyd算法）</strong></p>
+<pre><code class="language-c++">for(int k = 1;k &lt;= n;k++)
+    for(int i = 1;i &lt;= n;i++)
+        for(int j = 1;j &lt;= n;j++)
+            if(e[i][j] &gt; e[i][k] + e[k][j]){
+                e[i][j] = e[i][k] + e[k][j];
+                
+            }
+</code></pre>
+<hr>
+<p><strong>拓扑排序</strong></p>
+<ul>
+<li>
+<p>拓扑排序必定保证<code>G</code>无环。</p>
+</li>
+<li>
+<p>拓扑排序不唯一。</p>
+</li>
+<li>
+<p>Algorithm:</p>
+<ol>
+<li>在<code>AOV</code>网络中选一个没有直接前驱的顶点，放入排序集中。</li>
+<li>从图中删去该节点，同时删除所有它发出的有向边，更新邻点入度</li>
+<li>重复上述过程，直到：
+<ul>
+<li>全部节点输出，拓扑排序完成。</li>
+<li>图中还有未输出的节点（所有剩余节点入度均不为0），这是网络中必定存在有向环。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
