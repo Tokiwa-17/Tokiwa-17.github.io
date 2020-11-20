@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-20T16:39:57.792Z</updated>
+    <updated>2020-11-20T16:58:03.929Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -956,9 +956,16 @@ print(a.dtype) # float64
 <pre><code class="language-python">a = np.zeros((3, 4))
 </code></pre>
 <ul>
-<li>生成有序数列</li>
+<li>生成有序数列**（Numpy的默认数据类型是float64**</li>
 </ul>
 <pre><code class="language-python">a = np.arange(10, 20, 2) # (start, end, step)
+</code></pre>
+<ul>
+<li>可以用<code>astype</code>方法显示地转换数组的数据类型：</li>
+</ul>
+<pre><code class="language-python">numeric_strings = np.array(['1.25', '-9.6', '42'])
+numeric_strings.astype(float)
+# array([1.25, -9.6, 42.])
 </code></pre>
 <ul>
 <li>重新指定有序数列的格式</li>
@@ -1034,11 +1041,16 @@ print(np.clip(A, 5, 9))
 <p><code>diff</code> 第 <code>k</code>个数的值：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mi>v</mi><mi>a</mi><msub><mi>l</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">val_{k + 1} - val_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.902771em;vertical-align:-0.208331em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
 <hr>
 <h3 id="15-numpy索引">1.5 numpy索引</h3>
+<p><u> 数组的切片是原数组的视图， 数组并不是被复制了，任何对子视图的修改都会反映到原视图上。</u></p>
+<pre><code class="language-python">arr = np.arange(10)
+arr_slice = arr[5:8]
+arr_slice[1] = 12345 # 变化会反应在原数组上。
+</code></pre>
 <pre><code class="language-python">A = np.arange(3, 15).reshape(3, 4)
 #[[3 4 5 6]
 # [7 8 9 10]
 # [11 12 13 14]]
-print(A[2]) #索引行数 11 12 13 14
+print(A[2]) # 在一个二维数组中，每个索引值对应的元素不再是一个值，而是一个一维数组。
 print(A[1][1]) # 8
 print(A[1, 1])
 
