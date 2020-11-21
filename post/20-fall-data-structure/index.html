@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605891481493">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605950381299">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -37,7 +37,7 @@ Lecture 9 :Graph
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605891481493" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605950381299" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -279,7 +279,7 @@ void minSpanTreePrim(MGraph g){
     }
 }
 </code></pre>
-<h2 id="时间复杂度on可以通过优先级队列降低"><strong>时间复杂度<code>o(N)</code>,可以通过优先级队列降低。</strong></h2>
+<h2 id="时间复杂度on-2可以通过优先级队列降低"><strong>时间复杂度o(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>N</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">N ^ 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>),可以通过优先级队列降低。</strong></h2>
 <h2 id="lecture-10-graph2">Lecture 10: Graph(2)</h2>
 <ul>
 <li>
@@ -327,7 +327,66 @@ void dijkstra(int s){
 <p><u>限制条件：图中不能出现负权回路</u></p>
 <figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
 <figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
-<p><strong>TODO:SPFA(shortest path faster algorithm)</strong></p>
+<p><strong>SPFA(shortest path faster algorithm):存在负边权的单源最短路 + 检测正（负）环</strong></p>
+<blockquote>
+<p>SPFA——Bellman-Ford算法的优化</p>
+<p>很多时候我们并不需要那么多无用的松弛优化，很显然，只有上一次被松弛的节点所连接的边，才有可能引起下一次的松弛操作。如果用队列来维护哪些节点可能会引起松弛操作，就能只访问必要的边了。</p>
+</blockquote>
+<ul>
+<li>
+<p>如果图是随机生成的，时间复杂度<code>O(KM)</code></p>
+</li>
+<li>
+<p>实际上<code>SPFA</code>的时间复杂度为<code>O(NM)</code>,可以构造出卡SPFA的数据</p>
+</li>
+<li>
+<p>算法流程</p>
+<ul>
+<li>
+<p>队首出队</p>
+</li>
+<li>
+<p>遍历所有以队首为起点的有向边(u, v), dis[u] + w(u, v) &lt; dis[v], 则更新dis[v].</p>
+</li>
+<li>
+<p>若队列为空，循环终止。</p>
+<pre><code class="language-c++">q = new queue();
+q.push(s);
+in_queue[s] = true;//在队列中
+while(!q.empty()){
+    u = q.front();
+    q.pop();
+    in_queue[u] = false;
+    for each edge(u, v):
+    	if(relax(u, v)){
+           if(!in_queue[v]){//如果松弛成功且该点不在队列中则入队
+               q.push(v);
+               in_queue[v] = true;
+           }
+        }
+}
+</code></pre>
+</li>
+<li>
+<p>判断负环跑最短路，判断正环跑最长路。</p>
+<ul>
+<li>
+<p>可以在松弛操作中记录每个点进入队列的次数，如果<code>&gt;=N</code>次则存在正（负）环。</p>
+<pre><code class="language-c++">for each edge(u, v):
+	if(relax(u, v)){
+        if(!q.in_queue(v)){
+            if(!in_queue[v]){
+            q.push(v);in_queue[v] = true;
+            if(++num[v] &gt; n - 1) return true;
+        }
+    }
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <hr>
 <p><strong>多源最短路径问题（Floyd算法）</strong></p>
 <pre><code class="language-c++">for(int k = 1;k &lt;= n;k++)
