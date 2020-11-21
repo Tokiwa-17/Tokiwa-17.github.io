@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605950381299">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605956988467">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -23,11 +23,15 @@
 
 
     <meta name="description" content="20-fall data structure
-Lecture 9 :Graph
-1.基本术语
 
-简单路径：路径上各顶点V1,V2,...,VmV_1, V_2, ..., V_mV1​,V2​,...,Vm​均不相互重复。
-连通图与强连通分..." />
+Lecture 4: Stack
+栈的应用：
+
+
+进制转换
+
+void convert(Stack&lt;char&gt;&amp; s, int n, int base){
+    stat..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -37,7 +41,7 @@ Lecture 9 :Graph
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605950381299" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605956988467" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -104,6 +108,86 @@ Lecture 9 :Graph
             
             <div class="post-content" v-pre>
               <h1 id="20-fall-data-structure">20-fall data structure</h1>
+<hr>
+<h2 id="lecture-4-stack">Lecture 4: Stack</h2>
+<p><strong>栈的应用：</strong></p>
+<ul>
+<li>
+<p>进制转换</p>
+<figure data-type="image" tabindex="1"><img src="https://tokiwa-17.github.io/post-images/1605956978002.png" alt="" loading="lazy"></figure>
+<pre><code class="language-c++">void convert(Stack&lt;char&gt;&amp; s, int n, int base){
+    static char digit[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                          'A', 'B', 'C', 'D', 'E', 'F'};
+    while(n &gt; 0){
+        int remainder = n % base;
+        s.push(digit[remainder]);
+        n /= base;
+    }
+    while(!s.empty()) printf(&quot;%c &quot;, s.pop());
+}
+</code></pre>
+<ul>
+<li>
+<p>括号匹配</p>
+<ul>
+<li>先开后闭</li>
+<li>自左向右扫描，碰到开括号入栈</li>
+<li>碰到右括号，若栈顶不是对应的开括号，返回错误，否则左括号出栈</li>
+<li>最后必须栈空。</li>
+</ul>
+<pre><code class="language-c++">bool paren(const char* exp, int lo, int hi){
+	stack&lt;char&gt;s;
+    for(int i = lo;i &lt;= hi;i++){
+        switch(exp[i]){
+            case '(': case '[' : case '{' : s.push(exp[i]); break;
+            case ')': if(s.empty() || (s.pop) != '(') return false; break;
+            case ']': if(s.empty() || (s.pop) != ']') return false; break;
+            case '}': if(s.empty() || (s.pop) != '}') return false; break;
+            default: break;//非括号字符一律忽略
+        }
+    }
+    return s.empty();//整个表达式扫描过后，栈中若仍残留左括号，则不匹配
+}
+</code></pre>
+</li>
+<li>
+<p>表达式求值</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://tokiwa-17.github.io/post-images/1605956986167.jpg" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>逆波兰表达式求值</p>
+<pre><code class="language-c++">rpnEvaluation(expr){
+//input : RPN 表达式 expr
+//output: 表达式值
+	while(expr 未读取完毕){
+     	从expr中读取下一元素
+            if(x 是操作数，将 x 压入 stack);
+        	else {
+                从栈中弹出运算符所需数目的操作数
+                    对弹出的操作数实施运算后将结果重新入栈
+            }
+    }
+    return 栈顶
+}
+</code></pre>
+</li>
+<li>
+<p>中缀表达式转RPN</p>
+<ul>
+<li>无括号情况（操作符入栈时把栈中优先级更高的出栈） <strong>阶乘 &gt; 指数 &gt; 乘除 &gt; 加减</strong></li>
+<li>有括号情况  <code>(</code>入栈，<code>)</code>号优先级最低，<code>()</code>间所有操作符出栈</li>
+</ul>
+<p><strong>TODO：表达式转换代码</strong></p>
+</li>
+<li>
+<p>栈混洗：给定序列<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">{a_1, a_2, ..., a_n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>,经过一系列入栈，出栈操作后，其出栈序列<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mrow><mi>k</mi><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>a</mi><mrow><mi>k</mi><mn>2</mn></mrow></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>a</mi><mrow><mi>k</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">{a_{k1}, a_{k2}, ... , a_{kn}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>即为一种栈混洗。</p>
+</li>
+</ul>
+<hr>
 <h2 id="lecture-9-graph">Lecture 9 :Graph</h2>
 <h3 id="1基本术语">1.基本术语</h3>
 <ul>
@@ -125,10 +209,10 @@ Lecture 9 :Graph
 </li>
 </ul>
 <h3 id="2图的存储表示">2.图的存储表示</h3>
-<figure data-type="image" tabindex="1"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
 <p><u><strong>dtime</strong>:顶点<code>v</code>被访问到的时刻</u></p>
 <p><u><strong>ftime</strong>:顶点<code>v</code>被访问完的时刻</u></p>
-<figure data-type="image" tabindex="2"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
 <p><strong>图模板类</strong></p>
 <pre><code class="language-c++">template&lt;typename Tv, typename Te&gt;
 class GraphMatrix : public Graph&lt;Tv, Te&gt;{
@@ -180,7 +264,7 @@ return (i &gt; -1) &amp;&amp; (i &lt; n) &amp;&amp; (j &gt; -1) &amp;&amp; (j &l
 </li>
 <li>
 <p>边的动态操作</p>
-<figure data-type="image" tabindex="3"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>图的邻接表表示</p>
@@ -213,11 +297,11 @@ template &lt;typename Te&gt; struct Edge{
 <p><strong>BFS对应于层次遍历：越早访问的顶点，其邻域顶点越优先被访问。反复从队列中取出队头访问，并将其未被访问的邻域顶点入队。必须对顶点进行标记，已访问过的顶点不再入队。</strong></p>
 <p>​	<img src="https://tokiwa-17.github.io/post-images/1605885582153.jpg" alt="" loading="lazy"></p>
 <p><strong>DFS：</strong></p>
-<figure data-type="image" tabindex="4"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="5"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
 <hr>
 <h3 id="最小支撑树">最小支撑树</h3>
-<figure data-type="image" tabindex="6"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
 <pre><code class="language-c++">//邻接表版本prim
 struct Node{
     int v, dis;
@@ -290,7 +374,7 @@ void minSpanTreePrim(MGraph g){
 <li>无环性</li>
 </ul>
 <p><strong>Dijkstra:</strong> 首先求出长度最短的一条最短路径<code>(s, u)</code>, 更新SPT的顶点集及到其他各点的最短距离。依次类推，指导所有顶点进入SPT集合。</p>
-<figure data-type="image" tabindex="7"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
 </li>
 </ul>
 <p><strong>堆优化的dijkstra:整体时间复杂度O(elogn).</strong></p>
@@ -325,8 +409,8 @@ void dijkstra(int s){
 <hr>
 <p><strong>Bellman-Ford算法：解决负权边的问题。</strong></p>
 <p><u>限制条件：图中不能出现负权回路</u></p>
-<figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
 <p><strong>SPFA(shortest path faster algorithm):存在负边权的单源最短路 + 检测正（负）环</strong></p>
 <blockquote>
 <p>SPFA——Bellman-Ford算法的优化</p>
@@ -420,7 +504,7 @@ while(!q.empty()){
 </ol>
 </li>
 </ul>
-<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
 
             </div>
             
