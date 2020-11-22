@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606059163100">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606063084289">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -40,7 +40,7 @@ array = np...." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606059163100" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606063084289" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -487,6 +487,70 @@ np.random.seed(1234)
 rng =  np.random.RandomState(1234)
 rng.randn(10)
 </code></pre>
+<hr>
+<h2 id="pandas">Pandas</h2>
+<blockquote>
+<p>Pandas 用来处理表格型或者异质性数据。Numpy适合处理同质型的数据。</p>
+</blockquote>
+<ol>
+<li>Series:一维的数组型对象，包含了值序列，并且包含了数据索引。</li>
+</ol>
+<pre><code class="language-python">obj = pd.Series([4, 7, -5, 3])
+</code></pre>
+<p>默认生成的索引是<code>0</code>到<code>N - 1</code>.</p>
+<ul>
+<li>
+<p>可以用<code>values</code>属性和<code>index</code>分别获得Series对象的值和索引。</p>
+</li>
+<li>
+<p>创建一个索引序列，用标签标识每个数据点：</p>
+<pre><code class="language-python">obj2 = pd.Series([4, 7, -5, 3], index = ['d', 'b', 'a', 'c'])
+# 可以在选择数据的时候使用标签来索引
+obj2['a'] # -5
+# 使用布尔值数组进行过滤，将保存索引值连接：
+obj2[obj2 &gt; 0]
+&quot;&quot;&quot;
+d 6
+b 7
+c 3
+&quot;&quot;&quot;
+# 应用数学函数
+obj2 * 2
+np.exp(obj2)
+</code></pre>
+</li>
+<li>
+<p>可以认为Series是一个长度固定且有序的字典，索引值和数据按位置配对。</p>
+</li>
+<li>
+<p>可以使用字典直接生成一个Series</p>
+<pre><code class="language-python">obj = pd.Series(dict)
+</code></pre>
+</li>
+<li>
+<p>缺失数据（NA）</p>
+<pre><code class="language-python">sdata = {'Ohio': 35000, 'Texas': 71000, 'Oregon': 16000, 'Utah': 5000}
+Obj3 = pd.Series(sdata)
+states = ['California', 'Ohio', 'Oregon', 'Texas']
+obj4 = pd.Series(sdata, index = states) # 本意是改变顺序
+&quot;&quot;&quot;
+California NaN
+Ohio	  35000.0
+Oregon    16000.0
+Texas     71000.0
+&quot;&quot;&quot;
+</code></pre>
+<p><em>可以使用<code>isnull</code>或<code>notnull</code>函数来检查确实数据</em></p>
+</li>
+<li>
+<p>Series对象自身和其索引都有<code>name</code>属性</p>
+<pre><code class="language-python">obj4.name = 'population'
+obj4.index.name = 'state'
+#Series的索引可以通过按位置赋值的方式进行改变
+obj.index = ['Bob', 'Steve', 'Jeff', 'Ryan']
+</code></pre>
+</li>
+</ul>
 
             </div>
             
