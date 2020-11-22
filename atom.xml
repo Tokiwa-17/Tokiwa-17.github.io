@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-22T02:47:28.796Z</updated>
+    <updated>2020-11-22T15:16:58.101Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -844,7 +844,9 @@ dequeue(x){
 <ul>
 <li>队列单链表实现：引入尾指针，在尾部入队，头部出队。</li>
 </ul>
-<figure data-type="image" tabindex="4"><img src="https://tokiwa-17.github.io/post-images/1605972619355.png" alt="" loading="lazy"></figure>
+<p><img src="https://tokiwa-17.github.io/post-images/1605972619355.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1606058191279.png" alt="" loading="lazy"><br>
+<img src="https://tokiwa-17.github.io/post-images/1606058194770.png" alt="" loading="lazy"></p>
 <hr>
 <h2 id="lecture-9-graph">Lecture 9 :Graph</h2>
 <h3 id="1基本术语">1.基本术语</h3>
@@ -867,10 +869,10 @@ dequeue(x){
 </li>
 </ul>
 <h3 id="2图的存储表示">2.图的存储表示</h3>
-<figure data-type="image" tabindex="5"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
 <p><u><strong>dtime</strong>:顶点<code>v</code>被访问到的时刻</u></p>
 <p><u><strong>ftime</strong>:顶点<code>v</code>被访问完的时刻</u></p>
-<figure data-type="image" tabindex="6"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
 <p><strong>图模板类</strong></p>
 <pre><code class="language-c++">template&lt;typename Tv, typename Te&gt;
 class GraphMatrix : public Graph&lt;Tv, Te&gt;{
@@ -922,7 +924,7 @@ return (i &gt; -1) &amp;&amp; (i &lt; n) &amp;&amp; (j &gt; -1) &amp;&amp; (j &l
 </li>
 <li>
 <p>边的动态操作</p>
-<figure data-type="image" tabindex="7"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>图的邻接表表示</p>
@@ -955,11 +957,11 @@ template &lt;typename Te&gt; struct Edge{
 <p><strong>BFS对应于层次遍历：越早访问的顶点，其邻域顶点越优先被访问。反复从队列中取出队头访问，并将其未被访问的邻域顶点入队。必须对顶点进行标记，已访问过的顶点不再入队。</strong></p>
 <p>​	<img src="https://tokiwa-17.github.io/post-images/1605885582153.jpg" alt="" loading="lazy"></p>
 <p><strong>DFS：</strong></p>
-<figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
 <hr>
 <h3 id="最小支撑树">最小支撑树</h3>
-<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
 <pre><code class="language-c++">//邻接表版本prim
 struct Node{
     int v, dis;
@@ -1032,7 +1034,7 @@ void minSpanTreePrim(MGraph g){
 <li>无环性</li>
 </ul>
 <p><strong>Dijkstra:</strong> 首先求出长度最短的一条最短路径<code>(s, u)</code>, 更新SPT的顶点集及到其他各点的最短距离。依次类推，指导所有顶点进入SPT集合。</p>
-<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
 </li>
 </ul>
 <p><strong>堆优化的dijkstra:整体时间复杂度O(elogn).</strong></p>
@@ -1067,8 +1069,8 @@ void dijkstra(int s){
 <hr>
 <p><strong>Bellman-Ford算法：解决负权边的问题。</strong></p>
 <p><u>限制条件：图中不能出现负权回路</u></p>
-<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
 <p><strong>SPFA(shortest path faster algorithm):存在负边权的单源最短路 + 检测正（负）环</strong></p>
 <blockquote>
 <p>SPFA——Bellman-Ford算法的优化</p>
@@ -1162,7 +1164,7 @@ while(!q.empty()){
 </ol>
 </li>
 </ul>
-<figure data-type="image" tabindex="14"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
