@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1605978770914">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606013246479">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -22,15 +22,15 @@
 
 
 
-    <meta name="description" content="Python 编程06： Numpy、Pandas
+    <meta name="description" content="利用Python 进行数据分析
+第二章:Python 语言基础
+a = [1, 2, 3]
+b = a
 
-Numpy、Pandas用底层语言（C）实现，比Python自带类型要快很多。
+在Python中，a和b实际上指向了相同的对象。
+将对象作为参数传递给一个函数时，指向原始对象的新的本地变量就会被创建而无需复制。
 
-1.1 numpy属性
-import numpy as np
-
-列表转换成矩阵:
-array = np...." />
+..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -40,7 +40,7 @@ array = np...." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1605978770914" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606013246479" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -106,301 +106,449 @@ array = np...." />
             <div class="post-date">2020-11-18</div>
             
             <div class="post-content" v-pre>
-              <h1 id="python-编程06-numpy-pandas">Python 编程06： Numpy、Pandas</h1>
-<blockquote>
-<p>Numpy、Pandas用底层语言（C）实现，比Python自带类型要快很多。</p>
-</blockquote>
-<h2 id="11-numpy属性">1.1 numpy属性</h2>
-<pre><code class="language-python">import numpy as np
-</code></pre>
-<p>列表转换成矩阵:</p>
-<pre><code class="language-python">array = np.array([[1, 2, 3],
-                  [2, 3, 4]])
-# [[1 2 3]
-#	[2 3 4]] 没有逗号分隔
-</code></pre>
-<pre><code class="language-python">print(array.shape) # (2, 3)
-print(array.size)  # 6
-</code></pre>
-<hr>
-<h2 id="12-numpy的创建array">1.2 numpy的创建array</h2>
-<ul>
-<li>可以在创建的时候使用 <strong>dtype</strong>来指定元素类型：</li>
-</ul>
-<pre><code class="language-python">a = np.array([2, 23, 4], dtype = np.float)
-print(a.dtype) # float64
-</code></pre>
-<ul>
-<li>生成零矩阵(提供元组形参)</li>
-</ul>
-<pre><code class="language-python">a = np.zeros((3, 4))
-</code></pre>
-<ul>
-<li>生成有序数列**（Numpy的默认数据类型是float64**</li>
-</ul>
-<pre><code class="language-python">a = np.arange(10, 20, 2) # (start, end, step)
-</code></pre>
-<ul>
-<li>可以用<code>astype</code>方法显示地转换数组的数据类型：</li>
-</ul>
-<pre><code class="language-python">numeric_strings = np.array(['1.25', '-9.6', '42'])
-numeric_strings.astype(float)
-# array([1.25, -9.6, 42.])
-</code></pre>
-<ul>
-<li>重新指定有序数列的格式</li>
-</ul>
-<pre><code class="language-python">a = np.arrat(12).reshape((3, 4))
-</code></pre>
-<ul>
-<li>生成线段</li>
-</ul>
-<pre><code class="language-python">a = np.linspace(1, 10, 5)
-# 在 1 ~ 10之间生成五段的线段
-</code></pre>
-<hr>
-<h2 id="13-numpy的基础运算">1.3 numpy的基础运算</h2>
-<p><strong>aixs = 0 表示对每一列进行操作, axis = 1表示对每一行进行操作</strong></p>
-<pre><code class="language-python">a = np.array([10, 20, 30, 40])
-b = np.arange(4)
-
-c = a + b
-c = a - b
-c = b ** 2 # [0, 1, 4, 9]
-c = 10 * np.sin(a)
-print(b &lt; 3) #[True True True False]
-</code></pre>
-<ul>
-<li>矩阵运算</li>
-</ul>
-<pre><code class="language-python">a = np.array([[1, 1],
-              [0, 1]])
-b = np.arange(4).reshape((2, 2))
-# 逐个相乘
-c = a * b
-# 矩阵乘法
-c_dot = np.dot(a, b)
-c_dot = a.dot(b)
-</code></pre>
-<hr>
-<pre><code class="language-python">a = np.random.random((2, 4)) #shape
-print(np.sum(a))
-# axis = 1 每一行
-# axis = 0 每一列
-print(np.min(a, axis = 1))
-# [0.29046038 0.27287636]
-print(np.max(a, axis = 0))
-# [0.97312175 0.29046038 0.65062655 0.95807683]
-
-</code></pre>
-<hr>
-<h3 id="14-numpy基础运算2">1.4 numpy基础运算（2）</h3>
-<pre><code class="language-python">A = np.arange(2, 14).reshape((3, 4))
-
-print(np.argmin(A)) #最小值的索引 0
-print(np.argmax(A)) #最大值的索引 11
-
-print(np.mean(A)) # 平均值
-print(A.mean())
-print(np.average(A))
-
-print(np.median(A)) # 中位数
-print(np.cumsum(A))
-print(np.diff(A))
-print(np.sort(A)) # 逐行排序
-
-# 矩阵转置
-print(np.transpose(A))
-print(A.T)
-
-#clip(A, min, max)
-print(np.clip(A, 5, 9))
-#小于5的数变成5,大于9的数变成9
-</code></pre>
-<p><code>cumsum</code> 第 <code>k</code>个数的值：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></msubsup><mi>v</mi><mi>a</mi><mi>l</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">\sum_{i = 1}^{k} val[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2887179999999998em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9890079999999999em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>.</p>
-<p><code>diff</code> 第 <code>k</code>个数的值：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mi>v</mi><mi>a</mi><msub><mi>l</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">val_{k + 1} - val_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.902771em;vertical-align:-0.208331em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
-<ul>
-<li>通用函数(ufunc)：在<code>ndarray</code>数据中进行逐元素操作的函数， 如<code>sqrt</code>和<code>exp</code>.</li>
-</ul>
-<hr>
-<h3 id="15-numpy索引">1.5 numpy索引</h3>
-<p><u> 数组的切片是原数组的视图， 数组并不是被复制了，任何对子视图的修改都会反映到原视图上。</u></p>
-<pre><code class="language-python">arr = np.arange(10)
-arr_slice = arr[5:8]
-arr_slice[1] = 12345 # 变化会反应在原数组上。
-</code></pre>
-<pre><code class="language-python">A = np.arange(3, 15).reshape(3, 4)
-#[[3 4 5 6]
-# [7 8 9 10]
-# [11 12 13 14]]
-print(A[2]) # 在一个二维数组中，每个索引值对应的元素不再是一个值，而是一个一维数组。
-print(A[1][1]) # 8
-print(A[1, 1])
-
-print(A[2, :]) #第二行的所有数 [11 12 13 14]
-print(A[:, 1]) #第一列的所有数 [4 8 12]
-print(A[1, 1 : 3]) #第一行 1 ~ 2 [8 9]
-
-for row in A: # 迭代行
-    print(row)
-    
-for col in A.T:# 迭代列
-    print(col) 
-    
-print(A.flatten())
-#[3 4 5 6 ...]
-for item in A.flat:
-    print(item)
-#3 \n 4 \n...
-</code></pre>
-<p><code>flat</code>将数组转换成一维的迭代器，可以用<code>for</code>返回每一个元素。</p>
-<p><code>flatten()</code>将数组的副本转换成一个维度，并返回。</p>
-<ul>
-<li>
-<p>布尔索引</p>
-<pre><code class="language-python">names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
-data = np.random.randn(7, 4)
-
-data[names == 'Bob'] # 索引第0行、第3行
-# 可以使用 != 或在条件表达式前面使用 ~ 对条件取反：
-names != 'Bob'
-data[~(name == 'Bob')] 
-</code></pre>
-<p><em>Remark:使用布尔值索引数据时，总是生成数据的拷贝，即使返回的数组并没有任何变化。</em></p>
-</li>
-<li>
-<p>神奇索引(<strong>使用整数数组进行数据索引</strong>)</p>
-<pre><code class="language-python">arr = np.arange(36).reshape(9, 4)
-print(arr[[4, 3, 0, 6]]) # 索引第四行、第三行...
-print(arr[:, [1, 2]]) # 索引第一列、第二列
-print(arr[1, 5, 7, 2], [0, 3, 1, 2]) #(1, 0), (5, 3), (7, 1), (2, 2) 
-</code></pre>
-<p><em>神奇索引与切片不同，总是将数据复制到一个新的数组中</em></p>
-</li>
-</ul>
-<hr>
-<h3 id="16-numpy的array合并">1.6 numpy的array合并</h3>
-<pre><code class="language-python">A = np.array([1, 1, 1])
-B = np.array([2, 2, 2])
-print(np.vstack((A, B))) # vertical stack
-#[[1 1 1]
-# [2 2 2]]
-print(np.hstack((A, B))) # horizontal stack
-
-print(A.T) # [1 1 1]
-</code></pre>
-<p>不能用<code>A.T</code>把一个行向量变成列向量。可以用<code>newaxis</code>添加新的维度实现。</p>
-<pre><code class="language-python">A = np.arrray([1, 1, 1])
-print(A.shape) # (3,)
-
-print(A[np.newaxis, :].shape) # 在前面添加一个维度(1, 3)
-print(A[np.newaxis]) # [[1 1 1]]
-
-print(A[:, np.newaxis].shape) # (3, 1)
-print(A[:, np.newaxis]) # [[1]
-					  #  [1]
-    				  #  [1]]
-</code></pre>
-<pre><code class="language-python">A = np.array([1, 1, 1])[:, np.newaxis]
-B = np.array([2, 2, 2])[:, np.newaxis]
-D = np.hstack((A, B))
-print(D)
-'''
-[[1 2]
- [1 2]
- [1 2]]
-'''
-#多个数组进行合并
-C = np.concatenate((A, B, B , A), axis = 1)
-'''
-[[1 2 2 1]
- [1 2 2 1]
- [1 2 2 1]
-'''
-</code></pre>
-<hr>
-<h3 id="17-numpy的array分割">1.7 numpy的array分割</h3>
-<ul>
-<li>相等的分割</li>
-</ul>
-<pre><code class="language-python">A = np.arange(12).reshape((3, 4))
-print(A)
-
-print(np.split(A, 2 axis = 1)) # 把每一行分成两部分
-&quot;&quot;&quot;
-[array([[0, 1],
-	   [4, 5],
-	   [8, 9]]), array([[2, 3]
-	   				   [6, 7]
-	   				   [10, 11]])]
-&quot;&quot;&quot;
-</code></pre>
-<hr>
-<ul>
-<li>不等分割</li>
-</ul>
-<pre><code class="language-python">A = np.arange(12).reshape((3, 4))
-print(np.array_split(A, 3, axis = 1))
-&quot;&quot;&quot;
-[array([[0, 1],
-       [4, 5],
-       [8, 9]]), array([[ 2,  3],
-       [ 6,  7],
-       [10, 11]])]
-&quot;&quot;&quot;
-print(np.vsplit(A, 3))
-# [array([[0, 1, 2, 3]]), array([[4, 5, 6, 7]]), array([[ 8,  9, 10, 11]])]
-print(np.hsplit(A, 3))
-&quot;&quot;&quot;
-[array([[0, 1],
-       [4, 5],
-       [8, 9]]), array([[ 2,  3],
-       [ 6,  7],
-       [10, 11]])]
-&quot;&quot;&quot;
-</code></pre>
-<hr>
-<h3 id="18-numpy-的copy-deep-copy">1.8 numpy 的copy &amp; deep copy</h3>
-<pre><code class="language-python">a = np.arange(4)
+              <h1 id="利用python-进行数据分析">利用Python 进行数据分析</h1>
+<h2 id="第二章python-语言基础">第二章:Python 语言基础</h2>
+<pre><code class="language-python">a = [1, 2, 3]
 b = a
-c = b
-a[0] = 11
-print(a)
-&quot;&quot;&quot;
-[11, 1, 2, 3]
-b, c 和 a 一样
-&quot;&quot;&quot;
 </code></pre>
+<p>在Python中，a和b实际上指向了相同的对象。</p>
+<p>将对象作为参数传递给一个函数时，指向原始对象的新的本地变量就会被创建而无需复制。</p>
+<ul>
+<li>了解对象的类型</li>
+</ul>
 <blockquote>
-<p>如果想要 a 的值又不想关联到 a : deep copy</p>
+<p>isinstance接受一个包含类型的元组，你可以检查对象的类型是否是元组中存在的类型之一。</p>
 </blockquote>
-<pre><code class="language-python">a = arange(4)
-b = a.copy()
-a[0] = 11
-print(b) #[0 1 2 3]
+<pre><code class="language-python">a = 5; b = 4.5
+isinstance(a, (int, float))
+# True
+isinstance(b, (int,	float))
+# True
 </code></pre>
-<h2 id=""></h2>
+<ul>
+<li>检查一个对象是否可以迭代</li>
+</ul>
+<blockquote>
+<p>可以使用 <code>iter</code>函数检查一个对象是否实现了迭代器协议</p>
+</blockquote>
+<pre><code class="language-python">def isiterable(obj):
+    try:
+        iter(obj)
+        return True
+    except TypeError: # 不可遍历
+    	return False
+
+isiterable('a string') # True
+isiterable([1, 2, 3]) # True
+isiterable(5) # False
+</code></pre>
+<pre><code class="language-python">if not instance(x, list) and isiterable(x):
+    x = list(x)
+</code></pre>
+<p><em>Remark: 优先级 <code>not &gt; and &gt; or</code></em></p>
 <hr>
-<h3 id="使用数组进行面向数组编程">使用数组进行面向数组编程</h3>
+<ul>
+<li>运算</li>
+</ul>
+<blockquote>
+<p>检查两个引用是否指向同一个对象，可以使用<code>is</code>关键字。</p>
+</blockquote>
+<pre><code class="language-python">a = [1, 2, 3]
+b = a
+c = list(a) # list 函数总是创建一个新的列表
+
+a is b # True
+a is not c # True
+</code></pre>
+<p><code>is</code>和<code>is not</code>的常用之处是检查一个变量是否为<code>None</code></p>
+<pre><code class="language-python">a = None
+
+a is None # True
+</code></pre>
+<hr>
+<p><strong>标量类型</strong></p>
+<ul>
+<li>
+<p>数值类型：</p>
+<ol>
+<li><code>int</code>可以储存任意大小的数字</li>
+<li>浮点数可以用科学计数法表示</li>
+</ol>
+</li>
+<li>
+<p>字符串</p>
 <ol>
 <li>
-<p><code>meshgrid</code>函数：快速生成坐标矩阵</p>
-<pre><code class="language-python">X, Y = np.meshgrid(x, y) # 语法
-
-x = np.array([0, 1, 2])
-y = np.array([0, 1])
-
-X, Y = np.meshgrid(x, y)
+<p>对于含有换行的字符串，可以使用三个单引号<code>'''</code> 或者三个双引号<code>&quot;&quot;&quot;</code>.</p>
+<pre><code class="language-python">c = &quot;&quot;&quot;
+This is a long string that
+spans multiple lines
 &quot;&quot;&quot;
-X = array([[0, 1, 2], 
-		  [0, 1, 2]])
-		  
-Y = array([[0, 0, 0], 
-		 [1, 1, 1]])
-&quot;&quot;&quot;
+</code></pre>
+</li>
+<li>
+<p>字符串是不可变的，无法修改一个字符串</p>
+</li>
+<li>
+<p>含有大量反斜杠的字符串可以加一个前缀<code>r</code>，表示这些字符是原生字符(无需转义)</p>
+<pre><code class="language-python">s = r'this \has\no\sppecial\characters'
+</code></pre>
+</li>
+<li>
+<p>两个字符串合成一个字符串</p>
+<pre><code class="language-python">a = 'this is the first half'
+b = 'and this is the second half'
+a + b
+</code></pre>
+</li>
+<li>
+<p>字符串的<code>format</code>方法</p>
+<pre><code class="language-python">template = '{0:.2f} {1:s} are worth US${2:d}'
+template.format(4.5560, 'Argentine Pesos', 1)
+</code></pre>
+<ul>
+<li><code>{0:.2f}</code>表示将第一个参数格式化为2位小数的浮点数</li>
+<li>{1:s}表示将第二个参数格式化为字符串</li>
+<li>{2:d}表示将第三个参数格式化为整数。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>字节与<code>Unicode</code></p>
+<ol>
+<li>
+<p>encode 与 decode</p>
+<pre><code class="language-python">test = 'もうこんな時間'
+test_utf8 = test.encode('utf-8')
+print('test_utf8')
+&quot;&quot;&quot;b'\xe3\x82\x82\xe3\x81\x86\xe3\x81\x93\xe3\x82\x93\xe3\x81\xaa\xe6\x99\x82\xe9\x96\x93'&quot;&quot;&quot;
+print(test_utf8.decode('utf-8'))
+# もうこんな時間
+</code></pre>
+</li>
+<li>
+<p>可以在字符串加前缀<code>b</code>来定义字符文本</p>
+<pre><code class="language-python">bytes_val = b'this is bytes'
+print(bytes_val.decode('utf-8'))
 </code></pre>
 </li>
 </ol>
+</li>
+<li>
+<p><code>None</code> ：<strong>NoneType</strong>类型的唯一实例。如果一个函数没有显示地返回值，则它会隐式地返回None.</p>
+</li>
+<li>
+<p>三元表达式：</p>
+<pre><code class="language-python">value = true-expr if condition else false-expr
+
+'Non-negative' if x &gt;= 0 else 'Negative'
+</code></pre>
+</li>
+</ul>
+<hr>
+<hr>
+<h2 id="数据结构-函数和文件">数据结构、函数和文件</h2>
+<h2 id="31数据结构和序列">3.1数据结构和序列</h2>
+<ol>
+<li>
+<p>元组</p>
+<pre><code class="language-python"># 元组的元组
+nested_tup = ((4, 5, 6), (7, 8))
+# 使用tuple函数将任意序列或迭代器转换成元组:
+tuple([4, 0, 2]) # (4, 0, 2)
+tuple('string') # ('s', 't', 'r', 'i', 'n', 'g')
+
+# 如果元组中的一个对象是可变的，可以在它内部进行修改
+tup = tuple(['foo', [1, 2], True])
+tup[1].append(3)
+
+# 可以使用 + 号连接元组生成更长的元组
+(4, None, 'foo') + (6, 0) + ('bar',)
+# (4, None, 'foo', 6, 0, 'bar')
+
+# 将元组乘以整数，则会和列表一样，生成含有多份拷贝的元组
+('foo', 'bar') * 4
+# ('foo', 'bar', 'foo', 'bar', 'foo', 'bar', 'foo', 'bar')
+
+# 元组拆包
+tup = (4, 5, 6)
+a, b, c = tup
+# a = 4, b = 5, c = 6
+
+# 使用元组拆包，可以轻易地交换变量
+a, b = 1, 2
+b, a = a, b
+
+# 拆包的另一个常用场景就是遍历元组或列表组成的序列
+seq = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+for a, b, c in seq:
+    print('a = {0}, b = {1}, c = {2}'.format(a, b, c))
+&quot;&quot;&quot;
+a = 1, b = 2, c = 3
+a = 4, b = 5, c = 6
+a = 7, b = 8, c = 9
+&quot;&quot;&quot;
+
+# 使用 * 获取任意长度的参数列表
+values = 1, 2, 3, 4, 5
+a, b, *rest = values
+# rest = [3, 4, 5]
+
+#元组的方法 count(列表中也可用), 用于计量某个数值在元组中出现的次数
+a = (1, 2, 2, 2, 3, 4, 2)
+a.count(2)
+# 4
+</code></pre>
+<hr>
+<ol start="2">
+<li>
+<p>列表</p>
+<ul>
+<li>
+<p>使用<code>in</code>关键字可以检查一个值是否在列表中</p>
+</li>
+<li>
+<p>两个列表可以用 <code>+</code>号连接</p>
+</li>
+<li>
+<p>使用<code>extend</code>方法像列表添加多个元素</p>
+<pre><code class="language-python">x = [4, None, 'foo']
+x.extend([7, 8, (2, 3)])
+</code></pre>
+<blockquote>
+<p>通过 <code>+</code>号连接列表需要创建新列表、复制对象，使用<code>extend</code>添加元素是更好的方式。</p>
+</blockquote>
+</li>
+<li>
+<p>内建的<code>bisect</code>模块实现了二分搜索和已排序列表的插值</p>
+<ul>
+<li><code>bisect.bisect</code>会找到元素应当被插入的位置</li>
+<li><code>bisect.insort</code>将元素插入到相应位置。</li>
+</ul>
+<pre><code class="language-python">import bisect
+c = [1, 2, 2, 2, 3, 4, 7]
+bisect.bisect(c, 2) # 4
+bisect.insort(c, 6) # [1, 2, 2, 2, 3, 4, 6, 7]
+</code></pre>
+<p><em>Remark: bisect并不会检查列表是否已经排序</em></p>
+</li>
+<li>
+<p>切片</p>
+<pre><code class="language-python">seq = [7, 2, 3, 7, 5, 6, 0, 1]
+# 切片可以将序列赋值给变量
+seq[3 : 4] = [6, 3]
+# [7, 2, 3, 6, 3, 5, 6, 0, 1]
+
+# 步进值 step
+seq[::2]
+# [7, 3, 3, 6, 1]
+# 列表翻转
+seq[::-1]
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li>
+<p>Python 内建函数</p>
+<ul>
+<li>
+<p><code>enumerate</code>: 返回<code>(i, val)</code>,其中<code>val</code>是元素的值，<code>i</code>是元素的索引.</p>
+<pre><code class="language-python">for i, value in enumerate(collection):
+    #...
+# 常用来对数据建立索引
+some_list = ['foo', 'bar', 'baz']
+mapping = {}
+for i, v in enumerate(some_list):
+    mapping{v} = i
+# mapping = {'bar':1, 'baz':2, 'foo':0}
+</code></pre>
+</li>
+<li>
+<p><code>zip</code> :将列表、元组或其他序列的元素配对，新建一个元组构成的列表</p>
+<pre><code class="language-python">seq1 = ['foo', 'bar', 'baz']
+seq2 = ['one', 'two', 'three']
+zipped = zip(seq1, seq2)
+list(zipped)
+# [('foo', 'one'), ('bar', 'two'), ('baz', 'three')]
+
+# 可以处理任意长度的序列，生成列表长度由最短的序列决定
+seq3 = [False, True]
+list(zip(seq1, seq2, seq3))
+# [('foo', 'one', False), ('bar', 'two', True)]
+</code></pre>
+<ul>
+<li>
+<p><code>zip</code>的常用场景</p>
+<pre><code class="language-python"># 同时遍历多个序列
+for i, (a, b) in enumerate(zip(seq1, seq2)):
+    print('{0}: {1}, {2}'.format(i, a, b))
+# 0: foo, one
+# ...
+</code></pre>
+<pre><code class="language-python">#拆分已配对序列
+pitchers = [('Nolan', 'Ryan'), ('Roger', 'Clemens'), ('Schilling', 'Curt')]
+first_names, last_names = zip(*pitchers)
+# first_names = ('Nolan', 'Roger', 'Schilling')
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><code>reversed</code>将序列的元素倒序排列</p>
+<pre><code class="language-python">list(reversed(range(10)))
+# reversed是一个生成器，如果没有实例化，不会生成一个倒序的列表
+</code></pre>
+</li>
+</ul>
+<hr>
+<ol start="4">
+<li>
+<p>字典</p>
+<ul>
+<li>
+<p>插入字典中的元素</p>
+<pre><code class="language-python">d1[7] = 'an integer'
+</code></pre>
+</li>
+<li>
+<p>可以用<code>del</code>或<code>pop</code>删除值，<code>pop</code>会在删除的同时返回被删的值，并删除键</p>
+<pre><code class="language-python">d1 = {'a' : 'some value',
+      'b' : [1, 2, 3, 4],
+       7  : 'an integer', 
+      'dummy' : 'another value'}
+
+ret = d1.pop('dummy')
+</code></pre>
+</li>
+<li>
+<p><code>keys</code>方法和<code>values</code>方法会分别为你提供字典键、值的迭代器。输出时键、值按照相同的顺序。</p>
+</li>
+<li>
+<p>可以使用<code>update</code>方法将两个字典合并</p>
+<pre><code class="language-python">d1.update('b':'foo', 'c' : 12)
+</code></pre>
+<p><em>Remark:如果传给update()的字典含有相同的键，则原来的值会被覆盖</em></p>
+</li>
+<li>
+<p>两个序列在字典中按元素配对</p>
+<pre><code class="language-python"># 接受一个2-元组的列表作为参数：
+mapping = dict(zip(range(5), reversed(range(5))))
+</code></pre>
+</li>
+<li>
+<p>默认值</p>
+<pre><code class="language-python">if key in some_dict:
+    value = some_dict[key]
+else:
+    value = default_value
+# 可以用get()方法返回一个默认值
+# 等价代码
+value = some_dict.get(key, default_value)
+</code></pre>
+<p><code>setdefault()</code>和<code>get()</code>函数类似，键不存在于字典中，将会添加键并设置为默认值</p>
+<pre><code class="language-python">dict.setdefault(key, default = None)
+</code></pre>
+<p><code>defaultdict</code>接受一个工厂函数作为参数，当<code>key</code>不存在时，返回工厂的默认值：如<code>list</code>对应<code>[]</code>, <code>str</code>对应空字符串</p>
+<pre><code class="language-python">from collections import defaultdict
+by_letter = defaultdict(list)
+for word in words:
+    by_letter[word[0]].append(word)
+
+# 等价代码
+for word in words:
+    letter = word[0]
+    by_letter.setdefault(letter, []).append(word)
+</code></pre>
+</li>
+<li>
+<p>有效的字典键类型：键必须是不可变的对象，如标量类型（int,string)或元组.使用<code>hash</code>函数可以检查一个对象是否可以哈希化（即是否可以用作字典的键）</p>
+<pre><code class="language-python">hash('string')
+hash((1, 2, [2, 3])) # 列表是可变的所以会失败
+</code></pre>
+<p>将列表作为键的一种方式就是将其转换为元组</p>
+<pre><code class="language-python">d = {}
+d[tuple([1, 2, 3])] = 5
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<ol start="5">
+<li>
+<p>集合</p>
+<ul>
+<li>
+<p>创建方式</p>
+<pre><code class="language-python">set([2, ,2 ,2, 1, 3, 3])
+{1, 2, 3}
+</code></pre>
+</li>
+<li>
+<p>集合运算</p>
+<pre><code class="language-python">a = {1, 2, 3, 4, 5}
+b = {3, 4, 5, 6, 7, 8}
+
+# 并集
+a.union(b)
+a | b
+# 交集
+a.intersection(b)
+a &amp; b
+</code></pre>
+</li>
+<li>
+<p>不可变元素: 集合的元素必须是不可变的，如果想要包含列表型的元素，必须先转换成元组</p>
+<pre><code class="language-python">data = [1, 2, 3, 4]
+my_set = {tuple(data)}
+</code></pre>
+</li>
+<li>
+<p>检查一个集合是另一个集合的子集</p>
+<pre><code class="language-python">a_set = {1, 2, 3, 4, 5}
+{1, 2, 3}.issubset(a_set) # True
+
+a_set.issuperset({1, 2, 3}) # True
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ul>
+<li>
+<p>函数：</p>
+<ol>
+<li>
+<p>在函数内部，任意变量都是默认分配到本地命名空间的。本地命名空间在函数被调用时生成。在函数执行结束后，本地命名空间就会销毁。</p>
+<pre><code class="language-python">a = None
+def func():
+    a = [] # 使用global 关键字可以声明为全局变量
+    for i in range(5):
+        a.append(i)
+print(a) # None
+</code></pre>
+</li>
+<li>
+<p>返回多个值：（<strong>返回一个元组之后拆包</strong>）</p>
+<pre><code class="language-python">def f():
+    a, b, c = 5, 6, 7
+    return a, b, c
+
+a, b, c = f()
+</code></pre>
+</li>
+</ol>
+</li>
+</ul>
 
             </div>
             
