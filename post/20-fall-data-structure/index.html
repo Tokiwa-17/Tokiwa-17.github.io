@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606137542525">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606149623035">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -41,7 +41,7 @@ void convert(Stack&lt;char&gt;&amp; s, int n, int base){
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606137542525" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606149623035" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -541,35 +541,88 @@ int BinNode&lt;T&gt;::height() {
 </ul>
 </li>
 </ol>
-<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1606137540890.png" alt="" loading="lazy"></figure>
+<p><img src="https://tokiwa-17.github.io/post-images/1606137540890.png" alt="" loading="lazy"><br>
+二叉搜索树的搜索、插入、删除复杂度皆为O(h).</p>
+<p><em>但树高的最好情况<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo>=</mo><mo>⌊</mo><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi></mrow><mo>⌋</mo></mrow><annotation encoding="application/x-tex">h = \lfloor {logn} \rfloor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">h</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span></span><span class="mclose">⌋</span></span></span></span>, 最坏情况可能退化为h = n.</em></p>
+<p><strong>树高与树的构建时关键码的输入次序有关</strong></p>
+<ul>
+<li>按关键码大小顺序输入构建二叉搜索树时， 树高<code>h = n</code>.</li>
+<li>按照完全二叉树的层次遍历输入时， 树高 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo>=</mo><mo>⌊</mo><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi></mrow><mo>⌋</mo></mrow><annotation encoding="application/x-tex">h = \lfloor {logn} \rfloor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">h</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span></span><span class="mclose">⌋</span></span></span></span>.</li>
+<li>n个节点的关键码按照不同顺序有<code>n!</code>种全排列，<strong>按照排列顺序输入构建二叉搜索树</strong>，假设各排列概率均等，二叉搜索树的平均高度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Θ</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\Theta log(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
+<li>n个节点的二叉搜索树形态共有n的卡特兰数种，<strong>如果各形态概率均等</strong>。可证明二叉搜索树平均高度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Θ</mi><mo>(</mo><msup><mi>n</mi><mfrac><mn>1</mn><mn>2</mn></mfrac></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">\Theta(n ^ {\frac{1}{2}})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.20402em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9540200000000001em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8443142857142858em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<p><strong>理想平衡与适度平衡</strong></p>
+<ul>
+<li>理想平衡二叉搜索树：树高恰好为O(logn).</li>
+<li>平衡二叉搜索树**（平衡因子小于等于1）<strong>：AVL, splay</strong>(渐进不超过O(logn))**</li>
+<li>等价：两棵二叉搜索树的中序遍历序列相同，则称他们相互等价。</li>
+<li><strong>局部调整:使二叉搜索树在动态增减过程中保持适度平衡<u>调整为等价的平衡二叉搜索树。</u></strong>
+<ol>
+<li>经过单次动态修改后，至多有O(logn)处局部不再保持平衡条件。</li>
+<li>可在O(logn)时间内，使这O(logn)处局部重新满足条件。</li>
+</ol>
+</li>
+</ul>
 <hr>
-<h2 id="lecture-9-graph">Lecture 9 :Graph</h2>
-<h3 id="1基本术语-2">1.基本术语</h3>
+<p><strong>AVL</strong>:最基本的BBST</p>
 <ul>
-<li>简单路径：路径上各顶点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>V</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>V</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>V</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">V_1, V_2, ..., V_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>均不相互重复。</li>
-<li>连通图与强连通分量(无向图)
-<ul>
-<li>连通图：任一对顶点都是联通的
-<ul>
-<li>连通分量：非连通图的极大联通子图</li>
-</ul>
+<li>
+<p>平衡化旋转分类</p>
+<ol>
+<li>左单旋<strong>Zag</strong></li>
+<li>有单旋<strong>Zig</strong></li>
+<li><strong>Zag - Zig</strong></li>
+<li><strong>Zig - Zag</strong></li>
+</ol>
+</li>
+<li>
+<p>从变动位置沿通向根的路径回溯，检查各节点的平衡因子。</p>
+</li>
+<li>
+<p>从首次发生不平衡的节点起，沿刚才回溯的路径取直接下两层的节点（<strong>g</strong>randparent - <strong>p</strong>arent - <strong>v</strong>）。</p>
 </li>
 </ul>
-</li>
-<li>强联通图与强联通分量(有向图)
-<ul>
-<li>强连通图：每一对顶点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>V</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>V</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">V_i, V_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>,都可相互到达</li>
-<li>强连通分量：非强连通图的极大强连通子图。</li>
-</ul>
-</li>
-</ul>
-<h3 id="2图的存储表示">2.图的存储表示</h3>
-<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
-<p><u><strong>dtime</strong>:顶点<code>v</code>被访问到的时刻</u></p>
-<p><u><strong>ftime</strong>:顶点<code>v</code>被访问完的时刻</u></p>
-<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
-<p><strong>图模板类</strong></p>
-<pre><code class="language-c++">template&lt;typename Tv, typename Te&gt;
+<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1606149620087.jpg" alt="" loading="lazy"></figure>
+<p><u>找到失衡节点g后如何确定p和v？p 为 g 孩子中高度更高者， v 为 p 孩子中高度更高者。</u></p>
+<p><strong>核心操作</strong>：右（左）单旋</p>
+<pre><code class="language-c++">void RatateR(Node *&amp; ptr){//旋转后根在ptr
+    Node *subR = ptr;
+    ptr = subR -&gt; left;//根为p
+    subR -&gt; left = ptr -&gt; right;//g的左节点为p的右节点
+    ptr -&gt; right = subR;//p的右节点为g
+    ptr -&gt; bf = subR -&gt; bf = 0;//只有失衡时旋转，调整完毕后平衡因子为0.
+}
+****
+
+
+## Lecture 9 :Graph
+
+### 1.基本术语
+
+ * 简单路径：路径上各顶点$V_1, V_2, ..., V_m$均不相互重复。
+ * 连通图与强连通分量(无向图)
+   	* 连通图：任一对顶点都是联通的
+      	* 连通分量：非连通图的极大联通子图
+* 强联通图与强联通分量(有向图)
+  * 强连通图：每一对顶点$V_i, V_j$,都可相互到达
+  * 强连通分量：非强连通图的极大强连通子图。
+
+### 2.图的存储表示
+
+![](https://tokiwa-17.github.io/post-images/1605536837458.png)
+
+&lt;u&gt;**dtime**:顶点`v`被访问到的时刻&lt;/u&gt;
+
+&lt;u&gt;**ftime**:顶点`v`被访问完的时刻&lt;/u&gt;
+
+
+
+![](https://tokiwa-17.github.io/post-images/1605536844971.png)
+
+**图模板类**
+
+```c++
+template&lt;typename Tv, typename Te&gt;
 class GraphMatrix : public Graph&lt;Tv, Te&gt;{
     private:
     	Vector&lt;Vertex&lt;Tv&gt; &gt;V; //顶点集
@@ -619,7 +672,7 @@ return (i &gt; -1) &amp;&amp; (i &lt; n) &amp;&amp; (j &gt; -1) &amp;&amp; (j &l
 </li>
 <li>
 <p>边的动态操作</p>
-<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>图的邻接表表示</p>
@@ -652,11 +705,11 @@ template &lt;typename Te&gt; struct Edge{
 <p><strong>BFS对应于层次遍历：越早访问的顶点，其邻域顶点越优先被访问。反复从队列中取出队头访问，并将其未被访问的邻域顶点入队。必须对顶点进行标记，已访问过的顶点不再入队。</strong></p>
 <p>​	<img src="https://tokiwa-17.github.io/post-images/1605885582153.jpg" alt="" loading="lazy"></p>
 <p><strong>DFS：</strong></p>
-<figure data-type="image" tabindex="14"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="15"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
 <hr>
 <h3 id="最小支撑树">最小支撑树</h3>
-<figure data-type="image" tabindex="16"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
 <pre><code class="language-c++">//邻接表版本prim
 struct Node{
     int v, dis;
@@ -729,7 +782,7 @@ void minSpanTreePrim(MGraph g){
 <li>无环性</li>
 </ul>
 <p><strong>Dijkstra:</strong> 首先求出长度最短的一条最短路径<code>(s, u)</code>, 更新SPT的顶点集及到其他各点的最短距离。依次类推，指导所有顶点进入SPT集合。</p>
-<figure data-type="image" tabindex="17"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
 </li>
 </ul>
 <p><strong>堆优化的dijkstra:整体时间复杂度O(elogn).</strong></p>
@@ -764,8 +817,8 @@ void dijkstra(int s){
 <hr>
 <p><strong>Bellman-Ford算法：解决负权边的问题。</strong></p>
 <p><u>限制条件：图中不能出现负权回路</u></p>
-<figure data-type="image" tabindex="18"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="19"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
 <p><strong>SPFA(shortest path faster algorithm):存在负边权的单源最短路 + 检测正（负）环</strong></p>
 <blockquote>
 <p>SPFA——Bellman-Ford算法的优化</p>
@@ -859,7 +912,7 @@ while(!q.empty()){
 </ol>
 </li>
 </ul>
-<figure data-type="image" tabindex="20"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
 
             </div>
             
