@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tokiwa-17.github.io</id>
     <title>Tokiwa-17</title>
-    <updated>2020-11-23T09:13:03.420Z</updated>
+    <updated>2020-11-23T13:21:13.768Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tokiwa-17.github.io"/>
     <link rel="self" href="https://tokiwa-17.github.io/atom.xml"/>
@@ -1063,6 +1063,63 @@ int BinNode&lt;T&gt;::height() {
 <p><strong>前序 + 后序不可重构，若树的每个节点都有偶数个孩子，则可重构。</strong></p>
 <p>前序序列固定， 有多少种可能的中序序列？ Catlan数。</p>
 <hr>
+<p><strong>Huffman树（最优编码树）：</strong></p>
+<p>树的路径长度（PL）：所有节点从根到该节点的路径长度之和。</p>
+<p><strong>带权路径长度:</strong> 所有叶子节点的带权路径长度之和。</p>
+<p>**构造方法:**不断选取权值最小的点构成二叉树加入森林中。</p>
+<p><strong>哈夫曼编码:</strong></p>
+<ol>
+<li>比等长编码的情形要短。</li>
+<li>前缀无歧义编码。</li>
+</ol>
+<hr>
+<h2 id="lecture-7-binary-search-tree">Lecture 7: Binary Search Tree</h2>
+<p><strong>中序遍历:</strong></p>
+<ul>
+<li>对一棵二叉搜索树进行中序遍历，可以按从小到大的顺序，将各节点关键码排列起来。</li>
+<li>任意一棵二叉树是二叉搜索树，当且仅当其中序序列单调非降。</li>
+</ul>
+<hr>
+<p>基本操作：</p>
+<ol>
+<li><code>Search</code></li>
+</ol>
+<figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1606137528475.png" alt="" loading="lazy"></figure>
+<ol start="2">
+<li><code>insert</code>
+<ul>
+<li>插入新元素前须搜索该元素是否存在，若存在则不在插入。</li>
+<li>新元素的插入总是作为叶子节点插入。</li>
+</ul>
+</li>
+</ol>
+<figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1606137533825.png" alt="" loading="lazy"></figure>
+<ol start="3">
+<li><code>construct</code></li>
+</ol>
+<pre><code class="language-c++">void Construct(){
+	int x;
+    BSTNode* root = NULL;
+    std::cin &gt;&gt; x;
+    while(x &gt;= 0){
+        Insert(x, root);
+        std::cin &gt;&gt; x;
+    }
+}
+</code></pre>
+<ol start="4">
+<li>
+<p><code>Remove</code></p>
+<ul>
+<li>情况一：<strong>被删节点位于叶子</strong>， 只需将父节点指向它的指针清零，再释放它即可。</li>
+<li>情况二：<strong>被删节点左子树为空</strong>， 用被删节点右子树顶替，再释放它即可。</li>
+<li>情况三：<strong>被删节点右子树为空</strong>， 用被删节点左子树顶替，再释放它即可。</li>
+<li>情况四：<strong>被删除节点左右子树都不为空</strong>，在右子树中找到最左边的节点，把它的值填补到被删除节点中。再递归处理该节点的删除。</li>
+</ul>
+</li>
+</ol>
+<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1606137540890.png" alt="" loading="lazy"></figure>
+<hr>
 <h2 id="lecture-9-graph">Lecture 9 :Graph</h2>
 <h3 id="1基本术语-2">1.基本术语</h3>
 <ul>
@@ -1084,10 +1141,10 @@ int BinNode&lt;T&gt;::height() {
 </li>
 </ul>
 <h3 id="2图的存储表示">2.图的存储表示</h3>
-<figure data-type="image" tabindex="8"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
 <p><u><strong>dtime</strong>:顶点<code>v</code>被访问到的时刻</u></p>
 <p><u><strong>ftime</strong>:顶点<code>v</code>被访问完的时刻</u></p>
-<figure data-type="image" tabindex="9"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
 <p><strong>图模板类</strong></p>
 <pre><code class="language-c++">template&lt;typename Tv, typename Te&gt;
 class GraphMatrix : public Graph&lt;Tv, Te&gt;{
@@ -1139,7 +1196,7 @@ return (i &gt; -1) &amp;&amp; (i &lt; n) &amp;&amp; (j &gt; -1) &amp;&amp; (j &l
 </li>
 <li>
 <p>边的动态操作</p>
-<figure data-type="image" tabindex="10"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>图的邻接表表示</p>
@@ -1172,11 +1229,11 @@ template &lt;typename Te&gt; struct Edge{
 <p><strong>BFS对应于层次遍历：越早访问的顶点，其邻域顶点越优先被访问。反复从队列中取出队头访问，并将其未被访问的邻域顶点入队。必须对顶点进行标记，已访问过的顶点不再入队。</strong></p>
 <p>​	<img src="https://tokiwa-17.github.io/post-images/1605885582153.jpg" alt="" loading="lazy"></p>
 <p><strong>DFS：</strong></p>
-<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
 <hr>
 <h3 id="最小支撑树">最小支撑树</h3>
-<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
 <pre><code class="language-c++">//邻接表版本prim
 struct Node{
     int v, dis;
@@ -1249,7 +1306,7 @@ void minSpanTreePrim(MGraph g){
 <li>无环性</li>
 </ul>
 <p><strong>Dijkstra:</strong> 首先求出长度最短的一条最短路径<code>(s, u)</code>, 更新SPT的顶点集及到其他各点的最短距离。依次类推，指导所有顶点进入SPT集合。</p>
-<figure data-type="image" tabindex="14"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
 </li>
 </ul>
 <p><strong>堆优化的dijkstra:整体时间复杂度O(elogn).</strong></p>
@@ -1284,8 +1341,8 @@ void dijkstra(int s){
 <hr>
 <p><strong>Bellman-Ford算法：解决负权边的问题。</strong></p>
 <p><u>限制条件：图中不能出现负权回路</u></p>
-<figure data-type="image" tabindex="15"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="16"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
 <p><strong>SPFA(shortest path faster algorithm):存在负边权的单源最短路 + 检测正（负）环</strong></p>
 <blockquote>
 <p>SPFA——Bellman-Ford算法的优化</p>
@@ -1379,7 +1436,7 @@ while(!q.empty()){
 </ol>
 </li>
 </ul>
-<figure data-type="image" tabindex="17"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
