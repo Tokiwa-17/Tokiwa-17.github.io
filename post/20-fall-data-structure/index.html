@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606100618339">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606103098760">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -25,7 +25,7 @@
     <meta name="description" content="20-fall data structure
 
 Lecture 4: Stack
-栈的应用：
+栈的应用:
 
 
 进制转换
@@ -41,7 +41,7 @@ void convert(Stack&lt;char&gt;&amp; s, int n, int base){
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606100618339" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606103098760" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -110,7 +110,7 @@ void convert(Stack&lt;char&gt;&amp; s, int n, int base){
               <h1 id="20-fall-data-structure">20-fall data structure</h1>
 <hr>
 <h2 id="lecture-4-stack">Lecture 4: Stack</h2>
-<p><strong>栈的应用：</strong></p>
+<p><strong>栈的应用:</strong></p>
 <ul>
 <li>
 <p>进制转换</p>
@@ -208,7 +208,7 @@ bool stackPermutation(B[1, n]){
 </code></pre>
 <hr>
 <h2 id="lecture-5队列">Lecture 5:队列</h2>
-<p><strong>队列的数组实现：</strong></p>
+<p><strong>队列的数组实现:</strong></p>
 <pre><code class="language-c++">int A[10];
 front = rear = -1;
 bool empty(){
@@ -273,17 +273,17 @@ dequeue(x){
 <hr>
 <h2 id="lecture-6-binary-tree">Lecture 6: Binary Tree</h2>
 <h3 id="1基本术语">1.基本术语</h3>
-<p>​	**堂兄弟节点：**具有相同的祖父。</p>
+<p>​	<strong>堂兄弟节点:</strong> 具有相同的祖父。</p>
 <p>​	节点A深度：**从根到<code>A</code>**所经过的边数。</p>
 <p>​    节点A高度：<strong>从<code>A</code>到叶子节点</strong>所经过边数的最大值</p>
-<p>​	**树的高度：**树的根节点的高度。单节点树高度为0， 空节点树高度为-1.</p>
+<p>​	<strong>树的高度:</strong> 树的根节点的高度。单节点树高度为0， 空节点树高度为-1.</p>
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mi>e</mi><mi>i</mi><mi>g</mi><mi>h</mi><mi>t</mi><mo>(</mo><mi>T</mi><mo>)</mo><mo>≥</mo><mi>h</mi><mi>e</mi><mi>i</mi><mi>g</mi><mi>h</mi><mi>t</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>+</mo><mi>d</mi><mi>e</mi><mi>p</mi><mi>t</mi><mi>h</mi><mo>(</mo><mi>v</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">height(T) \geq height(v) + depth(v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">h</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">h</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></p>
-<p>​	**完全二叉树：**除了最后一层外，其余各层全是满的，并且最后一层的节点尽可能往左靠。第<code>i</code>层的最大节点数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">2 ^ i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span></span></span>.</p>
+<p>​	<strong>完全二叉树:</strong> 除了最后一层外，其余各层全是满的，并且最后一层的节点尽可能往左靠。第<code>i</code>层的最大节点数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">2 ^ i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span></span></span>.</p>
 <h2 id=""><img src="https://tokiwa-17.github.io/post-images/1606059095017.png" alt="" loading="lazy"></h2>
 <hr>
-<p>**平衡二叉树：**树中任意节点的左右子树的高度差不超过k（通常k为1）</p>
+<p><strong>平衡二叉树:</strong> 树中任意节点的左右子树的高度差不超过k（通常k为1）</p>
 <hr>
-<p><strong>二叉树的性质：</strong></p>
+<p><strong>二叉树的性质:</strong></p>
 <ul>
 <li>
 <p>若二叉树的层次从<code>0</code>开始，则二叉树第<code>i</code>层最多有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">2 ^ i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span></span></span>个节点。</p>
@@ -302,7 +302,7 @@ dequeue(x){
 </li>
 </ul>
 <hr>
-<p><strong>树的接口：</strong></p>
+<p><strong>树的接口:</strong></p>
 <ul>
 <li><code>root()</code></li>
 <li><code>parent()</code></li>
@@ -313,7 +313,7 @@ dequeue(x){
 <li><code>traverse()</code></li>
 </ul>
 <hr>
-<p><strong>树的表示：</strong></p>
+<p><strong>树的表示:</strong></p>
 <ul>
 <li>
 <p>父亲表示法<br>
@@ -332,7 +332,7 @@ dequeue(x){
 </li>
 </ul>
 <figure data-type="image" tabindex="4"><img src="https://tokiwa-17.github.io/post-images/1606100598171.png" alt="" loading="lazy"></figure>
-<p>**转换成二叉树：**长子节点 -&gt; 左孩子 	下一兄弟节点 -&gt; 右孩子</p>
+<p>**转换成二叉树:**长子节点 -&gt; 左孩子 	下一兄弟节点 -&gt; 右孩子</p>
 <figure data-type="image" tabindex="5"><img src="https://tokiwa-17.github.io/post-images/1606100602722.png" alt="" loading="lazy"></figure>
 <p><strong>n节点二叉树棵树形态数目：卡特兰数</strong>。</p>
 <ul>
