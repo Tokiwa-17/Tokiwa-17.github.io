@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606212800768">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606215265630">
 <link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
 
 
@@ -41,7 +41,7 @@ void convert(Stack&lt;char&gt;&amp; s, int n, int base){
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tokiwa-17.github.io">
-        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606212800768" class="site-logo">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606215265630" class="site-logo">
         <h1 class="site-title">Tokiwa-17</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -594,6 +594,159 @@ int BinNode&lt;T&gt;::height() {
 }
 
 </code></pre>
+<h2 id="lecture-8-heap">Lecture 8 :Heap</h2>
+<blockquote>
+<p>堆：一种基于<strong>完全二叉树</strong>的数据结构。每个节点的值大于等于其左右孩子的值：大根堆**(默认)**。</p>
+<p>每个顶点的值小于或等于其左右孩子的值：小根堆。</p>
+<p>优先级队列，每次从队列中取出的是具有<strong>最高优先权</strong>的元素。</p>
+</blockquote>
+<h3 id="priority_queue">priority_queue</h3>
+<ol>
+<li>基于有序向量的实现
+<ul>
+<li>**insert:**二分查找 + 移位 = O(n)</li>
+<li><strong>getMax()</strong>:取出向量最末元素O(1)</li>
+<li><strong>delMax()</strong>:遍历向量最末元素O(1)</li>
+</ul>
+</li>
+<li>基于<code>BBST</code>的实现
+<ul>
+<li><strong>insert()</strong>: O(logn)</li>
+<li><strong>getMax</strong>: O(logn)</li>
+<li><strong>delMax</strong>: O(logn)</li>
+</ul>
+</li>
+<li>基于<code>heap</code>的实现**（时间复杂度仍为O(logn), 但效率更高)**
+<ul>
+<li>只需维护最大值，无需维护其他元素的全局有效性。</li>
+<li>以向量为存储结构，以完全二叉树为逻辑结构。</li>
+<li><strong>insert()</strong>: O(logn)</li>
+<li><strong>getMax()</strong>: O(1)</li>
+<li><strong>delMax()</strong>: O(logn)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>完全二叉树的向量表示<u>（根节点为0）</u></p>
+<pre><code class="language-c++">parent(i) = (i - 1) &gt;&gt; 1;
+lchild(i) = (i &lt;&lt; 1) + 1;
+rchild(i) = (i &lt;&lt; 1) + 2;
+</code></pre>
+<hr>
+<p>基本操作</p>
+<ol>
+<li>
+<p>插入：上滤</p>
+<p>在向量末尾插入，若新节点大于其父节点，与父节点值进行互换。迭代进行此过程，直到满足堆序性要求。</p>
+<pre><code class="language-c++">template&lt;class ElemType&gt;
+void MyHeap&lt;ElemType&gt;::insert(ElemType elem){
+    heapDataVec.push_back(elem);//末尾添加元素
+    ++numCounts;
+    percolateUp(numCounts - 1, heapDataVec[numCounts - 1]);//上滤
+}
+
+template&lt;class ElemType&gt;
+void MyHeap&lt;ElemType&gt;::percolateUp(int index, ElemType value){
+    int parentIndex = (index - 1) &gt;&gt; 1;
+    while(index &gt; 0 &amp;&amp; (heapDataVec[parentIndex] &lt; value)){//索引大于0且值大于父节点
+        heapDataVec[index] = heapDataVec[parentIndex];//父节点的值覆盖当前节点
+        index = parentIndex;
+        parentIndex = (parentIndex - 1) &gt;&gt; 1;
+    }
+    heapDataVec[index] = value;
+}
+</code></pre>
+</li>
+<li>
+<p>删除最大元素：置换 + 下滤</p>
+<ul>
+<li>使用最后一个元素取代根节点值，把原堆顶置于向量最末端。</li>
+<li>比较新根和两个孩子，与其较大的孩子交换。迭代上述过程，直至全树满足堆序性要求。</li>
+</ul>
+<pre><code class="language-c++">template &lt;class typename&gt;
+void MyHeap&lt;ElemType&gt;::delMax(){
+    //堆顶和最后一个元素互换
+    ElemType value = heapDataVec[numCounts-1];
+    heapDataVec[numCounts-1] = heapDataVec[0];
+    //堆中元素数目减一  
+    --numCounts;
+    percolateDown (0, value);  // 下滤
+}
+
+template &lt;class ElemType&gt; 
+void MyHeap&lt;ElemType&gt;:: percolateDown(int childTree, ElemType value){
+    int index = childTree;                             // 目标节点索引  
+    int maxChid = 2 * (index + 1) ;                    // 目标节点右子节点
+    bool godown = true;                                // 循环下滤退出标志
+    while (godown &amp;&amp; maxChid &lt; numCounts) {
+        godown = false;
+        if (heapDataVec[maxChid] &lt; heapDataVec[maxChid - 1]) 
+             --maxChid;                                //若左孩子大，则更新为左孩子 
+        if (value &lt; heapDataVec[maxChid]) {            //若父节点小于孩子，则下滤 
+            godown = true;
+            heapDataVec[index] = heapDataVec[maxChid]; //令较大值为交换值 
+            index = maxChid;                           //该交换节点索引下移  
+            maxChid = 2 * (maxChid + 1);               //重新计算交换节点右子节点  
+        }
+    }
+    if (maxChid == numCounts){ 						
+        //此时heapDataVec[maxChild]正好是原来要删除的节点。
+        if(value &lt; heapDataVec[maxChid - 1]){          //令左子节点值为交换值
+            heapDataVec[index] = heapDataVec[maxChid - 1];
+            index = maxChid - 1;
+        }
+    }
+    heapDataVec[index] = value;                    //将调整值赋予交换节点
+}
+
+</code></pre>
+</li>
+<li>
+<p>堆构建</p>
+<p>方法1：根据<code>insert()</code>逐个插入（蛮力算法）O(nlogn).</p>
+<p>方法2：堆合并法（floyd)算法</p>
+<ul>
+<li>自底向上(向量中自右向左进行堆合并)</li>
+<li>假设左子堆和右子堆满足堆序性，对父亲节点执行下滤操作。若左子堆和右子堆都满足堆序性，则合并的结果满足堆序性。</li>
+</ul>
+</li>
+</ol>
+<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1606215231786.jpg" alt="" loading="lazy"></figure>
+<p>复杂度比较：</p>
+<ul>
+<li>蛮力算法：每个节点时间正比于深度。O(nlogn).</li>
+<li>堆合并法：每个节点时间正比于高度。O(n)</li>
+</ul>
+<pre><code class="language-c++">template &lt;class ElemType&gt;
+void MyHeap&lt;ElemType&gt;::makeHeap(){
+//建堆的过程就是一个不断调整堆的过程，循环调用函数percolateDown调整子树  
+    if (numCounts &lt; 2) return;
+    //第一个需要调整的子树的根节点地址
+    int parent = (numCounts) / 2 -1;
+    while (1){
+        percolateDown(parent, heapDataVec[parent]);
+        if (0 == parent) return; // 到达根节点，返回
+        --parent;
+   }
+}
+</code></pre>
+<ul>
+<li>
+<p>应用：<strong>堆排序</strong></p>
+<ul>
+<li>遍历未排序最大值：优先队列取最大值</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo><mo>→</mo><mi>O</mi><mo>(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n ^ 2) \rightarrow O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>.</li>
+<li>须进行建堆预处理，复杂度O(n), 整体复杂度仍为O(nlogn).</li>
+</ul>
+<pre><code class="language-c++">template &lt;class ElemType&gt;
+void MyHeap&lt;ElemType&gt;::sortHeap(){
+    makeHeap();
+    while(numCounts &gt; 0) delMax();
+}
+</code></pre>
+<p><strong>建堆后，不停地删除堆顶，即可实现从大到小排列。</strong></p>
+</li>
+</ul>
 <hr>
 <h2 id="lecture-9-graph">Lecture 9 :Graph</h2>
 <h3 id="1基本术语-2">1.基本术语</h3>
@@ -616,10 +769,10 @@ int BinNode&lt;T&gt;::height() {
 </li>
 </ul>
 <h3 id="2图的存储表示">2.图的存储表示</h3>
-<figure data-type="image" tabindex="11"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605536837458.png" alt="" loading="lazy"></figure>
 <p><u><strong>dtime</strong>:顶点<code>v</code>被访问到的时刻</u></p>
 <p><u><strong>ftime</strong>:顶点<code>v</code>被访问完的时刻</u></p>
-<figure data-type="image" tabindex="12"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605536844971.png" alt="" loading="lazy"></figure>
 <p><strong>图模板类</strong></p>
 <pre><code class="language-c++">template&lt;typename Tv, typename Te&gt;
 class GraphMatrix : public Graph&lt;Tv, Te&gt;{
@@ -671,7 +824,7 @@ return (i &gt; -1) &amp;&amp; (i &lt; n) &amp;&amp; (j &gt; -1) &amp;&amp; (j &l
 </li>
 <li>
 <p>边的动态操作</p>
-<figure data-type="image" tabindex="13"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://tokiwa-17.github.io/post-images/1605885575126.jpg" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>图的邻接表表示</p>
@@ -704,11 +857,11 @@ template &lt;typename Te&gt; struct Edge{
 <p><strong>BFS对应于层次遍历：越早访问的顶点，其邻域顶点越优先被访问。反复从队列中取出队头访问，并将其未被访问的邻域顶点入队。必须对顶点进行标记，已访问过的顶点不再入队。</strong></p>
 <p>​	<img src="https://tokiwa-17.github.io/post-images/1605885582153.jpg" alt="" loading="lazy"></p>
 <p><strong>DFS：</strong></p>
-<figure data-type="image" tabindex="14"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="15"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://tokiwa-17.github.io/post-images/1605885587728.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://tokiwa-17.github.io/post-images/1605885592893.png" alt="" loading="lazy"></figure>
 <hr>
 <h3 id="最小支撑树">最小支撑树</h3>
-<figure data-type="image" tabindex="16"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://tokiwa-17.github.io/post-images/1605536853016.png" alt="" loading="lazy"></figure>
 <pre><code class="language-c++">//邻接表版本prim
 struct Node{
     int v, dis;
@@ -781,7 +934,7 @@ void minSpanTreePrim(MGraph g){
 <li>无环性</li>
 </ul>
 <p><strong>Dijkstra:</strong> 首先求出长度最短的一条最短路径<code>(s, u)</code>, 更新SPT的顶点集及到其他各点的最短距离。依次类推，指导所有顶点进入SPT集合。</p>
-<figure data-type="image" tabindex="17"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://tokiwa-17.github.io/post-images/1605889438956.png" alt="" loading="lazy"></figure>
 </li>
 </ul>
 <p><strong>堆优化的dijkstra:整体时间复杂度O(elogn).</strong></p>
@@ -816,8 +969,8 @@ void dijkstra(int s){
 <hr>
 <p><strong>Bellman-Ford算法：解决负权边的问题。</strong></p>
 <p><u>限制条件：图中不能出现负权回路</u></p>
-<figure data-type="image" tabindex="18"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="19"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://tokiwa-17.github.io/post-images/1605889447755.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="https://tokiwa-17.github.io/post-images/1605889459444.jpg" alt="" loading="lazy"></figure>
 <p><strong>SPFA(shortest path faster algorithm):存在负边权的单源最短路 + 检测正（负）环</strong></p>
 <blockquote>
 <p>SPFA——Bellman-Ford算法的优化</p>
@@ -911,7 +1064,7 @@ while(!q.empty()){
 </ol>
 </li>
 </ul>
-<figure data-type="image" tabindex="20"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="21"><img src="https://tokiwa-17.github.io/post-images/1605889466037.jpg" alt="" loading="lazy"></figure>
 
             </div>
             
