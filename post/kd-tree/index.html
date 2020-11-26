@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>KD-Tree | Tokiwa-17</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1606375967862">
+<link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="KD Tree
+
+针对多维数据索引，是否存在类似平衡二叉树的索引方法？
+
+A K-D Tree is a binary search tree where data in each node is a K-Dimensional point..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tokiwa-17.github.io">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1606375967862" class="site-logo">
+        <h1 class="site-title">Tokiwa-17</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      転ばぬ先の杖
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tokiwa-17.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">KD-Tree</h2>
+            <div class="post-date">2020-11-26</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="kd-tree">KD Tree</h1>
+<blockquote>
+<p>针对多维数据索引，是否存在类似平衡二叉树的索引方法？</p>
+</blockquote>
+<p>A K-D Tree is a <strong>binary search</strong> tree where data in each node is a <font color = #00ffff>K-Dimensional point in space</font>.</p>
+<ul>
+<li><Font color = #FF0000>A non-leaf node in K-D tree divides the space into two parts, called as half-spaces</Font>.
+<ul>
+<li>Points to the left of this space are represented by the left subtree of that node and points to the right of the space are represented by the right subtree.</li>
+</ul>
+</li>
+</ul>
+<h2 id="build-kd-tree">Build KD Tree</h2>
+<p><Font color = #FF0000>O(nlogn)</Font></p>
+<pre><code class="language-c++">Algorithm BUILDKDTREE(p, depth)
+    if p contains only one point
+        then return a leaf storing this point
+    else if depth is even
+       	then split P with a vertical line l through the median x-coordinate into p1 and p2
+    else split P with a horizontal line l through the median y-coordinate into p1 and p2
+        v_left &lt;- BUILDKDTREE(p1, depth + 1)
+        v_right &lt;- BUILDKDTREE(p2, depth + 1)
+        create a node v storing l, make v_left the lson of v, v_right the rson of v.
+        return v
+</code></pre>
+<h3 id="creation-of-2-d-tree">Creation of 2-D tree</h3>
+<p>Consider following points in a 2-D plane:(3, 6), (17, 15), (13, 15), (6, 12), (9, 1), (2, 7), (10, 19)</p>
+<ol>
+<li>Insert (3, 6): Since tree is empty, make it the root node.</li>
+<li>Insert (17, 15): Compare it with root node point. Since root node is <Font color = #FF0000>X-aligned</Font>, the X-coordinate value will be compared to determine if it lies in the left subtree or in the right subtree. <Font color = #00ffff>This point will be Y-aligned.</Font></li>
+<li>Insert (13, 15): X-value of this point is greater than X-value of point in root node. So, this will lie in the right subtree of (3, 6). Again Compare Y-value of this point with the Y-value of point (17, 15) . Since, they are equal, this point will lie in the right subtree of (17, 15). This point will be X-aligned.</li>
+<li>Insert (6, 12): X-value of this point is greater than X-value of point in root node. So, this will lie in the right subtree of (3, 6). Again Compare Y-value of this point with the Y-value of point (17, 15) (Why?). Since, 12 &lt; 15, this point will lie in the left subtree of (17, 15). This point will be X-aligned.</li>
+<li>Insert (9, 1):Similarly, this point will lie in the right of (6, 12).</li>
+<li>Insert (2, 7):Similarly, this point will lie in the left of (3, 6).</li>
+<li>Insert (10, 19): Similarly, this point will lie in the left of (13, 15).</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Cylf%5CDesktop%5C3.png" alt="1" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="C:%5CUsers%5Cylf%5CDesktop%5C4.png" alt="4" loading="lazy"></figure>
+<h2 id="search-kd-tree">Search KD Tree</h2>
+<p><Font color = #FF0000>O(sqrt(n) + k)</Font>: k是最后<code>R</code>中元素的个数。</p>
+<pre><code class="language-c++">Algorithm SEARCHKDTREE(v, R)
+*Input.The root of a Kd-tree(or a subtree), and a range R.
+*output.All points at leaves below v that lie in the range.
+    if v is a leaf
+        then Report the point stored at v if it lies in R.
+    else if region(lc(v)) is fully contained in R
+        then ReportSubtree(lc(v))
+    else if region(lc(v)) intersects R
+        then SEARCHKDTREE(lc(v), R)
+   	if region(rc(v)) is fully contained in R
+        then ReportSubtree(rc(v))
+    else if region(rc(v)) intersects R
+        then SEARCHKDTREE(rc(v), R)
+</code></pre>
+<hr>
+<h2 id="code">Code</h2>
+<pre><code class="language-c++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int k = 2;
+struct Node{
+    int point[k];//To store k dimensional point
+    Node *left, *right;
+};
+
+//A method to create a node of kd-tree
+Node* newNode(int arr[]){
+    Node *tmp = new Node;
+    for(int i = 0;i &lt; k;i++) tmp -&gt; point[i] = arr[i];
+    tmp -&gt; left = tmp -&gt; right = nullptr;
+    return tmp;
+}
+
+//Inserts a new node and returns root of modified tree
+//The parameters depth is used to decide axis of comparison
+Node *insertRec(Node *root, int point[], unsigned int depth){
+	//tree is empty
+    if(root == nullptr) return newNode(point);
+    //calculate current dimension of comparison 
+    unsigned cd = depth % k;
+    //Compare the new point with root on current dimension 'cd', and decide the left or right subtree
+    if(point[cd] &lt; root -&gt; point[cd])
+        root -&gt; left = insertRec(root -&gt; left, point, depth + 1);
+    else root -&gt; right = insertRec(root -&gt; right, point, depth + 1);
+    return root;
+}
+Node *insert(Node *root, int point[]){
+    return insertRec(root, point, 0);
+}
+//A utility method to determine if two points are same.
+bool arePointsSame(int point1[], int point2[]){
+    for(int i = 0 ;i &lt; k;i++)
+        if(point1[i] != point2[i])
+            return false;
+    return true;
+}
+//Searches a Point 
+bool searchRec(Node* root, int point[], unsigned depth) { 
+    if (root == NULL)  return false; 
+    if (arePointsSame(root-&gt;point, point))  return true;
+    // Current dimension is computed using current depth and total 
+    // dimensions (k) 
+    unsigned cd = depth % k; 
+    // Compare point with root with respect to cd (Current dimension) 
+    if (point[cd] &lt; root-&gt;point[cd]) 
+        return searchRec(root-&gt;left, point, depth + 1); 
+  	else return searchRec(root-&gt;right, point, depth + 1); 
+} 
+bool search(Node* root, int point[]) { 
+    return searchRec(root, point, 0); 
+}  
+
+//test above functions
+int main() { 
+    struct Node *root = NULL; 
+    int points[][k] = {{3, 6}, {17, 15}, {13, 15}, {6, 12}, 
+                       {9, 1}, {2, 7}, {10, 19}}; 
+  
+    int n = sizeof(points)/sizeof(points[0]); 
+  
+    for (int i=0; i&lt;n; i++) 
+       root = insert(root, points[i]); 
+  
+    int point1[] = {10, 19}; 
+    (search(root, point1))? cout &lt;&lt; &quot;Found\n&quot;: cout &lt;&lt; &quot;Not Found\n&quot;; 
+  
+    int point2[] = {12, 19}; 
+    (search(root, point2))? cout &lt;&lt; &quot;Found\n&quot;: cout &lt;&lt; &quot;Not Found\n&quot;; 
+  
+    return 0; 
+} 
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tokiwa-17.github.io/post/20-fall-physics/">
+                  <h3 class="post-title">
+                    20-fall physics
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>
