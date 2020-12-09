@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Verilog HDL | Tokiwa-17</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tokiwa-17.github.io/favicon.ico?v=1607496443724">
+<link rel="stylesheet" href="https://tokiwa-17.github.io/styles/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Verilog HDL
+简介
+module AOI(a, b, c, d, f);
+    input a, b, c, d;
+    output f;
+    wire a, b, c , d, f;
+    assign f = ~(..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tokiwa-17.github.io">
+        <img src="https://tokiwa-17.github.io/images/avatar.png?v=1607496443724" class="site-logo">
+        <h1 class="site-title">Tokiwa-17</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      転ばぬ先の杖
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tokiwa-17.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Verilog HDL</h2>
+            <div class="post-date">2020-12-09</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="verilog-hdl">Verilog HDL</h1>
+<h2 id="简介">简介</h2>
+<pre><code class="language-verilog">module AOI(a, b, c, d, f);
+    input a, b, c, d;
+    output f;
+    wire a, b, c , d, f;
+    assign f = ~((a &amp; b) | (c &amp; d));
+endmodule
+</code></pre>
+<ul>
+<li>Verilog 程序是由模块构成的。每个模块的内容都是位于 module 和 endmodule 两个 语句之间。</li>
+<li>模块是可以层次嵌套的。</li>
+<li>每个模块要进行端口定义，并说明是输入口还是输出口。</li>
+<li>除了 endmodule 语句外，每个语句和数据定义的最后必须有分号。</li>
+</ul>
+<hr>
+<h2 id="模块的结构">模块的结构</h2>
+<h3 id="模块声明和端口定义">模块声明和端口定义</h3>
+<pre><code class="language-verilog">module name (port 1, port 2, ..., );
+</code></pre>
+<p><strong>在引用模块时其端口可以用两种方式连接：</strong></p>
+<ol>
+<li>
+<p>严格按照模块定义的端口顺序来连接</p>
+</li>
+<li>
+<p>在引用时用<code>.</code>符号，<Font color = #FF0000>表明原模块是定义时规定的端口名</Font>.</p>
+<pre><code class="language-verilog">module mymux2(out, a, b, s1);
+    ...
+endmodule
+
+module muxtwo(ain, bin, select, sout);
+    mymux2 m(.out(sout), .a(ain), .b(bin), .sl(select));
+    ...
+endmodule
+</code></pre>
+</li>
+</ol>
+<h3 id="模块内容">模块内容</h3>
+<p>模块内容包括IO说明，内部信号声明和功能定义。</p>
+<ol>
+<li>
+<p>I/O说明的格式：</p>
+<pre><code class="language-verilog">input[width : 0] 端口名 1;//输入口
+output[width : 0] 端口名 2;//输出口
+inout[width : 0] 端口名 1;//输入/输出口
+</code></pre>
+<p><code>width</code>为信号位宽，若<code>width</code>为 1，则<code>[width : 0]</code>可以省略。</p>
+<p>若几个端口为同样类型（同为输入、输出且width一样），则可以在同一个语句里声明。</p>
+<pre><code class="language-verilog">input[width : 0] name1, name2, name3,...;
+</code></pre>
+</li>
+<li>
+<p>内部信号说明：</p>
+<p>在模块中用到的和与端口有关的<code>wire</code>和<code>reg</code>类型变量的声明。</p>
+<pre><code class="language-verilog">reg [width : 0] R1, R2, ... ;
+wire[width : 0] W1, W2, ... ;
+</code></pre>
+</li>
+<li>
+<p>逻辑功能定义</p>
+<p>有三种方法可以在模块中产生逻辑。</p>
+<ul>
+<li>
+<p><code>assign</code>持续赋值语句定义</p>
+<pre><code class="language-verilog">assign F = ~((A &amp; B) | (C &amp; D));
+</code></pre>
+</li>
+<li>
+<p>调用原件（元件实例化）</p>
+<pre><code class="language-verilog">and #2 myand(out, a, b);
+//调用了一个跟与门一样的名为myand的门，输入为a, b, 输出为out.输出延迟两个单位时间
+</code></pre>
+</li>
+<li>
+<p><code>always</code>过程块赋值</p>
+<pre><code class="language-verilog">always @(posedge clk)
+    begin
+        if(reset) out = 0;
+        else out = out + 1;
+    end
+</code></pre>
+</li>
+</ul>
+<p><Font color = #FF0000>Remark:在Verilog模块中的所有过程块（initial、always)、连续赋值语句、实例引用都是并行的，在同一个模块中这三者出现的先后顺序没有关系。</Font></p>
+</li>
+</ol>
+<hr>
+<h2 id="常量">常量</h2>
+<h3 id="整数型">整数型</h3>
+<p><code>+ / -&lt;位宽&gt;&lt;进制&gt;&lt;数字&gt;</code></p>
+<ul>
+<li>二进制（b or B)</li>
+<li>十进制（d or D or 缺省）</li>
+<li>十六进制（h or H)</li>
+<li>八进制（o or O)</li>
+</ul>
+<pre><code class="language-verilog">8'b10101100 //位宽为8的数的二进制表示
+8'ha2 	    //位宽为8的数的十六进制表示
+</code></pre>
+<ol>
+<li>
+<p>较长的数字可以用下划线分隔</p>
+</li>
+<li>
+<p>缺省位宽为32位，缺省进制为十进制</p>
+</li>
+<li>
+<p>如果定义的位宽比实际位数长，通常在左边填0，如果定义的位宽比实际位数短，最左边的位相应地被截断。</p>
+</li>
+<li>
+<p>整数可以带符号，<code>+/-</code>号应该写在最左边</p>
+<pre><code class="language-verilog">-8'd5	//5的补数（八位二进制表示）
+
+</code></pre>
+</li>
+</ol>
+<h3 id="parameter型">parameter型</h3>
+<p><u>在<code>Verilog HDL</code> 中常用<code>parameter</code>来定义常量。</u></p>
+<pre><code class="language-verilog">parameter name1 = expression1, neme2 = expression2, ...;
+</code></pre>
+<p><Font color = #FF0000> 在模块或实例引用中，可以通过参数传递改变在被引用模块或实例中已经定义的参数。</Font></p>
+<pre><code class="language-verilog">module Decode(A, F);
+    parameter Width = 1, Polarity = 1;
+    ...
+endmodule
+...
+Decode #(4, 0) D1(A4, F16);
+//通过#(4, 0)实际调用的是参数Width 和 Polarity分别为4, 0的Decode模块。
+</code></pre>
+<h3 id="变量">变量</h3>
+<p><strong>wire型</strong>：<code>wire</code>型数据用来表示以<code>assign</code>关键字指定的组合逻辑信号。程序模块中输入、输出信号类型默认时自动定义为<code>wire</code>型。<strong>wire型信号可以用作任何方程式的输入，也可以用作assign语句的输出</strong></p>
+<p><strong>reg型</strong>：通过赋值语句可以改变寄存器储存的值，设计者可以通过结构语句来控制是否执行这些赋值语句。<code>always</code>模块中的每一个信号都必须定义成<code>reg</code>类型。</p>
+<h3 id="运算符">运算符</h3>
+<pre><code class="language-verilog">a &lt;&lt; n //n代表移动几位。
+</code></pre>
+<hr>
+<h3 id="赋值语句和块语句">赋值语句和块语句</h3>
+<p>信号有两种赋值方式：非阻塞赋值方式<code>b &lt;= a</code>和 <code>b = a</code>.</p>
+<ol>
+<li>
+<p>Non-Blocking</p>
+<ul>
+<li>赋值所在块结束后才能真正完成赋值操作。</li>
+<li><code>b</code>的值并不是立刻改变。</li>
+</ul>
+</li>
+<li>
+<p>Blocking</p>
+<ul>
+<li>赋值完成后才能结束该语句所在块或执行下一条语句。</li>
+<li><code>b</code>的值在赋值语句执行完毕之后立刻改变。</li>
+</ul>
+</li>
+</ol>
+<p>顺序块</p>
+<pre><code class="language-verilog">parameter d=50;
+reg [7：0] r;
+begin //由一系列延迟产生的波形
+#d r=’h35;
+#d r=’hE2;
+#d r=’h00;
+#d r=’hE7;
+#d -&gt;end_wave; //触发事件 end_wave
+end
+</code></pre>
+<p>并行块</p>
+<pre><code class="language-verilog">fork
+#50 r=’h35;
+#100 r=’hE2;
+#150 r=’h00;
+#200 r=’hE7;
+#250 -&gt;end_wave;
+join
+
+</code></pre>
+<hr>
+<h3 id="条件语句和循环语句">条件语句和循环语句</h3>
+<ul>
+<li>
+<p><code>if-else</code>语句同<code>c++</code></p>
+</li>
+<li>
+<p><code>case</code>语句</p>
+<pre><code class="language-verilog">reg[15：0] rega;
+reg[9：0] result;
+case(rega)
+16’d0: result=10’b0111111111;
+16’d1: result=10’b1011111111;
+16’d2: result=10’b1101111111;
+16’d3: result=10’b1110111111;
+16’d4: result=10’b1111011111;
+16’d5: result=10’b1111101111;
+16’d6: result=10’b1111110111;
+16’d7: result=10’b1111111011;
+16’d8: result=10’b1111111101;
+16’d9: result=10’b1111111110;
+default: result=10’bx;
+endcase
+</code></pre>
+</li>
+<li>
+<p>循环语句<code>while</code>和<code>for</code>同<code>c++</code>.</p>
+</li>
+</ul>
+<hr>
+<h3 id="结构说明语句">结构说明语句</h3>
+<p><Font color = #FF0000>任何过程模块都从属于以下4种结构的说明语句</Font><code>Initial</code> 、<code>Always</code>、<code>Task</code>、<code>Function</code>.</p>
+<p>一个程序可以有多个<code>initial</code>和 <code>always</code>过程块，在仿真的开始同时开始执行。<code>Initial</code>语句只执行一次，而<code>always</code>语句则是不断的重复直到仿真过程结束。</p>
+<p><code>Funciont</code>即为函数，函数的目的是返回一个值，用于表达式的计算。</p>
+<p><strong>Initial</strong>:通常用来在仿真开始时对各变量进行初始化。</p>
+<pre><code class="language-verilog">initial
+    begin
+        ...
+    end
+</code></pre>
+<p><strong>always</strong>：由于不断重复执行的特性，只有和一定的时序控制结合在一起才有用。</p>
+<pre><code class="language-verilog">always&lt;时序控制&gt;
+    begin
+        ...
+    end
+</code></pre>
+<p><strong>function</strong></p>
+<pre><code class="language-verilog">function&lt;返回值位宽或类型说明&gt; 函数名;
+    端口说明;
+    局部变量定义;
+    其他语句;
+endfunction
+</code></pre>
+<p><code>&lt;返回值位宽或类型说明&gt;</code>是一个可选项，如果缺省，返回一位寄存器类型的数据。</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tokiwa-17.github.io/post/kd-tree/">
+                  <h3 class="post-title">
+                    KD-Tree
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>
