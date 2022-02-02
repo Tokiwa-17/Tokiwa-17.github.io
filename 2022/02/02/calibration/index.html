@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="english" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>calibration | Tokiwa-17</title><meta name="keywords" content="3D-vision"><meta name="author" content="ylf"><meta name="copyright" content="ylf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="单目标定 相机坐标转换  世界坐标系：也称为测量坐标系，是一个三维直角坐标系，以其为基准可以描述相机和待测物体的空间位置。 相机坐标系：坐标原点为相机的光心位置，X 轴和Y 轴分别平行于图像坐标系的X轴和 Y 轴，Z 轴为相机的光轴。 图像坐标系： 坐标原点为CCD 图像平面的中心，X轴和Y 轴分别平行于图像平面的两条垂直边。单位（毫米） 像素坐标系：坐标原点为图像平面的左上角顶点，X 轴和Y 轴">
+<meta property="og:type" content="article">
+<meta property="og:title" content="calibration">
+<meta property="og:url" content="https://tokiwa-17.github.io/2022/02/02/calibration/index.html">
+<meta property="og:site_name" content="Tokiwa-17">
+<meta property="og:description" content="单目标定 相机坐标转换  世界坐标系：也称为测量坐标系，是一个三维直角坐标系，以其为基准可以描述相机和待测物体的空间位置。 相机坐标系：坐标原点为相机的光心位置，X 轴和Y 轴分别平行于图像坐标系的X轴和 Y 轴，Z 轴为相机的光轴。 图像坐标系： 坐标原点为CCD 图像平面的中心，X轴和Y 轴分别平行于图像平面的两条垂直边。单位（毫米） 像素坐标系：坐标原点为图像平面的左上角顶点，X 轴和Y 轴">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2022-02-02T12:32:05.000Z">
+<meta property="article:modified_time" content="2022-02-02T12:33:10.901Z">
+<meta property="article:author" content="ylf">
+<meta property="article:tag" content="3D-vision">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://tokiwa-17.github.io/2022/02/02/calibration/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'calibration',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-02 20:33:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/index.main.css" media="defer" onload="this.media.'all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s4.ax1x.com/2022/01/28/7vGmCR.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Tokiwa-17</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">calibration</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-02-02T12:32:05.000Z" title="Created 2022-02-02 20:32:05">2022-02-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-02-02T12:33:10.901Z" title="Updated 2022-02-02 20:33:10">2022-02-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>3min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="calibration"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>单目标定</h1>
+<h2 id="相机坐标转换">相机坐标转换</h2>
+<ul>
+<li>世界坐标系：也称为测量坐标系，是一个三维直角坐标系，以其为基准可以描述相机和待测物体的空间位置。</li>
+<li>相机坐标系：坐标原点为相机的光心位置，X 轴和Y 轴分别平行于图像坐标系的X轴和 Y 轴，Z 轴为相机的光轴。</li>
+<li>图像坐标系： 坐标原点为CCD 图像平面的中心，X轴和Y 轴分别平行于图像平面的两条垂直边。单位（毫米）</li>
+<li>像素坐标系：坐标原点为图像平面的左上角顶点，X 轴和Y 轴分别平行于图像物理坐标系的 X 轴和Y 轴。单位（像素）</li>
+</ul>
+<p><img src="/2022/02/02/calibration/image-20220117150903698.png" alt="image-20220117150903698"></p>
+<h2 id="针孔相机模型">针孔相机模型</h2>
+<p>相机将三维世界中的坐标点映射到二维图像平面的过程能够用一个几何模型进行描述。这个模型有很多种，其中最简单的称为针孔模型。</p>
+<p><img src="/2022/02/02/calibration/image-20220117145344535.png" alt="image-20220117145344535"></p>
+<p><img src="/2022/02/02/calibration/image-20220117145424020.png" alt="image-20220117145424020"></p>
+<p>也就是有如下关系：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><msub><mi>Z</mi><mi>c</mi></msub><mi>f</mi></mfrac><mo>=</mo><mfrac><msub><mi>X</mi><mi>c</mi></msub><msup><mi>X</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mfrac><mo>=</mo><mfrac><msub><mi>Y</mi><mi>c</mi></msub><msup><mi>Y</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mfrac></mrow><annotation encoding="application/x-tex">\frac{Z_c}{f} = \frac{X_c}{X'} = \frac{Y_c}{Y'}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.2408em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6779em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6779em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h3 id="世界-rightarrow-相机">世界<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 相机</h3>
+<p>可以理解为相机放的位置跟世界坐标原点位置不同，而且相机还会有角度上的偏差（pitch, yaw, roll)</p>
+<p><img src="/2022/02/02/calibration/image-20220117150121953.png" alt="image-20220117150121953"></p>
+<h3 id="相机-rightarrow-图像">相机<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 图像</h3>
+<p><img src="/2022/02/02/calibration/image-20220117150328144.png" alt="image-20220117150328144"></p>
+<h3 id="图像-rightarrow像素">图像<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span>像素</h3>
+<p><img src="/2022/02/02/calibration/image-20220117150511419.png" alt="image-20220117150511419"></p>
+<p><img src="/2022/02/02/calibration/image-20220117150524153.png" alt="image-20220117150524153"></p>
+<h3 id="相机-rightarrow像素">相机<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span>像素</h3>
+<p><img src="/2022/02/02/calibration/image-20220117150742266.png" alt="image-20220117150742266"></p>
+<h3 id="世界-rightarrow像素">世界<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span>像素</h3>
+<p><img src="/2022/02/02/calibration/image-20220117150957389.png" alt="image-20220117150957389"></p>
+<p><img src="/2022/02/02/calibration/image-20220117151122038.png" alt="image-20220117151122038"></p>
+<p><img src="/2022/02/02/calibration/image-20220117151159692.png" alt="image-20220117151159692"></p>
+<h2 id="相机标定">相机标定</h2>
+<p><strong>目的</strong></p>
+<ol>
+<li>外参数矩阵。告诉你现实世界点(世界坐标)是怎样经过旋转和平移，然后落到另一个现实世界点(摄像机坐标)上。</li>
+<li>内参数矩阵。告诉你上述那个点在1的基础上，是如何继续经过摄像机的镜头、并通过针孔成像和电子转化而成为像素点的。</li>
+<li>畸变矩阵。告诉你为什么上面那个像素点并没有落在理论计算该落在的位置上，还产生了一定的偏移和变形</li>
+</ol>
+<p>所需的参数是相机的内参矩阵和相机的外参矩阵。</p>
+<h3 id="相机的畸变参数">相机的畸变参数</h3>
+<p>为了取得好的成像效果，通常要在相机的镜头前添加透镜。在相机成像的过程中，透镜会对光线的传播产生影响，从而影响相机的成像效果，产生畸变：</p>
+<ul>
+<li>透镜自身的形状对才光线的传播产生影响，形成的畸变称为<strong>径向畸变</strong>。在小孔模型中，一条指向在成像平面上的像仍然是直线。但是在实际拍摄的过程中，由于透镜的存在，往往将一条直线投影成了曲线，越靠近图像的边缘，这种现象越明显。透镜往往是中心对称的，使得这种不规则的畸变通常是径向对称的。主要有两大类：桶形畸变和枕形畸变。</li>
+</ul>
+<p><img src="/2022/02/02/calibration/image-20220117181914135.png" alt="image-20220117181914135"></p>
+<ul>
+<li>由于在相机组装的过程中，透镜不能和成像平面严格平行，会引入<strong>切向畸变</strong>。</li>
+</ul>
+<h3 id="张正友标定法">张正友标定法</h3>
+<p>张正友标定法标定相机的内外参数的思路如下：</p>
+<p>1）求解内参矩阵与外参矩阵的积；</p>
+<p><img src="/2022/02/02/calibration/image-20220117153030403.png" alt="image-20220117153030403"></p>
+<p><img src="/2022/02/02/calibration/image-20220117154714057.png" alt="image-20220117154714057"></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(u, v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span>是像素坐标系下的标定板角点的坐标, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo separator="true">,</mo><mtext>Ｖ</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U,Ｖ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord cjk_fallback">Ｖ</span><span class="mclose">)</span></span></span></span>是世界坐标系下的标定板角点的坐标。</p>
+<p>我们可以通过图像识别算法，得到标定板角点的像素坐标<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(u,v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span>,标定板上每一个格子的大小是已知的，可以计算得到世界坐标系下的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo separator="true">,</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U,V)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mclose">)</span></span></span></span></p>
+<p><img src="/2022/02/02/calibration/image-20220117155347804.png" alt="image-20220117155347804"></p>
+<p>2）求解内参矩阵</p>
+<p>已知H, 接下来需要求解内参矩阵A。</p>
+<p><img src="/2022/02/02/calibration/image-20220117155613020.png" alt="image-20220117155613020"></p>
+<p><img src="/2022/02/02/calibration/image-20220117155951076.png" alt="image-20220117155951076"></p>
+<p><img src="/2022/02/02/calibration/image-20220117160015031.png" alt="image-20220117160015031"></p>
+<p><img src="/2022/02/02/calibration/image-20220117160227268.png" alt="image-20220117160227268"></p>
+<p><img src="/2022/02/02/calibration/image-20220117160440299.png" alt="image-20220117160440299"></p>
+<p><img src="/2022/02/02/calibration/image-20220117160810276.png" alt="image-20220117160810276"></p>
+<p><img src="/2022/02/02/calibration/image-20220117161001892.png" alt="image-20220117161001892"></p>
+<p>3）求解外参矩阵</p>
+<p>对于同一个相机，相机的内参矩阵取决于相机的内部参数，无论标定板和相机的位置关系是怎么样的，相机的内参矩阵不变。</p>
+<p>外参矩阵反应的是标定板和相机的位置关系。对于不同的图片，标定板和相机的位置关系已经改变，此时每一张图片对应的外参矩阵都是不同的。</p>
+<p>通过公式<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>R</mi><mn>1</mn><mspace width="1em"><mi>R</mi><mn>2</mn><mspace width="1em"><mi>T</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>H</mi></mspace></mspace></mrow><annotation encoding="application/x-tex">(R1 \quad R2 \quad T) = A^{-1}H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">1</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">2</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span>,即可求得每一张图片对应得外参矩阵<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>R</mi><mn>1</mn><mspace width="1em"><mi>R</mi><mn>2</mn><mspace width="1em"><mi>T</mi><mo stretchy="false">)</mo></mspace></mspace></mrow><annotation encoding="application/x-tex">(R1 \quad R2 \quad T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">1</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">2</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span></span></p>
+<p><img src="/2022/02/02/calibration/image-20220117161430697.png" alt="image-20220117161430697"></p>
+<h2 id="标定相机的畸变参数">标定相机的畸变参数</h2>
+<p>张正友标定法仅仅考虑了畸变模型中影响较大的径向畸变。</p>
+<p><img src="/2022/02/02/calibration/image-20220117182149411.png" alt="image-20220117182149411"></p>
+<p><img src="/2022/02/02/calibration/image-20220117182852035.png" alt="image-20220117182852035"></p>
+<p><img src="/2022/02/02/calibration/image-20220117182951026.png" alt="image-20220117182951026"></p>
+<p><img src="/2022/02/02/calibration/image-20220117183110996.png" alt="image-20220117183110996"></p>
+<p><img src="/2022/02/02/calibration/image-20220117183124629.png" alt="image-20220117183124629"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">ylf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://tokiwa-17.github.io/2022/02/02/calibration/">https://tokiwa-17.github.io/2022/02/02/calibration/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/3D-vision/">3D-vision</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/31/DiffPool/"><img class="next-cover" src="https://s4.ax1x.com/2022/01/28/7vGmCR.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">DiffPool</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ylf</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">单目标定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">相机坐标转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%92%88%E5%AD%94%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">针孔相机模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%96%E7%95%8C-rightarrow-%E7%9B%B8%E6%9C%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">世界→\rightarrow→ 相机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA-rightarrow-%E5%9B%BE%E5%83%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">相机→\rightarrow→ 图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F-rightarrow%E5%83%8F%E7%B4%A0"><span class="toc-number">1.2.3.</span> <span class="toc-text">图像→\rightarrow→像素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA-rightarrow%E5%83%8F%E7%B4%A0"><span class="toc-number">1.2.4.</span> <span class="toc-text">相机→\rightarrow→像素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%96%E7%95%8C-rightarrow%E5%83%8F%E7%B4%A0"><span class="toc-number">1.2.5.</span> <span class="toc-text">世界→\rightarrow→像素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A"><span class="toc-number">1.3.</span> <span class="toc-text">相机标定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA%E7%9A%84%E7%95%B8%E5%8F%98%E5%8F%82%E6%95%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">相机的畸变参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%A0%E6%AD%A3%E5%8F%8B%E6%A0%87%E5%AE%9A%E6%B3%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">张正友标定法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%AE%9A%E7%9B%B8%E6%9C%BA%E7%9A%84%E7%95%B8%E5%8F%98%E5%8F%82%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">标定相机的畸变参数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/02/02/calibration/" title="calibration">calibration</a><time datetime="2022-02-02T12:32:05.000Z" title="Created 2022-02-02 20:32:05">2022-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/31/DiffPool/" title="DiffPool">DiffPool</a><time datetime="2022-01-30T16:47:25.000Z" title="Created 2022-01-31 00:47:25">2022-01-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/OANet/" title="OANet">OANet</a><time datetime="2022-01-30T09:20:13.000Z" title="Created 2022-01-30 17:20:13">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/27/Graph-based/" title="Graph-based">Graph-based</a><time datetime="2022-01-27T05:07:54.000Z" title="Created 2022-01-27 13:07:54">2022-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/26/Matching/" title="SIFT">SIFT</a><time datetime="2022-01-26T09:45:28.000Z" title="Created 2022-01-26 17:45:28">2022-01-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By ylf</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer src="https://rmt.dogedoge.com/fetch/~/source/jsdelivr/npm/jquery@latest/dist/jquery.min.js"></script><script defer src="https://iiiii.cf/js/jquery.ripples.js"></script><script defer src="https://iiiii.cf/js/ripples.js"></script><script src = "/js/chocolate.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax  src="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.js"></script><!-- hexo injector body_end end --></body></html>
